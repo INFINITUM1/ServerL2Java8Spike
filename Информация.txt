@@ -1,7 +1,2 @@
-************** ForumMaxi ************************
-Шара сделана для ForumMaxi.Ru:
-Автор шары: http://forummaxi.ru/user/7040-gvb/
-Тема на мои услуги: http://forummaxi.ru/topic/60718-%D1%83%D1%81%D0%BB%D1%83%D0%B3%D0%B8-gvb/
-Автор сорца: Foxtrot pwsoft.ru
-Пароль на архив: gvbgvbgvb
-************** ForumMaxi ************************
+Сборка Java-8 сервера Lineage 2 interlude от команды pwsoft 
+Редакторы сборки: Gzu & Inspektop
