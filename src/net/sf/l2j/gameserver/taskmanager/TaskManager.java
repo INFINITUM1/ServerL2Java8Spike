@@ -38,6 +38,7 @@ import javolution.util.FastList;
 import javolution.util.FastMap;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.ThreadPoolManager;
+import net.sf.l2j.gameserver.taskmanager.tasks.TaskGiveDonations;
 import net.sf.l2j.gameserver.taskmanager.tasks.TaskJython;
 import net.sf.l2j.gameserver.taskmanager.tasks.TaskRecom;
 import net.sf.l2j.gameserver.taskmanager.tasks.TaskRestart;
@@ -183,11 +184,12 @@ public final class TaskManager
         registerTask(new TaskRestart());
         registerTask(new TaskSevenSignsUpdate());
         registerTask(new TaskShutdown());
+        registerTask(new TaskGiveDonations());
     }
 
     public void registerTask(Task task)
     {
-        int key = task.getName().hashCode();
+        int key = task.getName().trim().toLowerCase().hashCode();
         if (!_tasks.containsKey(key))
         {
             _tasks.put(key, task);
@@ -256,7 +258,9 @@ public final class TaskManager
         {
             long delay = Long.valueOf(task.getParams()[0]);
             long interval = Long.valueOf(task.getParams()[1]);
-
+            // Логируем параметры
+        _log.info("Launching fixed scheduled task: " + task.getTask().getName() 
+         + ", delay=" + delay + ", interval=" + interval);
             task.scheduled = scheduler.scheduleGeneralAtFixedRate(task, delay, interval);
             return true;
         }

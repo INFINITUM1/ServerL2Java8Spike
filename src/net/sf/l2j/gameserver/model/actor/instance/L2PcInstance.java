@@ -281,7 +281,7 @@ public class L2PcInstance extends L2PlayableInstance {
     private byte _zoneValidateCounter = 4;
     private boolean _isIn7sDungeon = false;
     /**
-     * Зоны *
+     * пїЅпїЅпїЅпїЅ *
      */
     private boolean _isInDangerArea = false;
     private boolean _isInSiegeFlagArea = false;
@@ -694,7 +694,7 @@ public class L2PcInstance extends L2PlayableInstance {
         // Add the player in the characters table of the database
         boolean ok = player.createDb();
 
-        //уровень при старте
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         player.addExpAndSp(Experience.LEVEL[Config.ALT_START_LEVEL] - player.getExp(), Config.ALT_START_SP);
 
         if (!Config.CUSTOM_STRT_ITEMS.isEmpty()) {
@@ -1363,7 +1363,7 @@ public class L2PcInstance extends L2PlayableInstance {
                 }
 
                 if (object.isL2Npc() && isInsideRadius(object, L2NpcInstance.INTERACTION_DISTANCE, false, false)) {
-                    L2NpcInstance npc = (L2NpcInstance) object; // TODO: прибить
+                    L2NpcInstance npc = (L2NpcInstance) object; // TODO: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                     QuestState[] states = getQuestsForTalk(npc.getNpcId());
 
                     if (states != null) {
@@ -1990,11 +1990,11 @@ public class L2PcInstance extends L2PlayableInstance {
             items = getInventory().equipItemAndRecord(item);
             // Consume mana - will start a task if required; returns if item is not a shadow item
             if (item.isShadowItem()) {
-                sendCritMessage(item.getItemName() + ": осталось " + item.getMana() + " минут.");
+                sendCritMessage(item.getItemName() + ": пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + item.getMana() + " пїЅпїЅпїЅпїЅпїЅ.");
             }
             if (item.getExpire() > 0) {
                 String date = new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm").format(new java.util.Date(item.getExpire()));
-                sendCritMessage(item.getItemName() + ": истекает " + date + ".");
+                sendCritMessage(item.getItemName() + ": пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + date + ".");
             }
             item.decreaseMana(true);
         }
@@ -2106,7 +2106,7 @@ public class L2PcInstance extends L2PlayableInstance {
             getSubClasses().get(_classIndex).setClassId(Id);
         }
 
-        // Социалка при получении профы
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         broadcastPacket(new MagicSkillUser(this, this, 5103, 1, 1000, 0));
         //broadcastPacket(new SocialAction(getObjectId(), 16));
         sendUserPacket(new PlaySound("ItemSound.quest_fanfare_2"));
@@ -2385,7 +2385,7 @@ public class L2PcInstance extends L2PlayableInstance {
             skills = SkillTreeTable.getInstance().getAvailableSkills(this, getClassId());
         }
 
-        sendMessage("Получено " + skillCounter + " новых скиллов.");
+        sendMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + skillCounter + " пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
     }
 
     /**
@@ -3550,7 +3550,7 @@ public class L2PcInstance extends L2PlayableInstance {
         }
     }
 
-    //заглушки коннекта
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     @Override
     public void setConnected(boolean f) {
         _isConnected = f;
@@ -4074,43 +4074,43 @@ public class L2PcInstance extends L2PlayableInstance {
 
     public void doEpicLoot(L2GrandBossInstance boss, int bossId) {
         int raid_item = 8350;
-        String raid_name = "Ooops! Скрин для админа сделай.";
+        String raid_name = "Ooops! пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.";
         Integer epicChance = -1;
 
         switch (bossId) {
             case 29001:
                 raid_item = 6660;
-                raid_name = "Кольцо Ant Queen ушло игроку ";
+                raid_name = "пїЅпїЅпїЅпїЅпїЅпїЅ Ant Queen пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ";
                 break;
             case 29028:
                 raid_item = 6657;
-                raid_name = "Ожерелье Valakas ушло игроку ";
+                raid_name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Valakas пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ";
                 break;
             case 29020:
                 raid_item = 6658;
-                raid_name = "Кольцо Baium ушло игроку ";
+                raid_name = "пїЅпїЅпїЅпїЅпїЅпїЅ Baium пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ";
                 break;
             case 29066:
             case 29067:
             case 29068:
                 raid_item = 6656;
-                raid_name = "Серьга Antharas ушла игроку ";
+                raid_name = "пїЅпїЅпїЅпїЅпїЅпїЅ Antharas пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ";
                 break;
             case 29006:
                 raid_item = 6662;
-                raid_name = "Кольцо Core ушло игроку ";
+                raid_name = "пїЅпїЅпїЅпїЅпїЅпїЅ Core пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ";
                 break;
             case 29014:
                 raid_item = 6661;
-                raid_name = "Серьга Orfen ушла игроку ";
+                raid_name = "пїЅпїЅпїЅпїЅпїЅпїЅ Orfen пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ";
                 break;
             case 29022:
                 raid_item = 6659;
-                raid_name = "Серьга Zaken ушла игроку ";
+                raid_name = "пїЅпїЅпїЅпїЅпїЅпїЅ Zaken пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ";
                 break;
             case 29047:
                 raid_item = 8191;
-                raid_name = "Ожерелье Frintezza ушло игроку ";
+                raid_name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Frintezza пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ";
                 break;
         }
 
@@ -4807,7 +4807,7 @@ public class L2PcInstance extends L2PlayableInstance {
 
     private void dropPkItem(L2ItemInstance item, L2Character killer) {
         dropItem("DieDrop", item, killer, true);
-        sendMessage("Вы обронили " + item.getDisplayName() + ".");
+        sendMessage("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + item.getDisplayName() + ".");
     }
 
     private void onDieUpdateKarma() {
@@ -4906,7 +4906,7 @@ public class L2PcInstance extends L2PlayableInstance {
                 return;
             } else if (isGuildEnemyFor(targetPlayer) == 2) {
                 incGuildPenalty();
-                sendMessage("Вы убили своего, ваш штраф увеличен.");
+                sendMessage("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
             }
         }
 
@@ -5376,7 +5376,7 @@ public class L2PcInstance extends L2PlayableInstance {
         _summon = summon;
     }
     /**
-     * Фея
+     * пїЅпїЅпїЅ
      */
     L2Summon fairy = null;
 
@@ -5403,7 +5403,7 @@ public class L2PcInstance extends L2PlayableInstance {
     }
 
     /**
-     * риквесты*
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ*
      */
     public void setTransactionRequester(final L2PcInstance requestor) {
         _currentTransactionRequester = requestor;
@@ -6467,7 +6467,7 @@ public class L2PcInstance extends L2PlayableInstance {
                 player.setNoble(rset.getInt("nobless") == 1);
                 player.setFourSide(rset.getInt("lang"));
 
-                // премиум
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 long premiumExpire = rset.getLong("premium");
                 if (Config.PREMIUM_ENABLE && premiumExpire > 0) {
                     if (premiumExpire > System.currentTimeMillis()) {
@@ -6574,7 +6574,7 @@ public class L2PcInstance extends L2PlayableInstance {
                     player._activeClass = activeClassId;
                 }
 
-                // оффтрейд
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 if (player.getVar("storemode") != null && player.getVar("offline") != null) {
                     player.restoreTradeList();
                     player.setPrivateStoreType(Integer.parseInt(player.getVar("storemode")));
@@ -6583,7 +6583,7 @@ public class L2PcInstance extends L2PlayableInstance {
                     player.unsetVar("storemode", null);
                 }
 
-                // покупное герйоство
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 long heroExpire = rset.getLong("hero");
                 if (Config.EVERYBODE_HERO) {
                     heroExpire = 1;
@@ -6655,7 +6655,7 @@ public class L2PcInstance extends L2PlayableInstance {
                     Close.SR(st2, rs2);
                 }
 
-                // настройки чара
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 try {
                     st2 = con.prepareStatement("SELECT no_exp, no_requests, autoloot, chatblock, charkey, traders, pathfind, skillchances, showshots FROM character_settings WHERE char_obj_id=? LIMIT 1");
                     st2.setInt(1, objectId);
@@ -6677,7 +6677,7 @@ public class L2PcInstance extends L2PlayableInstance {
                     Close.SR(st2, rs2);
                 }
 
-                // гилд мод / Storium
+                // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ / Storium
                 if (Config.ALLOW_GUILD_MOD) {
                     try {
                         st2 = con.prepareStatement("SELECT side, penalty FROM z_guild_mod WHERE char_id=? LIMIT 1");
@@ -6730,7 +6730,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return player;
     }
 
-    //заглушки
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public void setEnterWorldHp(double Hp) {
         _enterWorldHp = Hp;
     }
@@ -7553,7 +7553,7 @@ public class L2PcInstance extends L2PlayableInstance {
         }
 
         updateEffectIcons();
-        if (con_ex == null) // дубликат setActiveClass(int classIndex)
+        if (con_ex == null) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ setActiveClass(int classIndex)
         {
             broadcastUserInfo();
         }
@@ -8951,7 +8951,7 @@ public class L2PcInstance extends L2PlayableInstance {
     }
 
     public void sendHtmlMessage(String txt) {
-        sendHtmlMessage("Уведомление.", txt);
+        sendHtmlMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.", txt);
     }
 
     public void sendHtmlMessage(String type, String txt) {
@@ -10242,7 +10242,7 @@ public class L2PcInstance extends L2PlayableInstance {
         }
 
         if (_isPartner) {
-            _owner.sendMessage("Партнер получает " + ((int) i) + " урона от " + attacker.getName());
+            _owner.sendMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + ((int) i) + " пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ " + attacker.getName());
         }
         if (_partner != null) {
             _partner.getAI().onOwnerGotAttacked(attacker);
@@ -10258,7 +10258,7 @@ public class L2PcInstance extends L2PlayableInstance {
             getTrainedBeast().onOwnerGotAttacked(attacker);
         }
         if (_isPartner) {
-            _owner.sendMessage("Партнер получает " + ((int) value) + " урона от " + attacker.getName());
+            _owner.sendMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + ((int) value) + " пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ " + attacker.getName());
         }
         if (_partner != null) {
             _partner.getAI().onOwnerGotAttacked(attacker);
@@ -10273,7 +10273,7 @@ public class L2PcInstance extends L2PlayableInstance {
             getTrainedBeast().onOwnerGotAttacked(attacker);
         }
         if (_isPartner) {
-            _owner.sendMessage("Партнер получает " + ((int) value) + " урона от " + attacker.getName());
+            _owner.sendMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + ((int) value) + " пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ " + attacker.getName());
         }
         if (_partner != null) {
             _partner.getAI().onOwnerGotAttacked(attacker);
@@ -10415,7 +10415,7 @@ public class L2PcInstance extends L2PlayableInstance {
             return new DecodedBypass(bypass, null).trim();
         }
         //_log.warn("Direct access to bypass: " + bypass + " / Player: " + getName());
-        Log.add("Запрос: " + bypass + " / " + getFingerPrints(), "cheats/BypassValidate");
+        Log.add("пїЅпїЅпїЅпїЅпїЅпїЅ: " + bypass + " / " + getFingerPrints(), "cheats/BypassValidate");
         return null;
     }
 
@@ -10550,7 +10550,7 @@ public class L2PcInstance extends L2PlayableInstance {
             _log.log(Level.SEVERE, "deleteMe()", t);
         }
 
-        // Евенты
+        // пїЅпїЅпїЅпїЅпїЅпїЅ
         try {
             EventManager.getInstance().onExit(this);
         } catch (Throwable t) {
@@ -10584,19 +10584,19 @@ public class L2PcInstance extends L2PlayableInstance {
         }
 
         try {
-            //запоминаем баффы
+            //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             storeBuffProfiles();
         } catch (Throwable t) {
             _log.log(Level.SEVERE, "deleteMe()", t);
         }
 
         /*
-         * try { //запоминаем макросы _macroses.store(); } catch (Throwable t)
+         * try { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ _macroses.store(); } catch (Throwable t)
          * {_log.log(Level.SEVERE, "deleteMe()", t); }
          */
 
  /*
-         * try { //запоминаем панельку _shortCuts.store(); } catch (Throwable t)
+         * try { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ _shortCuts.store(); } catch (Throwable t)
          * {_log.log(Level.SEVERE, "deleteMe()", t); }
          */
         try {
@@ -11275,7 +11275,7 @@ public class L2PcInstance extends L2PlayableInstance {
 
                 // start the countdown
                 _jailTask = ThreadPoolManager.getInstance().scheduleGeneral(new JailTask(this), _jailTimer);
-                sendMessage("Вас посадили в тюрьму на " + delayInMinutes + " минут.");
+                sendMessage("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ " + delayInMinutes + " пїЅпїЅпїЅпїЅпїЅ.");
             }
 
             if (!TvTEvent.isInactive() && TvTEvent.isPlayerParticipant(getName())) {
@@ -11285,13 +11285,13 @@ public class L2PcInstance extends L2PlayableInstance {
             // Open a Html message to inform the player
             NpcHtmlMessage htmlMsg = NpcHtmlMessage.id(5);
             TextBuilder build = new TextBuilder("<html><body>");
-            build.append("<html><body>Право заниматься самообразованием.<br>");
-            build.append("Право трудиться.<br>");
-            build.append("Право на медицинское обеспечение.<br>");
-            build.append("Право отправлять религиозные обряды.<br>");
-            build.append("Право обращаться с предложениями, заявлениями и жалобами.<br>");
-            build.append("Право на получение бесплатного питания.<br>");
-            build.append("Право на прогулку.<br>");
+            build.append("<html><body>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.<br>");
+            build.append("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.<br>");
+            build.append("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.<br>");
+            build.append("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.<br>");
+            build.append("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.<br>");
+            build.append("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.<br>");
+            build.append("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.<br>");
             build.append("</body></html>");
             htmlMsg.setHtml(build.toString());
             sendUserPacket(htmlMsg);
@@ -11300,7 +11300,7 @@ public class L2PcInstance extends L2PlayableInstance {
         } else {
             // Open a Html message to inform the player
             NpcHtmlMessage htmlMsg = NpcHtmlMessage.id(0);
-            htmlMsg.setHtml("<html><body>Ведите себя хорошо!</body></html>");
+            htmlMsg.setHtml("<html><body>пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!</body></html>");
             sendUserPacket(htmlMsg);
 
             teleToLocation(17836, 170178, -3507, true);  // Floran
@@ -11527,8 +11527,8 @@ public class L2PcInstance extends L2PlayableInstance {
          * if (target.getPet() != null && target.getFirstEffect(1262) != null) {
          * int tDmg = (int)damage *
          * (int)target.getStat().calcStat(Stats.TRANSFER_DAMAGE_PERCENT, 0,
-         * null, null) / 100; sendMessage("Вы нанесли " + (damage-tDmg) + "
-         * повреждений вашей цели и " + tDmg + " повреждений слуге"); } else if
+         * null, null) / 100; sendMessage("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + (damage-tDmg) + "
+         * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ " + tDmg + " пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ"); } else if
          * (damage > 0)
          * sendUserPacket(SystemMessage.id(SystemMessageId.YOU_DID_S1_DMG).addNumber(damage));
          */
@@ -11538,7 +11538,7 @@ public class L2PcInstance extends L2PlayableInstance {
             }
 
             if (_isPartner) {
-                _owner.sendMessage("Партнер наносит " + damage + " урона по " + target.getName());
+                _owner.sendMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + damage + " пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ " + target.getName());
             }
         }
     }
@@ -11598,7 +11598,7 @@ public class L2PcInstance extends L2PlayableInstance {
             long banLengthMs = TimeUnit.SECONDS.toMillis(banLength);
             ThreadPoolManager.getInstance().scheduleGeneral(new SchedChatUnban(this), banLengthMs);
 
-            sendMessage("Чат заблокирован на (" + (banLength / 60) + ") минут");
+            sendMessage("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ (" + (banLength / 60) + ") пїЅпїЅпїЅпїЅпїЅ");
             banLength = System.currentTimeMillis() + banLengthMs;
         } else {
             banLength = 0;
@@ -11639,7 +11639,7 @@ public class L2PcInstance extends L2PlayableInstance {
     }
 
     /**
-     * Зоны *
+     * пїЅпїЅпїЅпїЅ *
      */
     public final boolean isInDangerArea() {
         return _isInDangerArea;
@@ -11910,11 +11910,11 @@ public class L2PcInstance extends L2PlayableInstance {
 
     @Override
     public void checkHpMessages(double curHp, double newHp) {
-        //сюда пасивные скиллы
+        //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         byte[] _hp = {30, 30};
         int[] skills = {290, 291};
 
-        //сюда активные эффекты
+        //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         int[] _effects_skills_id = {292, 292};
         byte[] _effects_hp = {30, 60};
 
@@ -11931,10 +11931,10 @@ public class L2PcInstance extends L2PlayableInstance {
             skill = st.getInfo(skills[i], 1);
             if (level > 0) {
                 if (_curHpPercent > _hp[i] && _newHpPercent <= _hp[i]) {
-                    sendMessage("Так как HP уменьшилось, вы ощущаете эффект от " + skill.getName());
+                    sendMessage("пїЅпїЅпїЅ пїЅпїЅпїЅ HP пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ " + skill.getName());
                     needsUpdate = true;
                 } else if (_curHpPercent <= _hp[i] && _newHpPercent > _hp[i]) {
-                    sendMessage("Так как HP увеличилось, эффект от " + skill.getName() + " пропадает");
+                    sendMessage("пїЅпїЅпїЅ пїЅпїЅпїЅ HP пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ " + skill.getName() + " пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
                     needsUpdate = true;
                 }
             }
@@ -11946,10 +11946,10 @@ public class L2PcInstance extends L2PlayableInstance {
                 if (getFirstEffect(_effects_skills_id[i]) != null) {
                     skill = st.getInfo(_effects_skills_id[i], 1);
                     if (_curHpPercent > _effects_hp[i] && _newHpPercent <= _effects_hp[i]) {
-                        sendMessage("Так как HP уменьшилось, вы можете применить " + skill.getName());
+                        sendMessage("пїЅпїЅпїЅ пїЅпїЅпїЅ HP пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + skill.getName());
                         needsUpdate = true;
                     } else if (_curHpPercent <= _effects_hp[i] && _newHpPercent > _effects_hp[i]) {
-                        sendMessage("Так как HP увеличилось, эффект от " + skill.getName() + " пропадает");
+                        sendMessage("пїЅпїЅпїЅ пїЅпїЅпїЅ HP пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ " + skill.getName() + " пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
                         //stopSkillEffects(_effects_skills_id[i]);
                         needsUpdate = true;
                     }
@@ -12011,7 +12011,7 @@ public class L2PcInstance extends L2PlayableInstance {
         sendChanges();
     }
     /**
-     * профили баффа
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
      */
     private FastMap<Integer, FastMap<Integer, Integer>> _profiles = new FastMap<Integer, FastMap<Integer, Integer>>().shared("L2PcInstance._profiles");
     private long _lastBuffProfile = 0;
@@ -12090,7 +12090,7 @@ public class L2PcInstance extends L2PlayableInstance {
 
             st.getInfo(id, lvl).getEffects(getBuffTarget(), getBuffTarget());
         }
-        //sendMessage("Профиль " + buffprofile + " баффнут");
+        //sendMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + buffprofile + " пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         broadcastPacket(new MagicSkillUser(getBuffTarget(), getBuffTarget(), 264, 1, 1, 0));
     }
 
@@ -12124,7 +12124,7 @@ public class L2PcInstance extends L2PlayableInstance {
 
             _profiles.get(buffprofile).put(id, level);
         }
-        //sendMessage("Профиль " + buffprofile + " сохранен");
+        //sendMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + buffprofile + " пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         sendUserPacket(Static.PROFILE_SAVED);
     }
 
@@ -12175,7 +12175,7 @@ public class L2PcInstance extends L2PlayableInstance {
             Close.CS(con, st);
         }
     }
-    //откта скиллов
+    //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private long _lastReload = 0;
 
     public void reloadSkills() {
@@ -12196,14 +12196,14 @@ public class L2PcInstance extends L2PlayableInstance {
         sendSkillCoolTime();
         sendSkillList();
 
-        //sendMessage("Откат скиллов");
+        //sendMessage("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         sendUserPacket(Static.SKILLS_RELOAD);
     }
 
     public boolean underAttack() {
         return (AttackStanceTaskManager.getInstance().getAttackStanceTask(this));
     }
-    //задержка на флуд атакой
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     private long _lastPacket = 0;
 
     public long getLastPacket() {
@@ -12213,14 +12213,14 @@ public class L2PcInstance extends L2PlayableInstance {
     public void setLastPacket() {
         _lastPacket = System.currentTimeMillis();
     }
-    //чар выходит из игры
+    //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
     private boolean _isDeleting = false;
 
     public boolean isDeleting() {
         return _isDeleting;
     }
-    //Бот
-    //первая проверка на бота по задержке между выбором чара и входа им в мир
+    //пїЅпїЅпїЅ
+    //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅ
     private long _EnterWorld = 0;
 
     public long getEnterWorld() {
@@ -12230,7 +12230,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public void setEnterWorld() {
         _EnterWorld = System.currentTimeMillis();
     }
-    //Титул
+    //пїЅпїЅпїЅпїЅпїЅ
     private long _requestGiveNickName = 0;
     private int _titleChngedFail = 0;
 
@@ -12253,7 +12253,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public void clearTitleChngedFail() {
         _titleChngedFail = 0;
     }
-    //флуд пакетами
+    //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private long _cpa = 0;
     private long _cpb = 0;
     private long _cpc = 0;
@@ -12780,7 +12780,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public void disableMove(int delay) {
         _cpaah = System.currentTimeMillis() + delay;
     }
-    //вепон еквип
+    //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     private boolean _equiptask = false;
 
     public void setWaitEquip(boolean f) {
@@ -12791,7 +12791,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return _equiptask;
     }
 
-    //для AI
+    //пїЅпїЅпїЅ AI
     public int getItemCount(int itemId) {
         return checkItemCount(getInventory().getItemByItemId(itemId));
     }
@@ -12826,7 +12826,7 @@ public class L2PcInstance extends L2PlayableInstance {
         id = null;
         return false;
     }
-    //анти-мировой чат
+    //пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
     private boolean _antiWorldChat = false;
 
     public void setWorldIgnore(boolean f) {
@@ -12836,7 +12836,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public boolean isWorldIgnore() {
         return _antiWorldChat;
     }
-    // модераторам
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private boolean _moder = false;
     private boolean _cmoder = true;
 
@@ -12874,7 +12874,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public void logModerAction(String Moder, String Action) {
         Moderator.getInstance().logWrite(getName(), Action);
     }
-    //оптимизация положения чара
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     private Location _lastOptiClientPosition;
     private Location _lastOptiServerPosition;
 
@@ -12893,7 +12893,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public Location getOptiLastServerPosition() {
         return _lastOptiServerPosition;
     }
-    //падение с высоты
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     private volatile long _fallingTimestamp = 0;
 
     public final boolean isFalling(int z) {
@@ -12933,9 +12933,9 @@ public class L2PcInstance extends L2PlayableInstance {
         } else {
             setCurrentHp(hp);
         }
-        sendMessage("Вы получили " + damage + " урона при падении с высоты.");
+        sendMessage("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + damage + " пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.");
     }
-    //френды
+    //пїЅпїЅпїЅпїЅпїЅпїЅ
     private FastMap<Integer, String> _friends = new FastMap<Integer, String>().shared("L2PcInstance._friends");
 
     public void storeFriend(int fId, String fName) {
@@ -12953,7 +12953,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public FastMap<Integer, String> getFriends() {
         return _friends;
     }
-    //сигнеты
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private Location _groundSkillLoc = null;
 
     public void setGroundSkillLoc(Location location) {
@@ -12964,7 +12964,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return _groundSkillLoc;
     }
 
-    //чтоб не ходили в снайпах и уд
+    //пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ
     public boolean isUltimate() {
         int[] imBuffs = {313, 110, 368};
 
@@ -13003,7 +13003,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public void stopMoving() {
         stopMove(null);
     }
-    //откат цп
+    //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
     private long _cpReuseTimeS = 0;
     private long _cpReuseTimeB = 0;
 
@@ -13043,14 +13043,14 @@ public class L2PcInstance extends L2PlayableInstance {
         super.onForcedAttack(attacker);
     }
 
-    // экономим байты
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     @Override
     public void sendActionFailed() {
         sendUserPacket(Static.ActionFailed);
     }
-    // заглушка на трейд Alt-H
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ Alt-H
     private int _tradePartner = -1;
-    private long _tradeStart = 0; //также как сессия трейда, у 2-х игроков не могут быть разные сессии
+    private long _tradeStart = 0; //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ 2-пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
     public int getTradePartner() {
         return _tradePartner;
@@ -13105,7 +13105,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return _destZ;
     }
     /*
-     * L2DonateInstance - переносы и биржа
+     * L2DonateInstance - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
      */
     private int _vote1Item = 0;
     private int _vote2Item = 0;
@@ -13144,7 +13144,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return voteAugm;
     }
     /*
-     * Биржа шмоток
+     * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
      */
     private int _sellIdStock = 0;
     private int _itemIdStock = 0;
@@ -13212,7 +13212,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public long getStockLastAction() {
         return _stockTime;
     }
-    // продажа лс
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
     private int _augSaleItem = 0;
     private int _augSaleId = 0;
     private int _augSaleLvl = 0;
@@ -13334,7 +13334,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public boolean getShowSkillChances() {
         return _skillChances;
     }
-    // МассПвп, апдейт статуса в хтмл-ке
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ-пїЅпїЅ
     private long _mpvplast = 0;
 
     public void setMPVPLast() {
@@ -13345,7 +13345,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return _mpvplast;
     }
 
-    // Для дальнейших евентов
+    // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public boolean inEvent() {
         return EventManager.getInstance().isReg(this);
     }
@@ -13391,7 +13391,7 @@ public class L2PcInstance extends L2PlayableInstance {
 
         sendUserPacket(new SpecialCamera(target.getObjectId(), dist, yaw, pitch, time, duration));
     }
-    // выдача наград за голосование на опр. ник
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ. пїЅпїЅпїЅ
     private String _voteRef = "no";
 
     public String voteRef() {
@@ -13463,7 +13463,7 @@ public class L2PcInstance extends L2PlayableInstance {
         }
         _voteRef = "no";
     }
-    //окно вставки лс, посылаем нафик при вставке, если не было пакета
+    //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     private boolean _augFlag = false;
 
     public void setAugFlag(boolean f) {
@@ -13473,7 +13473,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public boolean getAugFlag() {
         return _augFlag;
     }
-    //окно заточки скиллов, если в конфиге включена мультипрофа, посылаем нафик, если не было пакета
+    //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     private int _aquFlag = 0;
 
     public void setAquFlag(int id) {
@@ -13484,7 +13484,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return _aquFlag;
     }
 
-    // Дальность торговли от других
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public boolean canTrade() {
         if (isParalyzed()
                 || isCastingNow()
@@ -13696,7 +13696,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return player;
     }
     /**
-     * 0 - стандарт 1 - лук 2 - даггер 3 - маг 4 - бишоg
+     * 0 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1 - пїЅпїЅпїЅ 2 - пїЅпїЅпїЅпїЅпїЅпїЅ 3 - пїЅпїЅпїЅ 4 - пїЅпїЅпїЅпїЅg
      */
     private int _partnerClass = 0;
 
@@ -13775,7 +13775,7 @@ public class L2PcInstance extends L2PlayableInstance {
 
         //updateEffectIcons(true);
     }
-    // фейк игроки
+    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     private boolean _fantome = false;
 
     public void setFantome(boolean f) {
@@ -13786,7 +13786,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public boolean isFantome() {
         return _fantome;
     }
-    // снифф пакетов опр. игрока
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅ
     private boolean _spy = false;
 
     public void setSpy(boolean f) {
@@ -13796,7 +13796,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public boolean isSpy() {
         return _spy;
     }
-    // флаг, что к себе телепортит баюм
+    // пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     private boolean _bt = false;
 
     public void setBaiTele(boolean f) {
@@ -13807,7 +13807,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return _bt;
     }
     /**
-     * Бойцовский клуб
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
      */
     private int _fcObj = 0;
     private int _fcEnch = 0;
@@ -13876,7 +13876,7 @@ public class L2PcInstance extends L2PlayableInstance {
 
     }
 
-    // пароль на чара
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
     /*
      * CREATE TABLE `z_char_keys` ( `char_id` int(10) unsigned NOT NULL DEFAULT
      * '0', `key` varchar(255) NOT NULL DEFAULT ' ', PRIMARY KEY (`char_id`) )
@@ -13936,7 +13936,7 @@ public class L2PcInstance extends L2PlayableInstance {
          htm.replace("%KEY%", key);
          sendUserPacket(htm);*/
         //sendPacket(Static.SET_KEY_OK.replaceAndGet("%KEY%", key));
-        //sendHtmlMessage("Уважаемый игрок!", Static.SET_KEY_OK.replaceAll("%KEY%", key));
+        //sendHtmlMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ!", Static.SET_KEY_OK.replaceAll("%KEY%", key));
         NpcHtmlMessage htm = NpcHtmlMessage.id(0);
         htm.setFile("data/html/menu/set_form_ok.htm");
         htm.replace("%KEY%", key);
@@ -14002,7 +14002,7 @@ public class L2PcInstance extends L2PlayableInstance {
 
         return super.isParalyzed();
     }
-    // антисуммон филд
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     private boolean _antiSummon = false;
 
     public void setNoSummon(boolean f) {
@@ -14013,7 +14013,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return _antiSummon;
     }
     /**
-     * Задержка на одевание пушки
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
      *
      */
     private Lock wpnEquip = new ReentrantLock();
@@ -14085,7 +14085,7 @@ public class L2PcInstance extends L2PlayableInstance {
                 SystemMessage sm;
                 if (isEquipped) {
                     if (item.getElement() > 0) {
-                        sm = SystemMessage.id(SystemMessageId.S1_S2).addString(item.getWeaponName() + " было снято.");
+                        sm = SystemMessage.id(SystemMessageId.S1_S2).addString(item.getWeaponName() + " пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.");
                     } else if (item.getEnchantLevel() > 0) {
                         sm = SystemMessage.id(SystemMessageId.EQUIPMENT_S1_S2_REMOVED).addNumber(item.getEnchantLevel()).addItemName(item.getItemId());
                     } else {
@@ -14103,7 +14103,7 @@ public class L2PcInstance extends L2PlayableInstance {
                     }
                 } else {
                     if (item.getElement() > 0) {
-                        sm = SystemMessage.id(SystemMessageId.S1_S2).addString("Одето " + item.getWeaponName());
+                        sm = SystemMessage.id(SystemMessageId.S1_S2).addString("пїЅпїЅпїЅпїЅпїЅ " + item.getWeaponName());
                     } else if (item.getEnchantLevel() > 0) {
                         sm = SystemMessage.id(SystemMessageId.S1_S2_EQUIPPED).addNumber(item.getEnchantLevel()).addItemName(item.getItemId());
                     } else {
@@ -14121,12 +14121,12 @@ public class L2PcInstance extends L2PlayableInstance {
                     }
 
                     if (item.isShadowItem()) {
-                        sendCritMessage(item.getItemName() + ": осталось " + item.getMana() + " минут.");
+                        sendCritMessage(item.getItemName() + ": пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + item.getMana() + " пїЅпїЅпїЅпїЅпїЅ.");
                     }
 
                     if (item.getExpire() > 0) {
                         String date = new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm").format(new java.util.Date(item.getExpire()));
-                        sendCritMessage(item.getItemName() + ": истекает " + date + ".");
+                        sendCritMessage(item.getItemName() + ": пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + date + ".");
                     }
                     item.decreaseMana(true);
                 }
@@ -14143,7 +14143,7 @@ public class L2PcInstance extends L2PlayableInstance {
     }
 
     /**
-     * Разгрузка проверок AI-мобов на агрессивность
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ AI-пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
      *
      */
     @Override
@@ -14217,7 +14217,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return mob.isAggressive();
     }
     /**
-     * Для евента Сезон охоты
+     * пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
      */
     private int _osTeam = 0;
 
@@ -14232,7 +14232,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return _osTeam;
     }
     /**
-     * Продажа скиллов
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
      */
     private boolean _havpwcs = false;
     private int _pwskill = 0;
@@ -14285,7 +14285,7 @@ public class L2PcInstance extends L2PlayableInstance {
         CustomServerData.getInstance().addDonateSkill(getObjectId(), cls, id, lvl, expire);
     }
     /**
-     * Премиум
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
      *
      */
     private boolean _premium = false;
@@ -14331,7 +14331,7 @@ public class L2PcInstance extends L2PlayableInstance {
         if (days == 0) {
             _premium = false;
             _premiumExpire = 0;
-            sendCritMessage("Статус Премиум истек!");
+            sendCritMessage("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ!");
             if (Config.PREMIUM_ITEMS) {
                 for (L2ItemInstance item : getInventory().getItems()) {
                     if (item == null) {
@@ -14350,7 +14350,7 @@ public class L2PcInstance extends L2PlayableInstance {
         broadcastUserInfo();
 
         String date = new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new java.util.Date(expire));
-        sendCritMessage("Статус Премиум: до " + date);
+        sendCritMessage("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅ " + date);
     }
 
     private static class StopPremium implements Runnable {
@@ -14399,7 +14399,7 @@ public class L2PcInstance extends L2PlayableInstance {
         }
     }
     /**
-     * Покупное геройство
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
      */
     private long _heroExpire = 0;
 
@@ -14437,24 +14437,24 @@ public class L2PcInstance extends L2PlayableInstance {
     public void sendTempMessages() {
         revalidateZone(true);
         if (_heroExpire == 1) {
-            sendCritMessage("Статус Героя: бесконечный.");
+            sendCritMessage("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
         } else if (_heroExpire == -1) {
-            sendCritMessage("Статус Героя: истек.");
+            sendCritMessage("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅ.");
         } else if (_heroExpire > 1) {
             String date = new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new java.util.Date(_heroExpire));
-            sendCritMessage("Статус Героя: до " + date);
+            sendCritMessage("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: пїЅпїЅ " + date);
         }
 
         if (_premiumExpire == -1) {
-            sendCritMessage("Статус Премиум: истек.");
+            sendCritMessage("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅ.");
         } else if (_premiumExpire > 1) {
             String date = new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new java.util.Date(_premiumExpire));
-            sendCritMessage("Статус Премиум: до " + date);
+            sendCritMessage("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅ " + date);
         }
 
         if (_tradersIgnore > 1) {
             String date = new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new java.util.Date(_tradersIgnore));
-            sendCritMessage("Чат героя: до " + date);
+            sendCritMessage("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: пїЅпїЅ " + date);
         }
 
         if (Config.HTMPARA_WELCOME && !hasFourSide()) {
@@ -14472,7 +14472,7 @@ public class L2PcInstance extends L2PlayableInstance {
             sendUserPacket(Static.SERVER_WELCOME);
         }
     }
-    //стихии
+    //пїЅпїЅпїЅпїЅпїЅпїЅ
     private int _fourSide = 0;
 
     private void setFourSide(int f) {
@@ -14493,7 +14493,7 @@ public class L2PcInstance extends L2PlayableInstance {
         }
         setFourSide(id);
         addSkill(SkillTable.getInstance().getInfo(id, 1), true);
-        sendHtmlMessage("Выбор сделан, теперь вы можете играть.");
+        sendHtmlMessage("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.");
     }
 
     private boolean hasFourSide() {
@@ -14506,7 +14506,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public void setReborned() {
         _fourSide = 5;
     }
-    // шадов затычка
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private boolean _shdItems = false;
 
     public void setShadeItems(boolean f) {
@@ -14516,7 +14516,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public boolean getShadeItems() {
         return (_shdItems == false);
     }
-    // твт затычка
+    // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private boolean _tvtPassive = true;
 
     public void setTvtPassive(boolean f) {
@@ -14526,7 +14526,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public boolean isTvtPassive() {
         return _tvtPassive;
     }
-    // Почта
+    // пїЅпїЅпїЅпїЅпїЅ
     private int _bbsMailItem = 0;
     private String _bbsMailSender = "n.a";
     private String _bbsMailTheme = "n.a";
@@ -14555,13 +14555,13 @@ public class L2PcInstance extends L2PlayableInstance {
         return _bbsMailTheme;
     }
 
-    // Смена пола
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     public void setSex(boolean f) {
         byte abc = (byte) Rnd.get(3);
         _appearance = new PcAppearance(abc, abc, abc, f);
         //getAppearance().setSex(f);
     }
-    // пк/пвп бонус
+    // пїЅпїЅ/пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     private long _lastPvPPk = 0;
 
     @Override
@@ -14811,7 +14811,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return getClient().getIpAddr();
     }
 
-    // проверки гейт чант/клан гейт/суммон френд
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     public boolean canSummon() {
         if (underAttack()) {
             sendUserPacket(Static.YOU_CANNOT_SUMMON_IN_COMBAT);
@@ -14942,13 +14942,13 @@ public class L2PcInstance extends L2PlayableInstance {
         }
 
         if (getItemCount(8615) == 0) {
-            caster.sendMessage("Персонаж " + getName() + " не может быть призван без Summoning Crystal.");
+            caster.sendMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + getName() + " пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ Summoning Crystal.");
             sendUserPacket(Static.NO_SUMMON_CRY);
             return false;
         }
         return true;
     }
-    //антиклик
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private int _enchClicks = 0;
     private int _enchLesson = 0;
 
@@ -14975,20 +14975,20 @@ public class L2PcInstance extends L2PlayableInstance {
                 for (int i = (Rnd.get(30)); i > 0; i--) {
                     tb.append("<br>");
                 }
-                html.setHtml("<html><body><font color=\"FF6600\">!Превышен лимит заточки!</font><br>Нажмите на кнопку для продолжения заточки!<br> <table width=\"" + Rnd.get(40, 300) + "\"><tr><td align=\"right\">" + tb.toString() + "<button value=\"Продолжить\" action=\"bypass -h ench_click " + _enchClicks + "\" width=80 height=15 back=\"sek.cbui94\" fore=\"sek.cbui92\"></td></tr></table></body></html>");
+                html.setHtml("<html><body><font color=\"FF6600\">!пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!</font><br>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!<br> <table width=\"" + Rnd.get(40, 300) + "\"><tr><td align=\"right\">" + tb.toString() + "<button value=\"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\" action=\"bypass -h ench_click " + _enchClicks + "\" width=80 height=15 back=\"sek.cbui94\" fore=\"sek.cbui92\"></td></tr></table></body></html>");
                 //3.0Riddle riddle = CustomServerData.getInstance().getRiddle(_enchClicks);
-                //html.setHtml("<html><body>Отгадай загадку!<br>" + riddle.question + "<br><edit var=\"pwd\" width=60 length=\"8\"><br><br><button value=\"Ok\" action=\"bypass -h ench_click $pwd\" width=40 height=15 back=\"sek.cbui94\" fore=\"sek.cbui92\"></body></html>");
+                //html.setHtml("<html><body>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!<br>" + riddle.question + "<br><edit var=\"pwd\" width=60 length=\"8\"><br><br><button value=\"Ok\" action=\"bypass -h ench_click $pwd\" width=40 height=15 back=\"sek.cbui94\" fore=\"sek.cbui92\"></body></html>");
                 tb.clear();
                 tb = null;
                 break;
             case 1:
-                html.setHtml("<html><body>Введите этот код,<br>=== <font color=LEVEL>" + _enchClicks + "</font> ===<br> для продолжения заточки: <br><edit var=\"pwd\" width=60 length=\"5\"><br><br><button value=\"Ok\" action=\"bypass -h ench_click $pwd\" width=40 height=15 back=\"sek.cbui94\" fore=\"sek.cbui92\"></body></html>");
+                html.setHtml("<html><body>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ,<br>=== <font color=LEVEL>" + _enchClicks + "</font> ===<br> пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: <br><edit var=\"pwd\" width=60 length=\"5\"><br><br><button value=\"Ok\" action=\"bypass -h ench_click $pwd\" width=40 height=15 back=\"sek.cbui94\" fore=\"sek.cbui92\"></body></html>");
                 break;
             case 2:
                 int a = Rnd.get(100);
                 int b = Rnd.get(100);
                 _enchLesson = a + b;
-                html.setHtml("<html><body>Решите пример,<br>=== <font color=LEVEL> " + a + " + " + b + " = ?</font>, ===<br> для продолжения заточки: <br><edit var=\"pwd\" width=60 length=\"4\"><br><br><button value=\"Ok\" action=\"bypass -h ench_click $pwd\" width=40 height=15 back=\"sek.cbui94\" fore=\"sek.cbui92\"></body></html>");
+                html.setHtml("<html><body>пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ,<br>=== <font color=LEVEL> " + a + " + " + b + " = ?</font>, ===<br> пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: <br><edit var=\"pwd\" width=60 length=\"4\"><br><br><button value=\"Ok\" action=\"bypass -h ench_click $pwd\" width=40 height=15 back=\"sek.cbui94\" fore=\"sek.cbui92\"></body></html>");
                 break;
         }
         sendUserPacket(html);
@@ -14996,9 +14996,9 @@ public class L2PcInstance extends L2PlayableInstance {
 
     public void showAntiClickOk() {
         if (_enchClicks == 99908) {
-            sendHtmlMessage("Правильно, коровы!", "Пейте, дети, молоко -<br1>Будете здоровы!");
+            sendHtmlMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ!", "пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ -<br1>пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
         } else {
-            sendHtmlMessage("Спасибо", "можете точить дальше.");
+            sendHtmlMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ", "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.");
         }
 
         _enchClicks = 0;
@@ -15009,13 +15009,13 @@ public class L2PcInstance extends L2PlayableInstance {
         return answer.equalsIgnoreCase(CustomServerData.getInstance().getRiddle(_enchClicks).answer);
     }
 
-    // тп в гиран
+    // пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
     @Override
     public void teleToClosestTown() {
         teleToLocation(MapRegionTable.TeleportWhereType.Town);
         //teleToLocation(83461, 149018, -3431);
     }
-    // евент дозор
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     private boolean _isInEncounterEvent = false;
 
     public void setInEncounterEvent(boolean f) {
@@ -15025,7 +15025,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public boolean isInEncounterEvent() {
         return _isInEncounterEvent;
     }
-    // евент медальки
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private int _eventColNumber = 0;
 
     public void setEventColNumber(int rnd) {
@@ -15061,11 +15061,11 @@ public class L2PcInstance extends L2PlayableInstance {
         }
 
         switch (type) {
-            case 1: // отнимаем
+            case 1: // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 sendUserPacket(new ExPCCafePointInfo(this, 0, false, false));
                 sendMessage(Static.CONSUMED_S1_PCPOINTS.replace("%a%", String.valueOf(points)));
                 break;
-            case 2: // добавляем
+            case 2: // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 if (_premium) {
                     points *= Config.PREMIUM_PCCAFE_MUL;
                 }
@@ -15104,7 +15104,7 @@ public class L2PcInstance extends L2PlayableInstance {
     /**
      * party waiting room
      */
-    //- ищу пати
+    //- пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     private boolean _lookingForParty = false;
 
     public void setLFP(boolean f) {
@@ -15131,8 +15131,8 @@ public class L2PcInstance extends L2PlayableInstance {
         _partyRoom.sayToPartyRoom(cs);
     }
     /**
-     * невидимость для остальных, концепт 0 - инвиз 1 - обычный 2 - олимп 3 -
-     * просмотр 9 - торговцы //ивенты 4 - захват базы 5 - zames 6 - last hero 7
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 0 - пїЅпїЅпїЅпїЅпїЅ 1 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2 - пїЅпїЅпїЅпїЅпїЅ 3 -
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 9 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ //пїЅпїЅпїЅпїЅпїЅпїЅ 4 - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ 5 - zames 6 - last hero 7
      * - mass pvp 8 - tvt
      *
      */
@@ -15164,7 +15164,7 @@ public class L2PcInstance extends L2PlayableInstance {
                 break;
         }
         if (channel == 8 && Config.FORBIDDEN_EVENT_ITMES) {
-            // снятие переточеных вещей
+            // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             boolean found = false;
             for (L2ItemInstance item : getInventory().getItems()) {
                 if (item == null) {
@@ -15234,7 +15234,7 @@ public class L2PcInstance extends L2PlayableInstance {
     }
 
     /**
-     * телепортер на ивентах
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
      */
     @Override
     public void teleToLocation(int x, int y, int z) {
@@ -15277,7 +15277,7 @@ public class L2PcInstance extends L2PlayableInstance {
         super.teleToLocation(x, y, z, f);
     }
 
-    // титул
+    // пїЅпїЅпїЅпїЅпїЅ
     @Override
     public String getTitle() {
         if (_showMaskName) {
@@ -15296,7 +15296,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return super.getTitle();
     }
     /*
-     * оффтрейд DROP TABLE IF EXISTS `character_offline`; CREATE TABLE
+     * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ DROP TABLE IF EXISTS `character_offline`; CREATE TABLE
      * `character_offline` ( `obj_id` int(11) NOT NULL DEFAULT '0', `name`
      * varchar(86) NOT NULL DEFAULT '0', `value` varchar(255) NOT NULL DEFAULT
      * '0', UNIQUE KEY `prim` (`obj_id`,`name`), KEY `obj_id` (`obj_id`), KEY
@@ -15620,7 +15620,7 @@ public class L2PcInstance extends L2PlayableInstance {
         }
     }
 
-    //Группируем
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     @Override
     public boolean canSeeTarget(L2Object trg) {
         /*
@@ -15682,17 +15682,17 @@ public class L2PcInstance extends L2PlayableInstance {
         return true;
     }
 
-    // зареган на ивенте
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public boolean isInEvent() {
         return EventManager.getInstance().onEvent(this);
     }
 
-    //ламмгвардддд
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public void saveHWID(boolean f) {
         LoginServerThread.getInstance().setHwid(getAccountName(), (f ? getHWID() : ""));
         _client.setMyHWID(f ? getHWID() : "none");
     }
-    // мой хвид
+    // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
     public String getMyHWID() {
         if (_client == null) {
@@ -15701,7 +15701,7 @@ public class L2PcInstance extends L2PlayableInstance {
 
         return _client.getMyHWID();
     }
-    // полученный
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     public String getHWID() {
         if (_client == null) {
@@ -15711,7 +15711,7 @@ public class L2PcInstance extends L2PlayableInstance {
         return _client.getHWID();
     }
 
-    // пароль
+    // пїЅпїЅпїЅпїЅпїЅпїЅ
     public boolean updatePassword(String pass) {
         String newpass = Util.getSHA1(pass);
         if (newpass.length() < 5) {
@@ -15727,7 +15727,7 @@ public class L2PcInstance extends L2PlayableInstance {
         LoginServerThread.getInstance().setNewEmail(getAccountName(), email);
         return true;
     }
-    // антифлуд на повторные фразы
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     private int _lastSayCount = 0;
     private long _lastSayTime = 0;
     private String _lastSayString = "";
@@ -15761,7 +15761,7 @@ public class L2PcInstance extends L2PlayableInstance {
         }
         return false;
     }
-    // аугмент
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private int _activeAug = 0;
 
     public void setActiveAug(int aug) {
@@ -15771,7 +15771,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public int getActiveAug() {
         return _activeAug;
     }
-    //перенос аугментации альтб, отдельные методы, дабы избежать багов с нпц переносом
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private int _trans1item = 0;
     private int _trans2item = 0;
     private int _transAugId = 0;
@@ -15799,7 +15799,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public int getTransAugment() {
         return _transAugId;
     }
-    // бафф таргет
+    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     private L2Character _buffTarget = this;
 
     public void setBuffTarget(L2Character cha) {
@@ -15961,7 +15961,7 @@ public class L2PcInstance extends L2PlayableInstance {
         }
 
         if (isProtected()) {
-            sendMessage("Теперь на вас могут напасть.");
+            sendMessage("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
         }
 
         _lastTeleport = 0;
@@ -15994,7 +15994,7 @@ public class L2PcInstance extends L2PlayableInstance {
         setName(name);
         store();
 
-        sendAdmResultMessage("Ваш ник изменен на " + name);
+        sendAdmResultMessage("пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ " + name);
 
         if (_clan != null) {
             _clan.updateClanMember(this, true);
@@ -16141,7 +16141,7 @@ public class L2PcInstance extends L2PlayableInstance {
             return false;
         }
         if (underAttack()) {
-            sendHtmlMessage("Баффер", "Во время боя не баффаю.");
+            sendHtmlMessage("пїЅпїЅпїЅпїЅпїЅпїЅ", "пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.");
             sendActionFailed();
             return true;
         }
@@ -16510,36 +16510,36 @@ public class L2PcInstance extends L2PlayableInstance {
 
     public boolean canSeeBroadcast() {
         if (isCastingNow() || isAllSkillsDisabled() || isAttackingNow()) {
-            sendHtmlMessage("Произошла ошибка при попытке просмотра.");
+            sendHtmlMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
             return false;
         }
         if (isDead() || isAlikeDead()) {
-            sendHtmlMessage("Произошла ошибка при попытке просмотра.");
+            sendHtmlMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
             return false;
         }
 
         if (!TvTEvent.isInactive() && TvTEvent.isPlayerParticipant(getName())) {
-            sendHtmlMessage("Вы зарегистрирвоаны на ивенте.");
+            sendHtmlMessage("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.");
             return false;
         }
 
         if (inFClub()) {
-            sendHtmlMessage("Вы зарегистрирвоаны на ивенте.");
+            sendHtmlMessage("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.");
             return false;
         }
 
         if (getPet() != null) {
-            sendHtmlMessage("Отзовите суммона.");
+            sendHtmlMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
             return false;
         }
 
         if (Olympiad.isRegisteredInComp(this) || isInOlympiadMode() || getOlympiadGameId() > -1) {
-            sendHtmlMessage("Вы зарегистрирвоаны на олимпиаде.");
+            sendHtmlMessage("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
             return false;
         }
 
         if (isInEvent()) {
-            sendHtmlMessage("Вы зарегистрирвоаны на ивенте.");
+            sendHtmlMessage("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.");
             return false;
         }
 
@@ -16555,7 +16555,7 @@ public class L2PcInstance extends L2PlayableInstance {
 
     public void updateClanNpcScore(int score) {
         _clanNpcScore += score;
-        sendMessage("Теперь у вас " + _clanNpcScore + " клан очков.");
+        sendMessage("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ " + _clanNpcScore + " пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.");
     }
 
     public int getClanNpcScore() {
@@ -16895,7 +16895,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public void setAutoMp(boolean f) {
         _autoMp = f;
         sendPacket(new ExAutoSoulShot(728, _autoMp ? 1 : 0));
-        sendMessage("Автоматическое использование MP " + (_autoMp ? "включено." : "отключено."));
+        sendMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ MP " + (_autoMp ? "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ." : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ."));
     }
 
     @Override
@@ -16907,7 +16907,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public void setAutoHp(boolean f) {
         _autoHp = f;
         sendPacket(new ExAutoSoulShot(1539, _autoHp ? 1 : 0));
-        sendMessage("Автоматическое использование HP " + (_autoHp ? "включено." : "отключено."));
+        sendMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ HP " + (_autoHp ? "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ." : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ."));
     }
 
     @Override
@@ -16919,7 +16919,7 @@ public class L2PcInstance extends L2PlayableInstance {
     public void setAutoCp(boolean f) {
         _autoCp = f;
         sendPacket(new ExAutoSoulShot(5592, _autoCp ? 1 : 0));
-        sendMessage("Автоматическое использование CP " + (_autoCp ? "включено." : "отключено."));
+        sendMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ CP " + (_autoCp ? "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ." : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ."));
     }
 
     @Override

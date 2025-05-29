@@ -272,7 +272,7 @@ public class L2Attackable extends L2NpcInstance {
     private boolean _canReturnToSpawnPoint = true;
 
     public final boolean canReturnToSpawnPoint() {
-        if (System.currentTimeMillis() - _lastMove < 45000) // раз в 10 сек пусть ходят
+        if (System.currentTimeMillis() - _lastMove < 45000) // пїЅпїЅпїЅ пїЅ 10 пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         {
             return false;
         }
@@ -334,7 +334,7 @@ public class L2Attackable extends L2NpcInstance {
      */
     private boolean _mustGiveExpSp;
 
-    // рожд. дроп
+    // пїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅ
     //private static FastList<EventReward> _xMrewards = Config.XM_DROP;
     /**
      * Constructor of L2Attackable (use L2Character and L2NpcInstance
@@ -1023,7 +1023,7 @@ public class L2Attackable extends L2NpcInstance {
         return ai._hate;
     }
 
-    // шанс дропа
+    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     public int getDropChance(int dropChance, L2PcInstance attacker, int itemId) {
         switch (itemId) {
             case 57:
@@ -1055,7 +1055,7 @@ public class L2Attackable extends L2NpcInstance {
         }
     }
 
-    // умножение выпавших предметов
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public int getDropCount(int itemCount, L2PcInstance attacker, int itemId, int min, int max) {
         if (isEpicJewerly(itemId)) {
             return 1;
@@ -1473,7 +1473,7 @@ public class L2Attackable extends L2NpcInstance {
                         broadcastPacket(SystemMessage.id(SystemMessageId.S1_DIED_DROPPED_S3_S2).addString(getName()).addItemName(item.getItemId()).addNumber(item.getCount()));
                     }
 
-                    //автолут на чаре
+                    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
                     if (Config.VS_AUTOLOOT && !player.getAutoLoot()) {
                         dropItem(player, item); // drop the item on the ground
                         continue;
@@ -1482,7 +1482,7 @@ public class L2Attackable extends L2NpcInstance {
                     // Check if the autoLoot mode is active
                     if (Config.AUTO_LOOT_RAID && isRaid()) {
                         player.doAutoLoot(this, item); // Give this or these Item(s) to the L2PcInstance that has killed the L2Attackable
-                    } else if (Config.AUTO_LOOT && !isRaid()) {
+                    } else if (Config.AUTO_LOOT && !isRaid() && !isNotAutoloot(item.getItemId()) ) {
                         player.doAutoLoot(this, item);
                     } else {
                         dropItem(player, item); // drop the item on the ground
@@ -1502,6 +1502,18 @@ public class L2Attackable extends L2NpcInstance {
             case 6661:
             case 6662:
             case 8191:
+                return true;
+            default:
+                return false;
+        }
+    }
+    
+    private boolean isNotAutoloot(int itemId) {
+        switch (itemId) {
+            case 8608:
+            case 8609:
+            case 8610:
+            case 8611:
                 return true;
             default:
                 return false;
@@ -1543,7 +1555,7 @@ public class L2Attackable extends L2NpcInstance {
             return;
         }
 
-        // рождество
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (Config.ALLOW_XM_SPAWN) {
             for (EventReward reward : Config.XM_DROP) {
                 if (reward != null && Rnd.get(100) < reward.chance) {
