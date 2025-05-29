@@ -21,7 +21,7 @@
         "d:\\PWSOFTSOURCE\\libs\\guava-17.0.jar"
     ],
         "files.encoding": "windows1251",
-        "files.autoGuessEncoding": true,
+        "files.autoGuessEncoding": false,
         "java.project.sourcePaths": [
             "src"
         ]
