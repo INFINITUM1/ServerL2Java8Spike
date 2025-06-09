@@ -686,7 +686,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
                 return;
             } else {
                 player.incAccKickCount();
-                player.sendMessage("Êעמ-עמ ןûעאועסÿ חאיעט חא גארודמ ןונסמםאזא!");
+                player.sendMessage("Someone is trying to get behind your character!");
                 //LoginController.getInstance().sendPacket(new PlayerLogout(player.getAccountName()));
             }
 
@@ -707,7 +707,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
         closeNow();
         LoginServerThread.getInstance().sendLogout(account);
     }
-    // כאלדגאנההה
+    // lameguard
     private String _hwid = "none";
     private String _myhwid = "none";
     private boolean _protected;
