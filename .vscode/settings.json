@@ -1,0 +1,32 @@
+{
+    "java.project.sourcePaths": [
+        "src"
+    ],
+    "java.project.referencedLibraries": [
+        "libs\\bonecp-0.8.0.jar",
+        "libs\\bsf.jar",
+        "libs\\bsh-2.0b4.jar",
+        "libs\\cademia.jar",
+        "libs\\commons-lang3-3.3.2.jar",
+        "libs\\commons-logging-1.1.jar",
+        "libs\\commons-pool-1.5.4.jar",
+        "libs\\ecj.jar",
+        "libs\\guava-17.0.jar",
+        "libs\\java-engine.jar",
+        "libs\\javolution-5.5.1.jar",
+        "libs\\jython.jar",
+        "libs\\lameguard-1.9.5.jar",
+        "libs\\log4j-1.2.15.jar",
+        "libs\\mchange-commons-0.2.jar",
+        "libs\\mysql-connector-java-5.1.36-bin.jar",
+        "libs\\slf4j-api-1.7.12.jar",
+        "libs\\slf4j-nop-1.7.12.jar",
+        "libs\\strixguard-1.0.jar",
+        "d:\\SERVERS\\source pw\\libs\\javolution-5.5.1.jar",
+        "d:\\SERVERS\\50000\\server\\server\\libs\\it_grigys.jar"
+    ],
+    
+  "files.encoding": "utf8",
+  "files.autoGuessEncoding": false
+
+}

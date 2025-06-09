@@ -1,0 +1,21 @@
+Java 8 server Lineage 2 Interlude by PWSOFT 08.2017
+Edited by GZU & InsPekToP 01.2025
+
+
+Need to download the Server Build: 
+
+
+Links:
+1) +- "clean" build with default configs
+https://drive.google.com/file/d/1ilaxwJy2gOmpfYwq0XVKwOUeKXQiTXrs/view?usp=sharing 
+2) +- "clean" source 
+https://drive.google.com/file/d/1sfQmX0F33y4BaK4KXNXlKf98gvBLnELD/view?usp=sharing
+
+
+l2spike.com - a site of the server 
+
+|Updates|
+
+1. + TaskGiveDonations 
+2. Edited TP scroll 7123 -> to Dyno Island
+3. + isNotAutoloot() for HERBS
