@@ -10,7 +10,8 @@ Links:
 https://drive.google.com/file/d/1ilaxwJy2gOmpfYwq0XVKwOUeKXQiTXrs/view?usp=sharing 
 2) +- "clean" source 
 https://drive.google.com/file/d/1sfQmX0F33y4BaK4KXNXlKf98gvBLnELD/view?usp=sharing
-
+3) L2 Spike Patch + DB + Build 03 july 2025 
+https://drive.google.com/file/d/1DixlyELVnjHIcCo5_M6OW6TsWtv0xpDX/view?usp=sharing
 
 l2spike.com - a site of the server 
 
@@ -19,3 +20,4 @@ l2spike.com - a site of the server
 1. + TaskGiveDonations 
 2. Edited TP scroll 7123 -> to Dyno Island
 3. + isNotAutoloot() for HERBS
+4. L2Attackable  - add multiplying loot for each person in party 

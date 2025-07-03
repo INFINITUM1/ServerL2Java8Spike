@@ -1461,6 +1461,16 @@ public class L2Attackable extends L2NpcInstance {
                     item = calculateRewardItem(player, drop, levelModifier, false);
                 } else {
                     item = calculateCategorizedRewardItem(player, cat, levelModifier);
+                    // Увеличим дроп адены, если игрок в пати
+                    if (item != null && item.getItemId() == 57) { // 57 — ID адены
+                        if (player.isInParty()) {
+                            int partySize = player.getParty().getMemberCount();
+                            double bonusMultiplier = 1.0 + 0.04 * (partySize - 1); // +10% за каждого члена пати кроме себя
+                            int newCount = (int) Math.round(item.getCount() * bonusMultiplier);
+                            item = new RewardItem(item.getItemId(), newCount); // создаём новый RewardItem с новым количеством
+                        }
+                    }
+
                 }
 
                 if (item != null) {
