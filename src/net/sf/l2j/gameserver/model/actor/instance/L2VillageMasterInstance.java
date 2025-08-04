@@ -501,6 +501,16 @@ public class L2VillageMasterInstance extends L2FolkInstance {
             player.sendPacket(Static.INVITED_USER_NOT_ONLINE);
             return;
         }
+        for (Castle castle : CastleManager.getInstance().getCastles()) {
+            if (castle == null) {
+                continue;
+            }
+            if (castle.getSiege().getIsInProgress()
+                    && SiegeManager.getInstance().checkIsRegistered(clan, castle.getCastleId())) {
+                player.sendMessage("Запрещено во время осады.");
+                return;
+            }
+        }
         clan.setNewLeader(member);
     }
 
@@ -662,32 +672,34 @@ public class L2VillageMasterInstance extends L2FolkInstance {
          */
         Set<PlayerClass> availSubs = null;
         if (Config.ALT_ANY_SUBCLASS || (Config.PREMIUM_ANY_SUBCLASS && player.isPremium())) {
-            final ClassType npcTeachType = getVillageMasterTeachType();
-            availSubs = currClass.getAllSubclasses();
-            if (availSubs != null) {
-                for (PlayerClass availSub : availSubs) {
-                    for (Iterator<SubClass> subList = iterSubClasses(player); subList.hasNext();) {
+            availSubs = currClass.getAllSubclasses(Config.PREMIUM_ANY_SUBCLASS && player.isPremium());
+            if(availSubs != null && !availSubs.isEmpty())
+            {
+                for(PlayerClass availSub : availSubs)
+                {
+                    for(Iterator<SubClass> subList = iterSubClasses(player); subList.hasNext(); )
+                    {
                         SubClass prevSubClass = subList.next();
                         int subClassId = prevSubClass.getClassId();
-                        if (subClassId >= 88) {
+                        if(subClassId >= 88)
+                        {
                             subClassId = ClassId.values()[subClassId].getParent().getId();
                         }
 
-                        if (availSub.ordinal() == subClassId || availSub.ordinal() == charClassId) {
+                        if(availSub.ordinal() == subClassId || availSub.ordinal() == charClassId)
+                        {
                             availSubs.remove(PlayerClass.values()[availSub.ordinal()]);
                         }
                     }
-                        if (!availSub.isOfType(npcTeachType)) {
-                            availSubs.remove(availSub);
                     }
+                availSubs.remove(currClass);
                 }
-            }
-
         } else {
             final PlayerRace npcRace = getVillageMasterRace();
             final ClassType npcTeachType = getVillageMasterTeachType();
             availSubs = currClass.getAvailableSubclasses(player);
-            if (availSubs != null) {
+            if(availSubs != null && !availSubs.isEmpty())
+            {
                 for (PlayerClass availSub : availSubs) {
                     for (Iterator<SubClass> subList = iterSubClasses(player); subList.hasNext();) {
                         SubClass prevSubClass = subList.next();
@@ -719,6 +731,7 @@ public class L2VillageMasterInstance extends L2FolkInstance {
                         }
                     }
                 }
+                availSubs.remove(currClass);
             }
         }
         return availSubs;

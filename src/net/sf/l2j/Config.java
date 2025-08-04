@@ -2787,6 +2787,7 @@ public final class Config {
     public static boolean ALT_ANY_SUBCLASS;
     // Возможность взятия любого саб-класса + овер и крафт
     public static boolean ALT_ANY_SUBCLASS_OVERCRAF;
+    public static boolean SUBS_3RD_PROFF;
     // ивент зоны
     public static EventTerritory TVT_POLY;
     public static EventTerritory LASTHERO_POLY;
@@ -5698,6 +5699,7 @@ public final class Config {
             MAX_HENNA_BONUS = Integer.parseInt(altSettings.getProperty("MaxHennaBonus", "5"));
             ALT_ANY_SUBCLASS = Boolean.parseBoolean(altSettings.getProperty("AltAnySubClass", "False"));
             ALT_ANY_SUBCLASS_OVERCRAF = Boolean.parseBoolean(altSettings.getProperty("AltAnySubClassOverCraft", "False"));
+            SUBS_3RD_PROFF = Boolean.parseBoolean(altSettings.getProperty("Subs3rdProff", "False"));
             ALT_SUBCLASS_PHOENIX = Boolean.parseBoolean(altSettings.getProperty("AltSubClassPhoenix", "False"));
             ALT_AUGMENT_HERO = Boolean.parseBoolean(altSettings.getProperty("AltAugmentHeroWeapons", "False"));
             //

@@ -198,7 +198,7 @@ public final class RequestSellItem extends L2GameClientPacket {
                 player.disarmWeapons();
             }
 
-            totalPrice += item.getReferencePrice() * count / 2;
+            totalPrice += item.getReferencePrice() * count;
             if (totalPrice > Integer.MAX_VALUE) {
                 //Util.handleIllegalPlayerAction(player,"Warning!! Character "+player.getName()+" of account "+player.getAccountName()+" tried to purchase over "+Integer.MAX_VALUE+" adena worth of goods.",  Config.DEFAULT_PUNISH);
                 return;

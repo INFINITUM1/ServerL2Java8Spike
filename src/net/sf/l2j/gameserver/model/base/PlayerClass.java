@@ -105,22 +105,14 @@ public enum PlayerClass {
     Fourth),
     titan(Orc, Fighter, Fourth), grandKhauatari(Orc, Fighter, Fourth), dominator(Orc, Mystic, Fourth), doomcryer(
     Orc, Mystic, Fourth),
-    fortuneSeeker(Dwarf, Fighter, Fourth), maestro(Dwarf, Fighter, Fourth),
-    /*
-     * phoenix
-     * AssassinPh, WarriorPh, WizardPh, TankPh, HealerPh
-     */
-    HellParent(Human, Fighter, First),
-    HellAssassin(Human, Fighter, Fourth),
-    HellWarrior(Human, Fighter, Fourth),
-    HellWizard(Human, Mystic, Fourth),
-    HellTank(Human, Fighter, Fourth),
-    HellHealer(Human, Mystic, Fourth);
-    private PlayerRace _race;
-    private ClassLevel _level;
-    private ClassType _type;
+    fortuneSeeker(Dwarf, Fighter, Fourth), maestro(Dwarf, Fighter, Fourth);
+    private final PlayerRace _race;
+    private final ClassLevel _level;
+    private final ClassType _type;
     private static final Set<PlayerClass> mainSubclassSet;
+    private static final Set<PlayerClass> mainSubclassSetFinal;
     private static final Set<PlayerClass> neverSubclassed = EnumSet.of(Overlord, Warsmith);
+    private static final Set<PlayerClass> neverSubclassedFinal = EnumSet.of(PlayerClass.dominator, PlayerClass.doomcryer);
     private static final Set<PlayerClass> subclasseSet1 = EnumSet.of(DarkAvenger, Paladin, TempleKnight, ShillienKnight);
     private static final Set<PlayerClass> subclasseSet2 = EnumSet.of(TreasureHunter, AbyssWalker, Plainswalker);
     private static final Set<PlayerClass> subclasseSet3 = EnumSet.of(Hawkeye, SilverRanger, PhantomRanger);
@@ -128,7 +120,7 @@ public enum PlayerClass {
     private static final Set<PlayerClass> subclasseSet5 = EnumSet.of(Sorceror, Spellsinger, Spellhowler);
     private static final EnumMap<PlayerClass, Set<PlayerClass>> subclassSetMap = new EnumMap<PlayerClass, Set<PlayerClass>>(PlayerClass.class);
     //
-    private static final Set<PlayerClass> hellSubclasseSet = EnumSet.of(HellAssassin, HellWarrior, HellWizard, HellTank, HellHealer);
+    // private static final Set<PlayerClass> hellSubclasseSet = EnumSet.of(HellAssassin, HellWarrior, HellWizard, HellTank, HellHealer);
 
     static {
         Set<PlayerClass> subclasses = getSet(null, Third);
@@ -156,6 +148,8 @@ public enum PlayerClass {
         subclassSetMap.put(Sorceror, subclasseSet5);
         subclassSetMap.put(Spellsinger, subclasseSet5);
         subclassSetMap.put(Spellhowler, subclasseSet5);
+
+        mainSubclassSetFinal = getSet(null, Fourth);
     }
 
     PlayerClass(PlayerRace pRace, ClassType pType, ClassLevel pLevel) {
@@ -171,7 +165,7 @@ public enum PlayerClass {
             subclasses = EnumSet.copyOf(mainSubclassSet);
 
             subclasses.removeAll(neverSubclassed);
-            subclasses.removeAll(hellSubclasseSet);
+            // subclasses.removeAll(hellSubclasseSet);
             subclasses.remove(this);
 
             switch (player.getRace()) {
@@ -194,15 +188,26 @@ public enum PlayerClass {
     }
 
     public final Set<PlayerClass> getAllSubclasses() {
+        return getAllSubclasses(false);
+    }
+
+    public final Set<PlayerClass> getAllSubclasses(final boolean all) {
         Set<PlayerClass> subclasses = null;
         if (_level == Third) {
-            subclasses = EnumSet.copyOf(mainSubclassSet);
-            subclasses.remove(this);
-            if (Config.ALT_ANY_SUBCLASS_OVERCRAF) {
-                subclasses.addAll(neverSubclassed);
+            if (Config.SUBS_3RD_PROFF) {
+                subclasses = EnumSet.copyOf(PlayerClass.mainSubclassSetFinal);
+                if (all || Config.ALT_ANY_SUBCLASS_OVERCRAF) {
+                    subclasses.addAll(PlayerClass.neverSubclassedFinal);
             }
-            if (Config.ALT_SUBCLASS_PHOENIX) {
-                subclasses.addAll(hellSubclasseSet);
+            }
+            else {
+                subclasses = EnumSet.copyOf(PlayerClass.mainSubclassSet);
+                if (all || Config.ALT_ANY_SUBCLASS_OVERCRAF) {
+                    subclasses.addAll(PlayerClass.neverSubclassed);
+                }
+            }
+            if (subclasses != null) {
+                subclasses.remove(this);
             }
         }
         return subclasses;

@@ -1461,15 +1461,15 @@ public class L2Attackable extends L2NpcInstance {
                     item = calculateRewardItem(player, drop, levelModifier, false);
                 } else {
                     item = calculateCategorizedRewardItem(player, cat, levelModifier);
-                    // Увеличим дроп адены, если игрок в пати
-                    if (item != null && item.getItemId() == 57) { // 57 — ID адены
-                        if (player.isInParty()) {
-                            int partySize = player.getParty().getMemberCount();
-                            double bonusMultiplier = 1.0 + 0.04 * (partySize - 1); // +10% за каждого члена пати кроме себя
-                            int newCount = (int) Math.round(item.getCount() * bonusMultiplier);
-                            item = new RewardItem(item.getItemId(), newCount); // создаём новый RewardItem с новым количеством
-                        }
-                    }
+                    // // Увеличим дроп адены, если игрок в пати
+                    // if (item != null && item.getItemId() == 57) { // 57 — ID адены
+                    //     if (player.isInParty()) {
+                    //         int partySize = player.getParty().getMemberCount();
+                    //         double bonusMultiplier = 1.0 + 0.04 * (partySize - 1); // +10% за каждого члена пати кроме себя
+                    //         int newCount = (int) Math.round(item.getCount() * bonusMultiplier);
+                    //         item = new RewardItem(item.getItemId(), newCount); // создаём новый RewardItem с новым количеством
+                    //     }
+                    // }
 
                 }
 
@@ -1524,6 +1524,10 @@ public class L2Attackable extends L2NpcInstance {
             case 8609:
             case 8610:
             case 8611:
+            case 6622:
+            case 6577:
+            case 6578:
+            case 8762:
                 return true;
             default:
                 return false;
@@ -1589,14 +1593,28 @@ public class L2Attackable extends L2NpcInstance {
         if (Config.L2JMOD_CHAMPION_ENABLE && isChampion() && Config.L2JMOD_CHAMPION_REWARD) {
             for (EventReward reward : Config.L2JMOD_CHAMPION_REWARD_LIST) {
                 if (reward != null && Rnd.get(100) < reward.chance) {
-                    player.addItem("Champion.drop", reward.id, Rnd.get(1, reward.count), player, true);
-                }
+                    if (!isNotAutoloot(reward.id)) {
+                        player.addItem("Champion.drop", reward.id, reward.count, player, true);
+                    }
+                    // player.addItem("Champion.drop", reward.id, Rnd.get(1, reward.count), player, true); старая версия где count рандомно а не фикса
+                    else {
+                        RewardItem item = new RewardItem(reward.id, reward.count);
+                        dropItem(player, item);
+                    }
+                }  
+                
             }
         }
         if (Config.L2JMOD_CHAMPION_ENABLE_BLUE && isChampion1() && Config.L2JMOD_CHAMPION_REWARD_BLUE) {
             for (EventReward reward : Config.L2JMOD_CHAMPION_REWARD_LIST_BLUE) {
                 if (reward != null && Rnd.get(100) < reward.chance) {
-                    player.addItem("Champion.drop", reward.id, Rnd.get(1, reward.count), player, true);
+                    if (!isNotAutoloot(reward.id)) {
+                        player.addItem("Champion.drop", reward.id, reward.count, player, true);
+                    }
+                    else {
+                        RewardItem item = new RewardItem(reward.id, reward.count);
+                        dropItem(player, item);
+                    }
                 }
             }
         }

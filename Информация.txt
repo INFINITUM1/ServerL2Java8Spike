@@ -19,5 +19,8 @@ l2spike.com - a site of the server
 
 1. + TaskGiveDonations 
 2. Edited TP scroll 7123 -> to Dyno Island
-3. + isNotAutoloot() for HERBS
-4. L2Attackable  - add multiplying loot for each person in party 
+3. + isNotAutoloot() for HERBS + Books of Giant, Blessed Scrolls of Enchant S, Life Stones 76
+4. L2Attackable  - add multiplying loot for each person in party (Canceled, need to think)
+5. L2Attackable - add different titles and drop for blue and red champions
+6. + L2SymbolVillageMaster.java for NPC with many functions
+7. RequestSellItem.java - Selling items by full price

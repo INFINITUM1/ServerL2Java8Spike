@@ -46,32 +46,68 @@ public final class NpcInfo extends L2GameServerPacket {
         _isChampion1 = cha.isChampion1();
         _collisionHeight = cha.getCollisionHeight();
         _collisionRadius = cha.getCollisionRadius();
+        // Имя NPC (если задано с сервера)
         if (cha.getTemplate().serverSideName) {
             _name = cha.getTemplate().name;
         }
 
+        boolean championTitleSet = false;
+
+        // Установка титула чемпиона
         if (Config.L2JMOD_CHAMPION_ENABLE && _isChampion) {
-            _title = ("Champion");
-        }
-        if (Config.L2JMOD_CHAMPION_ENABLE_BLUE && _isChampion1) {
-            _title = ("Champion");
-        }
-        else if (cha.getTemplate().serverSideTitle) {
-            _title = cha.getTemplate().title;
-        } else {
-            _title = cha.getTitle();
-        }
-        if (!Config.SHOW_NPC_LVL && _activeChar.isL2Monster() && !_isChampion) {
-            _title = " ";
-        }
-        if (!Config.SHOW_NPC_LVL && _activeChar.isL2Monster() && !_isChampion1) {
-            _title = " ";
+            _title = "Заточки";
+            championTitleSet = true;
+        } else if (Config.L2JMOD_CHAMPION_ENABLE_BLUE && _isChampion1) {
+            _title = "Руна + Книга";
+            championTitleSet = true;
         }
 
-        _team = cha.getTeamAura();
-        if (_team > 0) {
-            _title = cha.getTitle();
+        // Если титул чемпиона НЕ установлен — продолжаем обычную логику
+        if (!championTitleSet) {
+            if (cha.getTemplate().serverSideTitle) {
+                _title = cha.getTemplate().title;
+            } else {
+                _title = cha.getTitle();
+            }
+
+            if (!Config.SHOW_NPC_LVL && _activeChar.isL2Monster()) {
+                _title = " ";
+            }
+
+            _team = cha.getTeamAura();
+            if (_team > 0) {
+                _title = cha.getTitle();
+            }
+        } else {
+            // Всё равно передаём команду, даже если чемпион (на всякий случай)
+            _team = cha.getTeamAura();
         }
+
+        // if (cha.getTemplate().serverSideName) {
+        // _name = cha.getTemplate().name;
+        // }
+
+        // if (Config.L2JMOD_CHAMPION_ENABLE && _isChampion) {
+        // _title = ("Champion");
+        // }
+        // if (Config.L2JMOD_CHAMPION_ENABLE_BLUE && _isChampion1) {
+        // _title = ("Champion");
+        // } else if (cha.getTemplate().serverSideTitle) {
+        // _title = cha.getTemplate().title;
+        // } else {
+        // _title = cha.getTitle();
+        // }
+        // if (!Config.SHOW_NPC_LVL && _activeChar.isL2Monster() && !_isChampion) {
+        // _title = " ";
+        // }
+        // if (!Config.SHOW_NPC_LVL && _activeChar.isL2Monster() && !_isChampion1) {
+        // _title = " ";
+        // }
+
+        // _team = cha.getTeamAura();
+        // if (_team > 0 && !_isChampion && !_isChampion1) {
+        // _title = cha.getTitle();
+        // }
 
         _x = _activeChar.getX();
         _y = _activeChar.getY();
@@ -95,7 +131,7 @@ public final class NpcInfo extends L2GameServerPacket {
         _activeChar = cha;
         _summon = cha;
         _idTemplate = cha.getTemplate().idTemplate;
-        _isAttackable = cha.isAutoAttackable(attacker); //(cha.getKarma() > 0);
+        _isAttackable = cha.isAutoAttackable(attacker); // (cha.getKarma() > 0);
         _rhand = cha.getWeapon();
         _lhand = 0;
         _chest = cha.getArmor();
@@ -103,7 +139,16 @@ public final class NpcInfo extends L2GameServerPacket {
         _collisionHeight = _activeChar.getTemplate().collisionHeight;
         _collisionRadius = _activeChar.getTemplate().collisionRadius;
         _name = cha.getName();
-        _title = cha.getOwner() != null ? (cha.getOwner().isOnline() == 0 ? "" : cha.getOwner().getName()) : ""; // when owner online, summon will show in title owner name
+        _title = cha.getOwner() != null ? (cha.getOwner().isOnline() == 0 ? "" : cha.getOwner().getName()) : ""; // when
+                                                                                                                 // owner
+                                                                                                                 // online,
+                                                                                                                 // summon
+                                                                                                                 // will
+                                                                                                                 // show
+                                                                                                                 // in
+                                                                                                                 // title
+                                                                                                                 // owner
+                                                                                                                 // name
 
         if (cha.isAgathion()) {
             _name = " ";
@@ -122,7 +167,7 @@ public final class NpcInfo extends L2GameServerPacket {
         _swimWalkSpd = _flWalkSpd = _flyWalkSpd = _walkSpd;
         _pvpFlag = Config.FREE_PVP ? 0 : _summon.getOwner().getPvpFlag();
         _team = _summon.getOwner().getTeam();
-        //_showSpawnAnimation = cha.isShowSpawnAnimation();
+        // _showSpawnAnimation = cha.isShowSpawnAnimation();
         can_writeImpl = true;
     }
 
@@ -130,14 +175,23 @@ public final class NpcInfo extends L2GameServerPacket {
         _activeChar = cha;
         _summon = cha;
         _idTemplate = cha.getTemplate().idTemplate;
-        _isAttackable = cha.isAutoAttackable(attacker); //(cha.getKarma() > 0);
+        _isAttackable = cha.isAutoAttackable(attacker); // (cha.getKarma() > 0);
         _rhand = 0;
         _lhand = 0;
         _isSummoned = cha.isShowSummonAnimation();
         _collisionHeight = _activeChar.getTemplate().collisionHeight;
         _collisionRadius = _activeChar.getTemplate().collisionRadius;
         _name = cha.getName();
-        _title = cha.getOwner() != null ? (cha.getOwner().isOnline() == 0 ? "" : cha.getOwner().getName()) : ""; // when owner online, summon will show in title owner name
+        _title = cha.getOwner() != null ? (cha.getOwner().isOnline() == 0 ? "" : cha.getOwner().getName()) : ""; // when
+                                                                                                                 // owner
+                                                                                                                 // online,
+                                                                                                                 // summon
+                                                                                                                 // will
+                                                                                                                 // show
+                                                                                                                 // in
+                                                                                                                 // title
+                                                                                                                 // owner
+                                                                                                                 // name
 
         if (cha.isAgathion()) {
             _name = " ";
@@ -173,7 +227,7 @@ public final class NpcInfo extends L2GameServerPacket {
 
         writeC(0x16);
         writeD(_activeChar.getObjectId());
-        writeD(_idTemplate + 1000000);  // npctype id
+        writeD(_idTemplate + 1000000); // npctype id
         writeD(_isAttackable ? 1 : 0);
         writeD(_x);
         writeD(_y);
@@ -185,35 +239,36 @@ public final class NpcInfo extends L2GameServerPacket {
         writeD(_runSpd);
         writeD(_walkSpd);
         writeD(_swimRunSpd/*
-         * 0x32
-         */);  // swimspeed
+                           * 0x32
+                           */); // swimspeed
         writeD(_swimWalkSpd/*
-         * 0x32
-         */);  // swimspeed
+                            * 0x32
+                            */); // swimspeed
         writeD(_flRunSpd);
         writeD(_flWalkSpd);
         writeD(_flyRunSpd);
         writeD(_flyWalkSpd);
         writeF(1.1/*
-         * _activeChar.getProperMultiplier()
-         */);
-        //writeF(1/*_activeChar.getAttackSpeedMultiplier()*/);
+                   * _activeChar.getProperMultiplier()
+                   */);
+        // writeF(1/*_activeChar.getAttackSpeedMultiplier()*/);
         writeF(_pAtkSpd / 277.478340719);
         writeF(_collisionRadius);
         writeF(_collisionHeight);
         writeD(_rhand); // right hand weapon
         writeD(0);
         writeD(_lhand); // left hand weapon
-        writeC(1);	// name above char 1=true ... ??
+        writeC(1); // name above char 1=true ... ??
         writeC(_activeChar.isRunning() ? 1 : 0);
         writeC(_activeChar.isInCombat() ? 1 : 0);
         writeC(_activeChar.isAlikeDead() ? 1 : 0);
-        writeC(_showSpawnAnimation);//writeC(_isSummoned ? 2 : 0); // invisible ?? 0=false  1=true   2=summoned (only works if model has a summon animation)
+        writeC(_showSpawnAnimation);// writeC(_isSummoned ? 2 : 0); // invisible ?? 0=false 1=true 2=summoned (only
+                                    // works if model has a summon animation)
         writeS(_name);
         writeS(_title);
 
         if (_activeChar.isL2Summon()) {
-            writeD(0x01);// Title color 0=client default  
+            writeD(0x01);// Title color 0=client default
         } else {
             writeD(_isChampion || _isChampion1 ? 0x01 : 0x00);
         }
@@ -227,27 +282,29 @@ public final class NpcInfo extends L2GameServerPacket {
             writeD(_isChampion || _isChampion1 ? 0x03 : 0x00);
         }
 
-        writeD(_activeChar.getAbnormalEffect());  // C2
-        /*if (_activeChar.isL2Summon()) {
-         writeD(0x01);
-         } else {
-         writeD(0x00);
-         }*/
+        writeD(_activeChar.getAbnormalEffect()); // C2
+        /*
+         * if (_activeChar.isL2Summon()) {
+         * writeD(0x01);
+         * } else {
+         * writeD(0x00);
+         * }
+         */
 
-        //writeD(0000);  // C2
-        //writeD(0000);  // C2
+        // writeD(0000); // C2
+        // writeD(0000); // C2
         writeD(_clanId);
         writeD(_clanCrest);
-        writeD(0000);  // C2
-        writeD(0000);  // C2
-        writeC(0000);  // C2
+        writeD(0000); // C2
+        writeD(0000); // C2
+        writeC(0000); // C2
 
         writeC(_team);// аура
 
         writeF(_collisionRadius);
         writeF(_collisionHeight);
-        writeD(_weaponEnhcant);  // C4
-        //writeD(0x00);  // C4
-        writeD(0x00);  // C6
+        writeD(_weaponEnhcant); // C4
+        // writeD(0x00); // C4
+        writeD(0x00); // C6
     }
 }
