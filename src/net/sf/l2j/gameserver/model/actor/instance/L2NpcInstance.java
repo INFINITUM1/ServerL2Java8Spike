@@ -939,7 +939,7 @@ public class L2NpcInstance extends L2Character {
                 player.sendActionFailed();
 
                 NpcHtmlMessage html = NpcHtmlMessage.id(getObjectId());
-                html.setFile("data/html/npcbusy.htm");
+                html.setFile(player,"data/html/npcbusy.htm");
                 html.replace("%busymessage%", getBusyMessage());
                 html.replace("%npcname%", getName());
                 html.replace("%playername%", player.getName());
@@ -948,7 +948,7 @@ public class L2NpcInstance extends L2Character {
                 NpcHtmlMessage html = NpcHtmlMessage.id(getObjectId());
                 {
                     if (getCastle().getOwnerId() > 0) {
-                        html.setFile("data/html/territorystatus.htm");
+                        html.setFile(player,"data/html/territorystatus.htm");
                         L2Clan clan = ClanTable.getInstance().getClan(getCastle().getOwnerId());
                         if (clan == null) {
                             player.sendHtmlMessage("Ошибка", "Сообщите администрации; код: " + getCastle().getOwnerId());
@@ -958,7 +958,7 @@ public class L2NpcInstance extends L2Character {
                         html.replace("%clanname%", Util.htmlSpecialChars(clan.getName()));
                         html.replace("%clanleadername%", Util.htmlSpecialChars(clan.getLeaderName()));
                     } else {
-                        html.setFile("data/html/territorynoclan.htm");
+                        html.setFile(player,"data/html/territorynoclan.htm");
                     }
                 }
                 html.replace("%castlename%", getCastle().getName());

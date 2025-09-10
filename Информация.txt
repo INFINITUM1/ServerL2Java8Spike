@@ -12,6 +12,8 @@ https://drive.google.com/file/d/1ilaxwJy2gOmpfYwq0XVKwOUeKXQiTXrs/view?usp=shari
 https://drive.google.com/file/d/1sfQmX0F33y4BaK4KXNXlKf98gvBLnELD/view?usp=sharing
 3) L2 Spike Patch + DB + Build 03 july 2025 
 https://drive.google.com/file/d/1DixlyELVnjHIcCo5_M6OW6TsWtv0xpDX/view?usp=sharing
+4) L2 Spike Patch + DB + Build 07 september 2025 -  First Grand Open
+https://drive.google.com/file/d/1l1NnDz_z8mPj921tKZJ4U0xpc7jloLwN/view?usp=sharing
 
 l2spike.com - a site of the server 
 
@@ -23,4 +25,14 @@ l2spike.com - a site of the server
 4. L2Attackable  - add multiplying loot for each person in party (Canceled, need to think)
 5. L2Attackable - add different titles and drop for blue and red champions
 6. + L2SymbolVillageMaster.java for NPC with many functions
-7. RequestSellItem.java - Selling items by full price
+7. RequestSellItem.java - Selling items by full price + SellList.java - viewing SellPrice to client.
+8. isEpicJewelry() commented
+9.RequestExEnchantSkill.java - adapted to stackable Life-Stones
+10.add NewTeleporter.java 
+11 NpcHtmlMessage.java  - add replacing raidboss status
+12. Multilang: 
+        +Language.java
+        +3 fields in Config.java    
+        +2 fields +methods in L2PCinstance
+        + gethtm(player,path) in HtmCache.java
+        + edit setfile() in NpcHtmlMessage.java

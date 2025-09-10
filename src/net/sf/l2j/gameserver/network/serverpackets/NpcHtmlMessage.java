@@ -19,13 +19,23 @@
 package net.sf.l2j.gameserver.network.serverpackets;
 
 import java.util.logging.Logger;
+// import java.util.regex.Matcher;
+// import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import net.sf.l2j.gameserver.cache.HtmCache;
+import net.sf.l2j.gameserver.instancemanager.RaidBossSpawnManager;
+import net.sf.l2j.gameserver.instancemanager.RaidBossSpawnManager.StatusEnum;
+// import net.sf.l2j.gameserver.instancemanager.RaidBossSpawnManager;
+// import net.sf.l2j.gameserver.instancemanager.RaidBossSpawnManager.StatusEnum;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.network.clientpackets.RequestBypassToServer;
 
 public class NpcHtmlMessage extends L2GameServerPacket {
     // d S
-    // d is usually 0, S is the html text starting with <html> and ending with </html>
+    // d is usually 0, S is the html text starting with <html> and ending with
+    // </html>
     //
 
     private static final Logger _log = Logger.getLogger(RequestBypassToServer.class.getName());
@@ -52,20 +62,74 @@ public class NpcHtmlMessage extends L2GameServerPacket {
         _npcObjId = npcObjId;
     }
 
-    /*@Override
-     public void runImpl() {
-     //System.out.println("##runImpl#1#" + (getClient() == null));
-     if (Config.BYPASS_VALIDATION) {
-     buildBypassCache(getClient().getActiveChar());
-     }
-     }*/
+    /*
+     * @Override
+     * public void runImpl() {
+     * //System.out.println("##runImpl#1#" + (getClient() == null));
+     * if (Config.BYPASS_VALIDATION) {
+     * buildBypassCache(getClient().getActiveChar());
+     * }
+     * }
+     */
     public void setHtml(String text) {
-        if (text.length() > 8192) {
-            _log.warning("Html is too long! this will crash the client!");
-            _html = "<html><body>Html was too long</body></html>";
-            return;
+    if (text.length() > 8192) {
+    _log.warning("Html is too long! this will crash the client!");
+    _html = "<html><body>Html was too long</body></html>";
+    return;
+    }
+    _html = text; // html code must not exceed 8192 bytes
+
+    }
+
+    // public boolean setFile(String path) {
+    // L2PcInstance player = null;
+
+    // // Попробуем достать игрока из активного клиента
+    // if (getClient() != null) {
+    // player = getClient().getActiveChar();
+    // }
+
+    // String content;
+    // if (player != null) {
+    // // используем мультиязычный метод
+    // content = HtmCache.getInstance().getHtm(player, path);
+    // } else {
+    // // fallback, как раньше
+    // content = HtmCache.getInstance().getHtm(path);
+    // }
+
+    // if (content == null) {
+    // setHtml("<html><body>My Text is missing:<br>" + path + "</body></html>");
+    // _log.warning("missing html page " + path);
+    // return false;
+    // }
+
+    // setHtml(content);
+
+    // if (_npcObjId >= 40080) {
+    // replaceAllRaidBossStatuses();
+    // }
+    // return true;
+    // }
+    // Новый метод — только для реального игрока
+    public boolean setFile(L2PcInstance player, String path) {
+        if (player == null)
+            return setFile(path); // fallback
+
+        String content = HtmCache.getInstance().getHtm(player, path);
+
+        if (content == null) {
+            setHtml("<html><body>My Text is missing:<br>" + path + "</body></html>");
+            _log.warning("missing html page " + path);
+            return false;
         }
-        _html = text; // html code must not exceed 8192 bytes
+
+        setHtml(content);
+
+        if (_npcObjId >= 40080) {
+            replaceAllRaidBossStatuses();
+        }
+        return true;
     }
 
     public boolean setFile(String path) {
@@ -78,6 +142,10 @@ public class NpcHtmlMessage extends L2GameServerPacket {
         }
 
         setHtml(content);
+        // if (_npcObjId >= 40080 && _npcObjId <= 40090) {
+        if (_npcObjId >= 40080) {
+            replaceAllRaidBossStatuses();
+        }
         return true;
     }
 
@@ -88,6 +156,103 @@ public class NpcHtmlMessage extends L2GameServerPacket {
     public void replace(String pattern, int value) {
         _html = _html.replaceAll(pattern, String.valueOf(value));
     }
+
+    public void replaceAllRaidBossStatuses() {
+        // Ищем все плейсхолдеры %rb_status_XXX% в HTML
+        Pattern pattern = Pattern.compile("%rb_status_(\\d+)%");
+        Matcher matcher = pattern.matcher(_html);
+
+        while (matcher.find()) {
+            int bossId = Integer.parseInt(matcher.group(1));
+            StatusEnum status = RaidBossSpawnManager.getInstance().getRaidBossStatusId(bossId);
+
+            String color;
+            String text;
+
+            switch (status) {
+                case ALIVE:
+                    color = "FFFF00"; // Желтый
+                    text = "LIVE";
+                    break;
+                // case DEAD:
+                // color = "FFFFFF"; // Белый
+                // text = "Dead";
+                // break;
+                case DEAD:
+                    color = "FFFFFF"; // Белый
+                    long respawnTime = RaidBossSpawnManager.getInstance().getRaidBossRespawnTime(bossId);
+                    if (respawnTime > 0) {
+                        long currentTime = System.currentTimeMillis();
+                        long diff = respawnTime - currentTime;
+
+                        if (respawnTime > 0 && diff > 0) {
+                            long minutes = diff / 60000L;
+                            if (minutes >= 1) {
+                                text = " " + minutes + " min...";
+                            } else {
+                                text = " &lt; 1 min..."; // ключевая правка
+                            }
+                        } else {
+                            text = "Dead";
+                        }
+                        // long currentTime = System.currentTimeMillis();
+                        // long minutesUntilRespawn = (respawnTime - currentTime) / (1000 * 60); //
+                        // Конвертируем миллисекунды в минуты
+                        // if (minutesUntilRespawn > 0) {
+                        // text = " " + minutesUntilRespawn + " min...";
+                        // } else {
+                        // text = " < 1 min...";
+                        // }
+                        // } else {
+                        // text = "Dead";
+                        // }
+                        break;
+                    }
+                case UNDEFINED:
+                default:
+                    color = "FF0000"; // Красный
+                    text = "Unknown";
+                    break;
+            }
+
+            // Заменяем плейсхолдеры статуса и цвета
+            _html = _html.replace("%rb_status_" + bossId + "%", text);
+            _html = _html.replace("%rb_color_" + bossId + "%", color);
+        }
+    }
+    // public void replaceAllRaidBossStatuses() {
+    // // ищем все плейсхолдеры %rb_status_XXX%
+    // Pattern pattern = Pattern.compile("%rb_status_(\\d+)%");
+    // Matcher matcher = pattern.matcher(_html);
+
+    // while (matcher.find()) {
+    // int bossId = Integer.parseInt(matcher.group(1));
+    // StatusEnum status =
+    // RaidBossSpawnManager.getInstance().getRaidBossStatusId(bossId);
+
+    // String color;
+    // String text;
+
+    // switch (status) {
+    // case ALIVE:
+    // color = "FFFF00"; // желтый
+    // text = "Жив";
+    // break;
+    // case DEAD:
+    // color = "FFFFFF"; // белый
+    // text = "Убит";
+    // break;
+    // default:
+    // color = "FF0000"; // красный для UNDEFINED
+    // text = "Неизвестно";
+    // break;
+    // }
+
+    // // заменяем и текст, и цвет
+    // _html = _html.replace("%rb_status_" + bossId + "%", text);
+    // _html = _html.replace("%rb_color_" + bossId + "%", color);
+    // }
+    // }
 
     public NpcHtmlMessage replaceAndGet(String pattern, String value) {
         _html = _html.replaceAll(pattern, value);
@@ -117,7 +282,7 @@ public class NpcHtmlMessage extends L2GameServerPacket {
             } else {
                 activeChar.addBypass(_html.substring(start, finish));
             }
-            //System.err.println("["+_html.substring(start, finish)+"]");
+            // System.err.println("["+_html.substring(start, finish)+"]");
         }
     }
 
@@ -125,22 +290,24 @@ public class NpcHtmlMessage extends L2GameServerPacket {
     protected final void writeImpl() {
         writeC(0x0f);
 
-        //System.out.println(_npcObjId);
+        // System.out.println(_npcObjId);
         writeD(_npcObjId);
-        //writeS(_html);
-       /* L2PcInstance player = getClient().getActiveChar();
-         if (player == null) {
-         return;
-         }*/
+        // writeS(_html);
+        /*
+         * L2PcInstance player = getClient().getActiveChar();
+         * if (player == null) {
+         * return;
+         * }
+         */
         writeProtectedHTM(getClient().getActiveChar());
-        //System.out.println("##3#");
-        //Log.add(_html, "HTMLtest");
+        // System.out.println("##3#");
+        // Log.add(_html, "HTMLtest");
 
-        //player.cleanBypasses(false);
-        //String html = player.encodeBypasses(_html, false);
-        //writeProtectedHTM(player.encodeBypasses(_html, false));
-        //Log.add(html, "HTMLtest");
-        //writeS(html);
+        // player.cleanBypasses(false);
+        // String html = player.encodeBypasses(_html, false);
+        // writeProtectedHTM(player.encodeBypasses(_html, false));
+        // Log.add(html, "HTMLtest");
+        // writeS(html);
         writeD(0x00);
     }
 
@@ -149,7 +316,7 @@ public class NpcHtmlMessage extends L2GameServerPacket {
             return;
         }
         player.cleanBypasses(false);
-        //String html = player.encodeBypasses(_html, false);
+        // String html = player.encodeBypasses(_html, false);
         writeS(player.encodeBypasses(_html, false));
     }
 }

@@ -101,7 +101,7 @@ public final class L2ClassMasterInstance extends L2FolkInstance {
             }
 
             NpcHtmlMessage html = NpcHtmlMessage.id(getObjectId());
-            html.setFile("data/html/classmaster/index.htm");
+            html.setFile(player,"data/html/classmaster/index.htm");
             html.replace("%objectId%", String.valueOf(getObjectId()));
             html.replace("%config_master_npcname%", Config.MASTER_NPCNAME);
             player.sendPacket(html);

@@ -1418,7 +1418,11 @@ public final class Formulas {
     }
 
     public static boolean calcMCrit(double mRate) {
-        return (Rnd.poker(mRate) < mRate);
+        // return (Rnd.poker(mRate) < mRate);
+        	{
+		return mRate > Rnd.get(100);
+	}
+	
     }
 
     /**

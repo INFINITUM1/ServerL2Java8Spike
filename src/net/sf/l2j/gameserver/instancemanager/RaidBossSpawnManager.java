@@ -178,6 +178,13 @@ public class RaidBossSpawnManager {
         _storedInfo.remove(boss.getNpcId());
         _storedInfo.put(boss.getNpcId(), info);
     }
+public long getRaidBossRespawnTime(int bossId) {
+    if (_storedInfo.containsKey(bossId)) {
+        StatsSet info = _storedInfo.get(bossId);
+        return info.getLong("respawnTime", 0L); // Возвращает время респавна или 0, если данных нет
+    }
+    return 0L; // Если босс не найден
+}
 
     @SuppressWarnings("unused")
     private void storeBossDeath(int bossId, double currentHP, double currentMP, long respawnTime) {
@@ -245,6 +252,14 @@ public class RaidBossSpawnManager {
             }
 
             _schedules.put(bossId, futureSpawn);
+
+            // 👇 ДОБАВИЛ вот это: сохраняем время респа в _storedInfo
+            StatsSet info = new StatsSet();
+            info.set("currentHP", currentHP);
+            info.set("currentMP", currentMP);
+            info.set("respawnTime", respawnTime);
+
+        _storedInfo.put(bossId, info);
         }
 
         _spawns.put(bossId, spawnDat);

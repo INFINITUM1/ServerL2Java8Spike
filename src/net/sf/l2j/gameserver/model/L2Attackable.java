@@ -1504,14 +1504,15 @@ public class L2Attackable extends L2NpcInstance {
 
     private boolean isEpicJewerly(int itemId) {
         switch (itemId) {
-            case 6656:
-            case 6657:
-            case 6658:
-            case 6659:
-            case 6660:
-            case 6661:
-            case 6662:
-            case 8191:
+            case 1:
+            // case 6656:
+            // case 6657:
+            // case 6658:
+            // case 6659:
+            // case 6660:
+            // case 6661:
+            // case 6662:
+            // case 8191:
                 return true;
             default:
                 return false;

@@ -19,13 +19,17 @@
 package net.sf.l2j.gameserver.model.actor.instance;
 
 import java.util.StringTokenizer;
+// import java.util.regex.Matcher;
+// import java.util.regex.Pattern;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.cache.Static;
 import net.sf.l2j.gameserver.datatables.CustomServerData;
 import net.sf.l2j.gameserver.datatables.TeleportLocationTable;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
-import net.sf.l2j.gameserver.instancemanager.GrandBossManager;
+// import net.sf.l2j.gameserver.instancemanager.GrandBossManager;
+// import net.sf.l2j.gameserver.instancemanager.RaidBossSpawnManager;
+import net.sf.l2j.gameserver.instancemanager.RaidBossSpawnManager.StatusEnum;
 import net.sf.l2j.gameserver.instancemanager.SiegeManager;
 import net.sf.l2j.gameserver.instancemanager.TownManager;
 import net.sf.l2j.gameserver.instancemanager.ZoneManager;
@@ -38,8 +42,8 @@ import net.sf.l2j.gameserver.templates.L2NpcTemplate;
  * @version $Revision: 1.3.2.2.2.5 $ $Date: 2005/03/27 15:29:32 $
  *
  */
-public final class L2TeleporterInstance extends L2FolkInstance {
-    //private static Logger _log = Logger.getLogger(L2TeleporterInstance.class.getName());
+public final class L2NewTeleporterInstance extends L2FolkInstance {
+    //private static Logger _log = Logger.getLogger(L2NewTeleporterInstance.class.getName());
 
     private static final int COND_ALL_FALSE = 0;
     private static final int COND_BUSY_BECAUSE_OF_SIEGE = 1;
@@ -49,7 +53,7 @@ public final class L2TeleporterInstance extends L2FolkInstance {
     /**
      * @param template
      */
-    public L2TeleporterInstance(int objectId, L2NpcTemplate template) {
+    public L2NewTeleporterInstance(int objectId, L2NpcTemplate template) {
         super(objectId, template);
     }
 
@@ -140,34 +144,31 @@ public final class L2TeleporterInstance extends L2FolkInstance {
             pom = npcId + "-" + val;
         }
 
-        return "data/html/teleporter/" + pom + ".htm";
+        return "data/html/newteleporter/" + pom + ".htm";
     }
 
-    @Override
-    public void showChatWindow(L2PcInstance player) {
-        String filename = "data/html/teleporter/castleteleporter-no.htm";
+   @Override
+public void showChatWindow(L2PcInstance player) {
+    String filename = getHtmlPath(getNpcId(), 0); // Загружаем основной HTML
+    NpcHtmlMessage html = NpcHtmlMessage.id(getObjectId());
+    html.setFile(filename);
+    html.replace("%objectId%", String.valueOf(getObjectId()));
+    html.replace("%npcname%", getName());
+    
+    // Обрабатываем статусы рейдбоссов
+    html.replaceAllRaidBossStatuses();
+    
+    player.sendPacket(html);
+}
 
-        int condition = validateCondition(player);
-        if (condition == COND_REGULAR) {
-            super.showChatWindow(player);
-            return;
-        } else if (condition > COND_ALL_FALSE) {
-            if (condition == COND_BUSY_BECAUSE_OF_SIEGE) {
-                filename = "data/html/teleporter/castleteleporter-busy.htm"; // Busy because of siege
-            } else if (condition == COND_OWNER) // Clan owns castle
-            {
-                filename = getHtmlPath(getNpcId(), 0); // Owner message window
-            }
-        }
-
-        NpcHtmlMessage html = NpcHtmlMessage.id(getObjectId());
-        html.setFile(filename);
-        html.replace("%objectId%", String.valueOf(getObjectId()));
-        html.replace("%npcname%", getName());
-        html = GrandBossManager.getHtmlRespawns(html);
-        // html.replaceAllRaidBossStatuses();
-        player.sendPacket(html);
+private String getFriendlyStatus(StatusEnum status) {
+    switch (status) {
+        case ALIVE: return "<font color=\"00FF00\">Alive</font>";
+        case DEAD: return "<font color=\"FF0000\">Dead</font>";
+        case UNDEFINED: return "<font color=\"FFFFFF\">Unknown</font>";
+        default: return status.name();
     }
+}
 
     private void doTeleport(L2PcInstance player, int val) {
         if (player.isAlikeDead()) {
@@ -196,7 +197,7 @@ public final class L2TeleporterInstance extends L2FolkInstance {
             return;
         }
         if (list.getIsForNoble() && !player.isNoble()) {
-            String filename = "data/html/teleporter/nobleteleporter-no.htm";
+            String filename = "data/html/newteleporter/nobleteleporter-no.htm";
             NpcHtmlMessage html = NpcHtmlMessage.id(getObjectId());
             html.setFile(filename);
             html.replace("%objectId%", String.valueOf(getObjectId()));
@@ -218,7 +219,7 @@ public final class L2TeleporterInstance extends L2FolkInstance {
             player.teleToLocation(list.getLocX(), list.getLocY(), list.getLocZ(), true);
         } else if (list.getTeleId() == 9983 && list.getTeleId() == 9984 && getNpcId() == 30483 && player.getLevel() > Config.CRUMA_TOWER_LEVEL_RESTRICT) {
             // Chars level XX can't enter in Cruma Tower. Retail: level 56 and above
-            String filename = "data/html/teleporter/30483-biglvl.htm";
+            String filename = "data/html/newteleporter/30483-biglvl.htm";
             NpcHtmlMessage html = NpcHtmlMessage.id(getObjectId());
             html.setFile(filename);
             html.replace("%allowedmaxlvl%", "" + Config.CRUMA_TOWER_LEVEL_RESTRICT + "");
@@ -243,13 +244,13 @@ public final class L2TeleporterInstance extends L2FolkInstance {
     }
 
     private int validateCondition(L2PcInstance player) {
-        if (CastleManager.getInstance().getCastleIndex(this) < 0) // Teleporter isn't on castle ground
+        if (CastleManager.getInstance().getCastleIndex(this) < 0) // newteleporter isn't on castle ground
         {
             return COND_REGULAR; // Regular access
-        } else if (getCastle().getSiege().getIsInProgress()) // Teleporter is on castle ground and siege is in progress
+        } else if (getCastle().getSiege().getIsInProgress()) // newteleporter is on castle ground and siege is in progress
         {
             return Config.CHECK_SIEGE_TELE ? COND_BUSY_BECAUSE_OF_SIEGE : COND_REGULAR;                 // Busy because of siege
-        } else if (player.getClan() != null) // Teleporter is on castle ground and player is in a clan
+        } else if (player.getClan() != null) // newteleporter is on castle ground and player is in a clan
         {
             if (getCastle().getOwnerId() == player.getClanId()) // Clan owns castle
             {

@@ -318,7 +318,7 @@ public class L2VillageMasterInstance extends L2FolkInstance {
                         content.append("Add Subclass:<br>Саб <font color=\"LEVEL\">" + className + "</font> добавлен");
                         player.sendPacket(Static.CLASS_TRANSFER); // Transfer to new class.
                     } else {
-                        html.setFile("data/html/villagemaster/SubClass_Fail.htm");
+                        html.setFile(player,"data/html/villagemaster/SubClass_Fail.htm");
                     }
                     break;
                 case 5: // Change Class - Action

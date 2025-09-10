@@ -137,7 +137,9 @@ public final class RequestExEnchantSkill extends L2GameClientPacket
             			return;
             		}
             		// ok
-            		player.destroyItem("Consume", spb, trainer, true);
+            		// player.destroyItem("Consume", spb, trainer, true);
+					player.destroyItemByItemId("Consume", spbId, 1, trainer, true);
+
             	}
         	}
         	else

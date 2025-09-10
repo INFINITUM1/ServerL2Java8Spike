@@ -3,6 +3,7 @@ package net.sf.l2j;
 //can't stop me now
 import java.io.*;
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -96,6 +97,10 @@ public final class Config {
     /**
      * Word list for chat filter
      */
+    public static boolean MULTILANG_ENABLE;
+    public static String MULTILANG_DEFAULT;
+    public static List<String> MULTILANG_ALLOWED;
+
     public static final String CHAT_FILTER_FILE = "./config/chatfilter.txt";
     public static final String GEO_FILE = "./config/geodata.cfg";
     public static final String FAKE_FILE = "./config/fakeplayers.cfg";
@@ -116,7 +121,7 @@ public final class Config {
     /**
      * Game Server ports
      */
-    //public static int PORT_GAME;
+    // public static int PORT_GAME;
     public static int[] PORTS_GAME;
     /**
      * Login Server port
@@ -1093,11 +1098,17 @@ public final class Config {
     public static boolean MULTIPLE_ITEM_DROP;
     /**
      * This is setting of experimental Client <--> Server Player coordinates
-     * synchronization<br> <b><u>Valeurs :</u></b> <li>0 - no synchronization at
-     * all</li> <li>1 - parcial synchronization Client --> Server only * using
-     * this option it is difficult for players to bypass obstacles</li> <li>2 -
-     * parcial synchronization Server --> Client only</li> <li>3 - full
-     * synchronization Client <--> Server</li> <li>-1 - Old system: will
+     * synchronization<br>
+     * <b><u>Valeurs :</u></b>
+     * <li>0 - no synchronization at
+     * all</li>
+     * <li>1 - parcial synchronization Client --> Server only * using
+     * this option it is difficult for players to bypass obstacles</li>
+     * <li>2 -
+     * parcial synchronization Server --> Client only</li>
+     * <li>3 - full
+     * synchronization Client <--> Server</li>
+     * <li>-1 - Old system: will
      * synchronize Z only</li>
      */
     public static int COORD_SYNCHRONIZE;
@@ -1136,6 +1147,7 @@ public final class Config {
         False,
         GM
     }
+
     /**
      * Allow the use of L2Walker client ?
      */
@@ -1213,7 +1225,7 @@ public final class Config {
      * Allow cursed weapons ?
      */
     public static boolean ALLOW_CURSED_WEAPONS;
-    //WALKER NPC
+    // WALKER NPC
     public static boolean ALLOW_NPC_WALKERS;
     /**
      * Time after which a packet is considered as lost
@@ -1245,7 +1257,7 @@ public final class Config {
      * Maximal protocol revision
      */
     public static int MAX_PROTOCOL_REVISION;
-    //Для отладки, показываь протоколы которые заходят на сервер?
+    // Для отладки, показываь протоколы которые заходят на сервер?
     public static boolean SHOW_PROTOCOL_VERSIONS;
     // random animation interval
     /**
@@ -1338,7 +1350,8 @@ public final class Config {
      * Allow use Event Managers for change occupation ?
      */
     public static boolean ALLOW_CLASS_MASTERS;
-    public static final FastMap<Integer, EventReward> CLASS_MASTERS_PRICES = new FastMap<Integer, EventReward>().shared("Config.CLASS_MASTERS_PRICES");
+    public static final FastMap<Integer, EventReward> CLASS_MASTERS_PRICES = new FastMap<Integer, EventReward>()
+            .shared("Config.CLASS_MASTERS_PRICES");
     public static boolean ALLOW_CLAN_LEVEL;
     public static boolean REWARD_SHADOW;
     /**
@@ -1591,19 +1604,19 @@ public final class Config {
     public static boolean L2JMOD_WEDDING_BOW;
     // L2WalkerProtection
     public static boolean KICK_L2WALKER;
-    //пвп-зона на епиках
+    // пвп-зона на епиках
     public static boolean ALLOW_RAID_PVP;
-    //откат цп
+    // откат цп
     public static long CP_REUSE_TIME;
     // банка мп
     public static long MANA_RESTORE;
-    //антибафф
+    // антибафф
     public static int ANTIBUFF_SKILLID;
-    //шанс прохождения абил
+    // шанс прохождения абил
     public static int BLOW_CHANCE_FRONT;
     public static int BLOW_CHANCE_BEHIND;
     public static int BLOW_CHANCE_SIDE;
-    //умножение дамага абил по типу брони
+    // умножение дамага абил по типу брони
     public static double BLOW_DAMAGE_HEAVY;
     public static double BLOW_DAMAGE_LIGHT;
     public static double BLOW_DAMAGE_ROBE;
@@ -1642,14 +1655,16 @@ public final class Config {
     /**
      * Переделка шансов на затчоку
      */
-    public static int ENCHANT_CHANCE_NEXT; //переломный момент в шансах заточки
-    public static int ENCHANT_FAILED_NUM; //переломный момент в шансах заточки
-    public static float MAGIC_CHANCE_BEFORE_NEXT; //шанс на заточку магического оружия до ENCHANT_CHANCE_NEXT
-    public static float MAGIC_CHANCE_AFTER_NEXT; //шанс на заточку магического оружия после ENCHANT_CHANCE_NEXT включительно
-    public static float WEAPON_CHANCE_BEFORE_NEXT; //шанс на заточку оружия до ENCHANT_CHANCE_NEXT
-    public static float WEAPON_CHANCE_AFTER_NEXT; //шанс на заточку оружия после ENCHANT_CHANCE_NEXT включительно
-    public static final List<Float> ARMOR_ENCHANT_TABLE = new FastList<Float>(); //таблица шансов на заточку арморов
-    public static final List<Float> FULL_ARMOR_ENCHANT_TABLE = new FastList<Float>(); //таблица шансов на заточку FullBody арморов
+    public static int ENCHANT_CHANCE_NEXT; // переломный момент в шансах заточки
+    public static int ENCHANT_FAILED_NUM; // переломный момент в шансах заточки
+    public static float MAGIC_CHANCE_BEFORE_NEXT; // шанс на заточку магического оружия до ENCHANT_CHANCE_NEXT
+    public static float MAGIC_CHANCE_AFTER_NEXT; // шанс на заточку магического оружия после ENCHANT_CHANCE_NEXT
+                                                 // включительно
+    public static float WEAPON_CHANCE_BEFORE_NEXT; // шанс на заточку оружия до ENCHANT_CHANCE_NEXT
+    public static float WEAPON_CHANCE_AFTER_NEXT; // шанс на заточку оружия после ENCHANT_CHANCE_NEXT включительно
+    public static final List<Float> ARMOR_ENCHANT_TABLE = new FastList<Float>(); // таблица шансов на заточку арморов
+    public static final List<Float> FULL_ARMOR_ENCHANT_TABLE = new FastList<Float>(); // таблица шансов на заточку
+                                                                                      // FullBody арморов
     /**
      * Chat filter
      */
@@ -1681,6 +1696,7 @@ public final class Config {
         BitSet,
         Stack
     }
+
     /**
      * ID Factory type
      */
@@ -1707,6 +1723,7 @@ public final class Config {
         L2ObjectHashSet,
         WorldObjectSet
     }
+
     /**
      * Type of map object
      */
@@ -1717,7 +1734,8 @@ public final class Config {
     public static ObjectSetType SET_TYPE;
     /**
      * Allow lesser effects to be canceled if stronger effects are used when
-     * effects of the same stack group are used.<br> New effects that are added
+     * effects of the same stack group are used.<br>
+     * New effects that are added
      * will be canceled if they are of lesser priority to the old one.
      */
     public static boolean EFFECT_CANCELING;
@@ -1935,14 +1953,16 @@ public final class Config {
      * Bypass exploit protection ?
      */
     public static boolean BYPASS_VALIDATION;
-    //твт баф
+    // твт баф
     public static boolean TVT_BUFF;
-    //баф старт
+    // баф старт
     public static boolean ON_BUFFS;
     public static int ON_BUFFS_LVL;
-    public static final FastMap<Integer, Integer> ON_ENTER_M_BUFFS = new FastMap<Integer, Integer>().shared("Config.ON_ENTER_M_BUFFS");
-    public static final FastMap<Integer, Integer> ON_ENTER_F_BUFFS = new FastMap<Integer, Integer>().shared("Config.ON_ENTER_F_BUFFS");
-    //клан конфиг доп
+    public static final FastMap<Integer, Integer> ON_ENTER_M_BUFFS = new FastMap<Integer, Integer>()
+            .shared("Config.ON_ENTER_M_BUFFS");
+    public static final FastMap<Integer, Integer> ON_ENTER_F_BUFFS = new FastMap<Integer, Integer>()
+            .shared("Config.ON_ENTER_F_BUFFS");
+    // клан конфиг доп
     public static int CLAN_CHAR_LEVEL6;
     public static int CLAN_CHAR_LEVEL7;
     public static int CLAN_CHAR_LEVEL8;
@@ -2100,7 +2120,8 @@ public final class Config {
     public static int AUGSALE_COIN; // ID итема
     public static int AUGSALE_PRICE; // цена
     public static String AUGSALE_COIN_NAME; // название итема
-    public static final FastMap<Integer, Integer> AUGSALE_TABLE = new FastMap<Integer, Integer>().shared("Config.AUGSALE_TABLE");
+    public static final FastMap<Integer, Integer> AUGSALE_TABLE = new FastMap<Integer, Integer>()
+            .shared("Config.AUGSALE_TABLE");
     // продажа Skill of Balance
     public static int SOB_ID; // ID скилла
     public static int SOB_NPC; // ID нпц для кубика (99997 - фея)
@@ -2113,8 +2134,8 @@ public final class Config {
     public static boolean ALLOW_DSKILLS;
     // китайский шоп
     public static boolean ALLOW_CSHOP;
-    //public static int DSHOP_COIN; // цена на месяц
-    //public static String DSHOP_COIN_NEMA; // название итема
+    // public static int DSHOP_COIN; // цена на месяц
+    // public static String DSHOP_COIN_NEMA; // название итема
     // аукцион
     public static int BBS_AUC_ITEM_COIN;
     public static int BBS_AUC_ITEM_PRICE;
@@ -2128,13 +2149,14 @@ public final class Config {
     public static int BBS_AUC_HERO_COIN;
     public static int BBS_AUC_HERO_PRICE;
     public static String BBS_AUC_HERO_NAME;
-    public static final FastMap<Integer, String> BBS_AUC_MONEYS = new FastMap<Integer, String>().shared("Config.BBS_AUC_MONEYS");
+    public static final FastMap<Integer, String> BBS_AUC_MONEYS = new FastMap<Integer, String>()
+            .shared("Config.BBS_AUC_MONEYS");
     public static int BBS_AUC_EXPIRE_DAYS;
     /**
      * Баффер
      *
      */
-    //профили
+    // профили
     public static int BUFFER_ID;
     public static boolean BUFF_CANCEL;
     public static final FastMap<Integer, Integer> M_BUFF = new FastMap<Integer, Integer>().shared("Config.M_BUFF");
@@ -2187,6 +2209,7 @@ public final class Config {
             this.chance = chance;
         }
     }
+
     // МассПвп
     public static final String EVENT_FILE = "./config/events.cfg";
     public static boolean MASS_PVP;
@@ -2201,10 +2224,10 @@ public final class Config {
     public static int MPVP_MAXC;
     public static int MPVP_NPC; // 20788
     public static Location MPVP_NPCLOC; // 116530, 76141, -2730
-    //public static Location MPVP_TPLOC; // 116530, 76141, -2730
+    // public static Location MPVP_TPLOC; // 116530, 76141, -2730
     public static FastList<Location> MPVP_TPLOC = new FastList<Location>();
     public static FastList<Location> MPVP_CLOC = new FastList<Location>();
-    //public static FastList<Location> MPVP_WLOC = new FastList<Location>();
+    // public static FastList<Location> MPVP_WLOC = new FastList<Location>();
     public static int MPVP_CREW; // 4355
     public static int MPVP_CREWC; // 4355
     public static int MPVP_EREW; // 4355
@@ -2215,25 +2238,25 @@ public final class Config {
     public static boolean TVT_NOBL;
     // Нападение на Шуттгарт
     public static boolean ALLOW_SCH;
-    public static int SCH_TIMEBOSS; //время жизни босса
+    public static int SCH_TIMEBOSS; // время жизни босса
     public static int SCH_TIME1; // Время до начала спауна монстров, после обьявления о начале евента
     public static int SCH_TIME2; // 2 волна мобов
     public static int SCH_TIME3; // 3 волна мобов
     public static int SCH_TIME4; // 4 волна мобов
     public static int SCH_TIME5; // 5 волна мобов
     public static int SCH_TIME6; // 6 волна мобов
-    public static long SCH_NEXT; //повтороное проведение евента через
-    public static int SCH_RESTART; //время запуска после перезагрузки скрипта, если удалить значения в бд
-    public static int SCH_MOB1; //мобы первой волны
-    public static int SCH_MOB2; //мобы первой волны
-    public static int SCH_MOB3; //мобы первой волны
-    public static int SCH_MOB4; //мобы первой волны
-    public static int SCH_MOB5; //мобы первой волны
-    public static int SCH_MOB6; //мобы первой волны
-    public static int SCH_BOSS; //Boss
+    public static long SCH_NEXT; // повтороное проведение евента через
+    public static int SCH_RESTART; // время запуска после перезагрузки скрипта, если удалить значения в бд
+    public static int SCH_MOB1; // мобы первой волны
+    public static int SCH_MOB2; // мобы первой волны
+    public static int SCH_MOB3; // мобы первой волны
+    public static int SCH_MOB4; // мобы первой волны
+    public static int SCH_MOB5; // мобы первой волны
+    public static int SCH_MOB6; // мобы первой волны
+    public static int SCH_BOSS; // Boss
     public static boolean SCH_ALLOW_SHOP;
-    public static int SCH_SHOP; //нпц которого спавним после победы над монстрами
-    public static int SCH_SHOPTIME; //нпц которого спавним после победы над монстрами
+    public static int SCH_SHOP; // нпц которого спавним после победы над монстрами
+    public static int SCH_SHOPTIME; // нпц которого спавним после победы над монстрами
     // Сезон охоты
     public static boolean OPEN_SEASON;
     public static int OS_NEXT;
@@ -2267,16 +2290,16 @@ public final class Config {
     public static boolean ELH_FORBID_MAGIC;
     public static String ELH_ALT_NAME;
     public static final FastList<Integer> ELH_FORB_POTIONS = new FastList<Integer>();
-    //бк
+    // бк
     public static final FastTable<Integer> FC_ALLOWITEMS = new FastTable<Integer>();
-    //рождество
+    // рождество
     public static boolean ALLOW_XM_SPAWN;
     public static final FastList<EventReward> XM_DROP = new FastList<EventReward>();
     public static long XM_TREE_LIFE;
-    //медальки
+    // медальки
     public static boolean ALLOW_MEDAL_EVENT;
     public static final FastList<EventReward> MEDAL_EVENT_DROP = new FastList<EventReward>();
-    //захват базы
+    // захват базы
     public static boolean EBC_ENABLE;
     public static long EBC_ARTIME;
     public static long EBC_REGTIME;
@@ -2304,7 +2327,7 @@ public final class Config {
     public static FastList<Location> EBC_TPLOC1 = new FastList<Location>();
     public static FastList<Location> EBC_TPLOC2 = new FastList<Location>();
     public static FastList<Location> EBC_RETURN_COORDINATES = new FastList<Location>();
-    //дозор
+    // дозор
     public static boolean EENC_ENABLE;
     public static long EENC_ARTIME;
     public static long EENC_REGTIME;
@@ -2322,14 +2345,15 @@ public final class Config {
     public static int EENC_TICKETID;
     public static int EENC_TICKETCOUNT;
     public static final FastList<EventReward> EENC_REWARDS = new FastList<EventReward>();
-    public static final FastMap<Integer, FastList<Location>> EENC_POINTS = new FastMap<Integer, FastList<Location>>().shared("Config.EENC_POINTS");
-    //анархия
+    public static final FastMap<Integer, FastList<Location>> EENC_POINTS = new FastMap<Integer, FastList<Location>>()
+            .shared("Config.EENC_POINTS");
+    // анархия
     public static boolean ANARCHY_ENABLE;
     public static int ANARCHY_DAY;
     public static int ANARCHY_HOUR;
     public static long ANARCHY_DELAY;
     public static final FastList<Integer> ANARCHY_TOWNS = new FastList<Integer>();
-    //замес
+    // замес
     public static boolean FIGHTING_ENABLE;
     public static int FIGHTING_DAY;
     public static int FIGHTING_HOUR;
@@ -2368,7 +2392,8 @@ public final class Config {
     public static int NPC_SPAWN_TYPE;
     // заточка при покупке в мультиселле
     public static int MULT_ENCH;
-    public static final FastMap<Integer, Integer> MULT_ENCHS = new FastMap<Integer, Integer>().shared("Config.MULT_ENCHS");
+    public static final FastMap<Integer, Integer> MULT_ENCHS = new FastMap<Integer, Integer>()
+            .shared("Config.MULT_ENCHS");
     // последняя активность клана, дабы удалять кх с мертвых кланов
     public static long CLAN_CH_CLEAN;
     public static boolean CHECK_SKILLS;
@@ -2395,7 +2420,7 @@ public final class Config {
     public static boolean VS_PATHFIND;
     public static boolean VS_SKILL_CHANCES;
     public static boolean VS_ANIM_SHOTS;
-    //.security
+    // .security
     public static boolean VS_HWID;
     public static boolean VS_PWD;
     public static boolean VS_EMAIL;
@@ -2427,7 +2452,8 @@ public final class Config {
     public static int PWCNGSKILLS_COIN;
     public static int PWCNGSKILLS_PRICE;
     public static String PWCNGSKILLS_COINNAME;
-    public static final FastMap<Integer, Integer> PWCSKILLS = new FastMap<Integer, Integer>().shared("Config.PWCSKILLS");
+    public static final FastMap<Integer, Integer> PWCSKILLS = new FastMap<Integer, Integer>()
+            .shared("Config.PWCSKILLS");
 
     public static class AltBColor {
 
@@ -2439,6 +2465,7 @@ public final class Config {
             this.color = color;
         }
     }
+
     public static boolean PWTCOLOR_PAYMENT;
     public static int PWNCOLOR_COIN;
     public static int PWNCOLOR_PRICE;
@@ -2446,7 +2473,8 @@ public final class Config {
     public static int PWTCOLOR_COIN;
     public static int PWTCOLOR_PRICE;
     public static String PWTCOLOR_COINNAME;
-    public static final FastMap<Integer, AltBColor> PWCOLOURS = new FastMap<Integer, AltBColor>().shared("Config.PWCOLOURS");
+    public static final FastMap<Integer, AltBColor> PWCOLOURS = new FastMap<Integer, AltBColor>()
+            .shared("Config.PWCOLOURS");
     public static int PWCNGCLASS_COIN;
     public static int PWCNGCLASS_PRICE;
     public static String PWCNGCLASS_COINNAME;
@@ -2465,7 +2493,8 @@ public final class Config {
     public static int PREMIUM_COIN;
     public static int PREMIUM_PRICE;
     public static String PREMIUM_COINNAME;
-    public static final FastMap<Integer, Integer> PREMIUM_DAY_PRICES = new FastMap<Integer, Integer>().shared("Config.PREMIUM_DAY_PRICES");
+    public static final FastMap<Integer, Integer> PREMIUM_DAY_PRICES = new FastMap<Integer, Integer>()
+            .shared("Config.PREMIUM_DAY_PRICES");
     public static double PREMIUM_EXP;
     public static double PREMIUM_SP;
     public static double PREMIUM_ITEMDROP;
@@ -2493,7 +2522,7 @@ public final class Config {
      *
      */
     public static String VOTE_SERVER_PREFIX;
-    //l2top
+    // l2top
     public static boolean L2TOP_ENABLE;
     public static String L2TOP_SERV_URL;
     public static int L2TOP_UPDATE_DELAY;
@@ -2502,7 +2531,7 @@ public final class Config {
     public static String L2TOP_OFFLINE_LOC;
     public static final FastList<EventReward> L2TOP_ONLINE_REWARDS = new FastList<EventReward>();
     public static int L2TOP_LOGTYPE;
-    //mmotop
+    // mmotop
     public static boolean MMOTOP_ENABLE;
     public static String MMOTOP_STAT_LINK;
     public static int MMOTOP_UPDATE_DELAY;
@@ -2562,11 +2591,13 @@ public final class Config {
     public static boolean ENCHANT_PENALTY;
     public static int ENCHANT_ALT_MAGICCAHNCE;
     public static int ENCHANT_ALT_MAGICCAHNCE_BLESS;
-    public static final FastMap<Integer, Integer> ENCHANT_ALT_MAGICSTEPS = new FastMap<Integer, Integer>().shared("Config.ENCHANT_ALT_MAGICSTEPS");
+    public static final FastMap<Integer, Integer> ENCHANT_ALT_MAGICSTEPS = new FastMap<Integer, Integer>()
+            .shared("Config.ENCHANT_ALT_MAGICSTEPS");
     public static int ENCHANT_ALT_WEAPONCAHNCE;
     public static int ENCHANT_ALT_WEAPONCAHNCE_BLESS;
-    public static final FastMap<Integer, Integer> ENCHANT_ALT_WEAPONSTEPS = new FastMap<Integer, Integer>().shared("Config.ENCHANT_ALT_WEAPONSTEPS");
-    //public static int ENCHANT_ALT_WEAPONFAIL;
+    public static final FastMap<Integer, Integer> ENCHANT_ALT_WEAPONSTEPS = new FastMap<Integer, Integer>()
+            .shared("Config.ENCHANT_ALT_WEAPONSTEPS");
+    // public static int ENCHANT_ALT_WEAPONFAIL;
     public static int ENCHANT_ALT_WEAPONFAILBLESS;
     public static int ENCHANT_ALT_WEAPONFAILBLESS1;
     public static int ENCHANT_ALT_WEAPONFAILBLESS2;
@@ -2580,8 +2611,9 @@ public final class Config {
     public static int ENCHANT_ALT_WEAPONFAILCRYST;
     public static int ENCHANT_ALT_ARMORCAHNCE;
     public static int ENCHANT_ALT_ARMORCAHNCE_BLESS;
-    public static final FastMap<Integer, Integer> ENCHANT_ALT_ARMORSTEPS = new FastMap<Integer, Integer>().shared("Config.ENCHANT_ALT_ARMORSTEPS");
-    //public static int ENCHANT_ALT_ARMORFAIL;
+    public static final FastMap<Integer, Integer> ENCHANT_ALT_ARMORSTEPS = new FastMap<Integer, Integer>()
+            .shared("Config.ENCHANT_ALT_ARMORSTEPS");
+    // public static int ENCHANT_ALT_ARMORFAIL;
     public static int ENCHANT_ALT_ARMORFAILBLESS;
     public static int ENCHANT_ALT_ARMORFAILBLESS1;
     public static int ENCHANT_ALT_ARMORFAILBLESS2;
@@ -2595,8 +2627,9 @@ public final class Config {
     public static int ENCHANT_ALT_ARMORFAILCRYST;
     public static int ENCHANT_ALT_JEWERLYCAHNCE;
     public static int ENCHANT_ALT_JEWERLYCAHNCE_BLESS;
-    public static final FastMap<Integer, Integer> ENCHANT_ALT_JEWERLYSTEPS = new FastMap<Integer, Integer>().shared("Config.ENCHANT_ALT_JEWERLYSTEPS");
-    //public static int ENCHANT_ALT_JEWERLYFAIL;
+    public static final FastMap<Integer, Integer> ENCHANT_ALT_JEWERLYSTEPS = new FastMap<Integer, Integer>()
+            .shared("Config.ENCHANT_ALT_JEWERLYSTEPS");
+    // public static int ENCHANT_ALT_JEWERLYFAIL;
     public static int ENCHANT_ALT_JEWERLYFAILBLESS;
     public static int ENCHANT_ALT_JEWERLYFAILBLESS1;
     public static int ENCHANT_ALT_JEWERLYFAILBLESS2;
@@ -2609,7 +2642,7 @@ public final class Config {
     public static int ENCHANT_ALT_JEWERLYFAILBLESS9;
     public static int ENCHANT_ALT_JEWERLYFAILCRYST;
     public static boolean ENCHANT_HERO_WEAPONS;
-    //антиклик
+    // антиклик
     public static boolean ENCH_ANTI_CLICK;
     public static int ENCH_ANTI_CLICK_STEP;
     public static int ENCH_ANTI_CLICK_TYPE;
@@ -2665,6 +2698,7 @@ public final class Config {
             return (pvp >= min && pvp <= max);
         }
     }
+
     public static boolean ALLOW_PVPPK_REWARD;
     public static int PVPPK_INTERVAL;
     public static PvpColor PVPPK_PENALTY;
@@ -2684,9 +2718,11 @@ public final class Config {
     public static final FastList<EventReward> LASTHERO_KILLSITEMS = new FastList<EventReward>();
     public static final FastList<EventReward> PVPPK_PKITEMS = new FastList<EventReward>();
     public static boolean ALLOW_PVPBONUS_STEPS;
-    public static final FastMap<Integer, PvpColor> PVPBONUS_ITEMS = new FastMap<Integer, PvpColor>().shared("Config.PVPBONUS_ITEMS");
+    public static final FastMap<Integer, PvpColor> PVPBONUS_ITEMS = new FastMap<Integer, PvpColor>()
+            .shared("Config.PVPBONUS_ITEMS");
     public static final FastList<PvpTitleBonus> PVPBONUS_TITLE = new FastList<PvpTitleBonus>();
-    public static final FastMap<Integer, PvpColor> PVPBONUS_COLORS = new FastMap<Integer, PvpColor>().shared("Config.PVPBONUS_COLORS");
+    public static final FastMap<Integer, PvpColor> PVPBONUS_COLORS = new FastMap<Integer, PvpColor>()
+            .shared("Config.PVPBONUS_COLORS");
     public static final FastList<Integer> PVPBONUS_COLORS_NAME = new FastList<Integer>();
     public static final FastList<Integer> PVPBONUS_COLORS_TITLE = new FastList<Integer>();
     public static int PVPPK_STEP;
@@ -2694,12 +2730,15 @@ public final class Config {
     public static boolean PVPPK_REWARD_ZONE;
     public static boolean PVP_TITLE_SKILL;
     // итем для открытия мультиселлов
-    public static final FastMap<Integer, EventReward> MULTVIP_CARDS = new FastMap<Integer, EventReward>().shared("Config.MULTVIP_CARDS");
+    public static final FastMap<Integer, EventReward> MULTVIP_CARDS = new FastMap<Integer, EventReward>()
+            .shared("Config.MULTVIP_CARDS");
     // награда за захват замка
     public static boolean SIEGE_REWARD_CLAN;
     public static boolean CASTLE_SIEGE_REWARD_STATIC;
-    public static final FastMap<Integer, FastList<EventReward>> CASTLE_SIEGE_REWARDS = new FastMap<Integer, FastList<EventReward>>().shared("Config.CASTLE_SIEGE_REWARDS");
-    public static final FastMap<Integer, FastList<EventReward>> CASTLE_RPOTECT_REWARDS = new FastMap<Integer, FastList<EventReward>>().shared("Config.CASTLE_RPOTECT_REWARDS");
+    public static final FastMap<Integer, FastList<EventReward>> CASTLE_SIEGE_REWARDS = new FastMap<Integer, FastList<EventReward>>()
+            .shared("Config.CASTLE_SIEGE_REWARDS");
+    public static final FastMap<Integer, FastList<EventReward>> CASTLE_RPOTECT_REWARDS = new FastMap<Integer, FastList<EventReward>>()
+            .shared("Config.CASTLE_RPOTECT_REWARDS");
     // пассивки апеллы
     public static boolean ALLOW_APELLA_BONUSES;
     // альт-б в пис зоне
@@ -2728,22 +2767,25 @@ public final class Config {
     public static int PC_CAFE_INTERVAL;
     public static PvpColor PC_CAFE_BONUS;
     public static int PC_CAFE_DOUBLE_CHANCE;
-    //webserver
+    // webserver
     public static int WEBSERVER_REFRESH_STATS;
     public static int WEBSERVER_PORT;
     public static String WEBSERVER_FOLDER;
     public static String WEBSERVER_PAGE;
     // увеличение времени баффов
     public static int ALT_BUFF_TIMEMUL;
-    public static final FastMap<Integer, Integer> ALT_BUFF_TIME = new FastMap<Integer, Integer>().shared("Config.ALT_BUFF_TIME");
+    public static final FastMap<Integer, Integer> ALT_BUFF_TIME = new FastMap<Integer, Integer>()
+            .shared("Config.ALT_BUFF_TIME");
     // шансы прохождения скиллов
-    public static final FastMap<Integer, Integer> ALT_SKILL_CHANSE = new FastMap<Integer, Integer>().shared("Config.ALT_SKILL_CHANSE");
+    public static final FastMap<Integer, Integer> ALT_SKILL_CHANSE = new FastMap<Integer, Integer>()
+            .shared("Config.ALT_SKILL_CHANSE");
     // одевать геройские пухи не героям
     public static boolean HERO_ITEMS_PENALTY;
     // доп маг пухи
     public static final FastList<Integer> ALT_MAGIC_WEAPONS = new FastList<Integer>();
     // отдельные итемы при старте
-    public static final FastMap<Integer, Integer> CUSTOM_STRT_ITEMS = new FastMap<Integer, Integer>().shared("Config.CUSTOM_STRT_ITEMS");
+    public static final FastMap<Integer, Integer> CUSTOM_STRT_ITEMS = new FastMap<Integer, Integer>()
+            .shared("Config.CUSTOM_STRT_ITEMS");
     // альтернативная академия
     public static boolean ACADEMY_CLASSIC;
     public static int ACADEMY_POINTS;
@@ -2764,8 +2806,9 @@ public final class Config {
     public static final FastTable<String> CHAT_FILTER_STRINGS = new FastTable<String>();
     // интервал осад, дни
     public static int ALT_SIEGE_INTERVAL;
-    //лимит на заточку опр. вещей
-    public static final FastMap<Integer, Integer> ENCHANT_LIMITS = new FastMap<Integer, Integer>().shared("Config.ENCHANT_LIMITS");
+    // лимит на заточку опр. вещей
+    public static final FastMap<Integer, Integer> ENCHANT_LIMITS = new FastMap<Integer, Integer>()
+            .shared("Config.ENCHANT_LIMITS");
     // анимация сулшотов
     public static boolean SOULSHOT_ANIM;
     // запретить хилить таргет за воротами
@@ -2806,7 +2849,7 @@ public final class Config {
     public static String STARTUP_TITLE;
     // время на поднятие дропа
     public static long PICKUP_PENALTY;
-    // заставки  к боссам
+    // заставки к боссам
     public static boolean DISABLE_BOSS_INTRO;
     // смертельный рефлект
     public static boolean DEATH_REFLECT;
@@ -2858,13 +2901,13 @@ public final class Config {
     public static int MIRAGE_CHANCE;
     // что не варили цп нонстопом
     public static boolean SUMMON_CP_PROTECT;
-    //Запрет на ношение HEAVY
+    // Запрет на ношение HEAVY
     public static final FastList<Integer> HEAVY_PENALTY = new FastList<Integer>();
-    //Запрет на ношение LIGHT
+    // Запрет на ношение LIGHT
     public static final FastList<Integer> LIGHT_PENALTY = new FastList<Integer>();
-    //Запрет на ношение ROBE
+    // Запрет на ношение ROBE
     public static final FastList<Integer> MAGIC_PENALTY = new FastList<Integer>();
-    //Запрет на ношение SHIELD
+    // Запрет на ношение SHIELD
     public static final FastList<Integer> SHIELD_PENALTY = new FastList<Integer>();
     // запрет на атаку луком конкретным профам
     public static final FastList<Integer> FORBIDDEN_BOW_CLASSES = new FastList<Integer>();
@@ -2886,8 +2929,10 @@ public final class Config {
     // свадьбы цвет ника
     public static PvpColor WEDDING_COLORS;
     // олимп баффы
-    public static final FastMap<Integer, Integer> OLY_MAGE_BUFFS = new FastMap<Integer, Integer>().shared("Config.OLY_MAGE_BUFFS");
-    public static final FastMap<Integer, Integer> OLY_FIGHTER_BUFFS = new FastMap<Integer, Integer>().shared("Config.OLY_FIGHTER_BUFFS");
+    public static final FastMap<Integer, Integer> OLY_MAGE_BUFFS = new FastMap<Integer, Integer>()
+            .shared("Config.OLY_MAGE_BUFFS");
+    public static final FastMap<Integer, Integer> OLY_FIGHTER_BUFFS = new FastMap<Integer, Integer>()
+            .shared("Config.OLY_FIGHTER_BUFFS");
     // отключение привязки мультиселлов
     public static boolean MULTISSELL_PROTECT;
     // отключение ошибок загрузки мультиселлов
@@ -2903,7 +2948,7 @@ public final class Config {
     public static boolean WEBSTAT_CHEATS;
     public static int WEBSTAT_ENCHANT;
     public static boolean WEBSTAT_EPICLOOT;
-    //откат скиллов, оли
+    // откат скиллов, оли
     public static boolean ALT_OLY_RELOAD_SKILLS;
     // шансы прохождениея дебаффов от мобов
     public static int MOB_DEBUFF_CHANCE;
@@ -2919,18 +2964,18 @@ public final class Config {
     // умножения выпавших шмоток в сб и эпиков
     public static double RATE_DROP_ITEMSRAIDMUL;
     public static double RATE_DROP_ITEMSGRANDMUL;
-    //бк выдавать шмотку в инвентарь
+    // бк выдавать шмотку в инвентарь
     public static boolean FC_INSERT_INVENTORY;
-    //макс. точка на олимпе
+    // макс. точка на олимпе
     public static int OLY_MAX_WEAPON_ENCH;
     public static int OLY_MAX_ARMOT_ENCH;
-    //соски и мана на панели при старте перса.
+    // соски и мана на панели при старте перса.
     public static boolean ALT_START_ITEMS;
-    //этих нпц нельзя бить
+    // этих нпц нельзя бить
     public static final FastList<Integer> NPC_HIT_PROTECTET = new FastList<Integer>();
-    //GUI консолька
+    // GUI консолька
     public static boolean CONSOLE_ADVANCED;
-    //ноблесс за убийство Баракиеля
+    // ноблесс за убийство Баракиеля
     public static boolean BARAKIEL_NOBLESS;
     /**
      * guard
@@ -2940,39 +2985,41 @@ public final class Config {
     public static int GAMEGUARD_INTERVAL;
     public static int GAMEGUARD_PUNISH;
     public static boolean GAMEGUARD_LOG;
-    //покупка ноблесса
+    // покупка ноблесса
     public static boolean NOBLES_ENABLE;
     public static int SNOBLE_COIN;
     public static int SNOBLE_PRICE;
     public static String SNOBLE_COIN_NAME;
-    //ancientwar
-    // конфиг на макс левел т.е указывал число и после указанного лвла чар не качаеться
+    // ancientwar
+    // конфиг на макс левел т.е указывал число и после указанного лвла чар не
+    // качаеться
     public static int MAX_EXP_LEVEL;
     public static boolean FREE_PVP;
     public static boolean PROTECT_GRADE_PVP;
-    //обнуление очков олимпа после бана
+    // обнуление очков олимпа после бана
     public static boolean CLEAR_OLY_BAN;
-    //запрет передачи итемов пету
+    // запрет передачи итемов пету
     public static boolean GIVE_ITEM_PET;
-    //отключение кормежки петов
+    // отключение кормежки петов
     public static boolean DISABLE_PET_FEED;
-    //альтернативная формула ентчанта
+    // альтернативная формула ентчанта
     public static boolean ENCHANT_ALT_FORMULA;
-    //спавн гвардов на осадах
+    // спавн гвардов на осадах
     public static boolean SIEGE_GUARDS_SPAWN;
-    //защита на тп
+    // защита на тп
     public static long TELEPORT_PROTECTION;
-    //макс. значение скорости каста и атаки для подсчета отката скиллов
+    // макс. значение скорости каста и атаки для подсчета отката скиллов
     public static int MAX_MATKSPD_DELAY;
     public static int MAX_PATKSPD_DELAY;
-    //макс. значение физ/маг атаки для подсчета прохождения дебаффов
+    // макс. значение физ/маг атаки для подсчета прохождения дебаффов
     public static int MAX_MATK_CALC;
     public static int MAX_MDEF_CALC;
-    //мин. значение задержки скорости атаки
+    // мин. значение задержки скорости атаки
     public static int MIN_ATKSPD_DELAY;
     // бонусные скиллы за взятие замка
     public static boolean CASTLE_SIEGE_SKILLS_DELETE;
-    public static final FastMap<Integer, EventReward> CASTLE_SIEGE_SKILLS = new FastMap<Integer, EventReward>().shared("Config.CASTLE_SIEGE_SKILLS");
+    public static final FastMap<Integer, EventReward> CASTLE_SIEGE_SKILLS = new FastMap<Integer, EventReward>()
+            .shared("Config.CASTLE_SIEGE_SKILLS");
     /// макс статы ботов
     public static int FAKE_MAX_PATK_BOW;
     public static int FAKE_MAX_MDEF_BOW;
@@ -2997,70 +3044,73 @@ public final class Config {
     public static int FAKE_MAX_HP_HEAL;
     // телепорт при ударе нпц
     public static Location NPC_HIT_LOCATION;
-    //кикать с аккаунта
+    // кикать с аккаунта
     public static int KICK_USED_ACCOUNT_TRYES;
-    //кланрепа за убийство рб
+    // кланрепа за убийство рб
     public static int RAID_CLANPOINTS_REWARD;
     public static int EPIC_CLANPOINTS_REWARD;
-    //требования к поднятию лвл клана до 5
+    // требования к поднятию лвл клана до 5
     public static boolean DISABLE_CLAN_REQUREMENTS;
     // координаты респа закена
     public static Location ZAKEN_SPAWN_LOC;
-    //продажа ника в альтб
+    // продажа ника в альтб
     public static int BBS_CNAME_COIN;
     public static int BBS_CNAME_PRICE;
     public static String BBS_CNAME_VAL;
-    //в этих шмотках нельзя атаковать и ресать
+    // в этих шмотках нельзя атаковать и ресать
     public static final FastList<Integer> HIPPY_ITEMS = new FastList<Integer>();
-    //запрет на атаку мобов с опр. шмотками у игрока
+    // запрет на атаку мобов с опр. шмотками у игрока
     public static boolean PROTECT_MOBS_ITEMS;
-    //max заточка у рб
+    // max заточка у рб
     public static int BOSS_ZONE_MAX_ENCH;
-    //продолжительность езды на страйдере
+    // продолжительность езды на страйдере
     public static int MOUNT_EXPIRE;
-    //запрещенные шмотки в босс зонах
+    // запрещенные шмотки в босс зонах
     public static final FastList<Integer> BOSS_ITEMS = new FastList<Integer>();
-    //запрещенные скиллы с проклятым оружием
+    // запрещенные скиллы с проклятым оружием
     public static final FastList<Integer> FORB_CURSED_SKILLS = new FastList<Integer>();
-    //лечащие саммоны
+    // лечащие саммоны
     public static int HEALSUM_ANIM;
     public static long HEALSUM_DELAY;
-    public static final FastMap<Integer, EventReward> HEALING_SUMMONS = new FastMap<Integer, EventReward>().shared("Config.HEALING_SUMMONS");
-    //уникальные скиллы
+    public static final FastMap<Integer, EventReward> HEALING_SUMMONS = new FastMap<Integer, EventReward>()
+            .shared("Config.HEALING_SUMMONS");
+    // уникальные скиллы
     public static boolean ALLOW_UNIQ_SKILLS;
-    public static final FastMap<Integer, Integer> UNIQ_SKILLS = new FastMap<Integer, Integer>().shared("Config.UNIQ_SKILLS");
-    //откат скиллов на оли перед и после боя
+    public static final FastMap<Integer, Integer> UNIQ_SKILLS = new FastMap<Integer, Integer>()
+            .shared("Config.UNIQ_SKILLS");
+    // откат скиллов на оли перед и после боя
     public static boolean OLY_RELOAD_SKILLS_BEGIN;
     public static boolean OLY_RELOAD_SKILLS_END;
-    //увод нпц на большие расстояния
+    // увод нпц на большие расстояния
     public static boolean NPC_CHECK_RANGE;
     public static int NPC_CHECK_MAX_RANGE;
-    //4 кубка
+    // 4 кубка
     public static int FS_PARTY_RANGE;
     public static int FS_CYCLE_MIN;
     public static boolean FS_WALL_DOORS;
-    //есть скроллы точки
+    // есть скроллы точки
     public static boolean EAT_ENCH_SCROLLS;
-    //запрет телепорта, если зареган на ивенте
+    // запрет телепорта, если зареган на ивенте
     public static boolean FORB_EVENT_REG_TELE;
-    //все герои
+    // все герои
     public static boolean EVERYBODE_HERO;
-    //награда за геройство
+    // награда за геройство
     public static final FastList<EventReward> ALT_HERO_REWARDS = new FastList<EventReward>();
-    //нпц в виде игроков
+    // нпц в виде игроков
     public static boolean ALLOW_PC_NPC;
-    //голосовалка ncs.Spawn
+    // голосовалка ncs.Spawn
     public static boolean VOTE_NCS_SPAWN;
-    //фринта
+    // фринта
     public static long FRINTA_UPDATE_LAIR;
     public static long FRINTA_MIN_RESPAWN;
     public static long FRINTA_MAX_RESPAWN;
     public static long FRINTA_RESTART_DELAY;
     public static long FRINTA_SPAWN_DELAY;
-    //стартовое СП
+    // стартовое СП
     public static int ALT_START_SP;
-    //увод мобов
-    public static final FastMap<Integer, Integer> NPC_CHASE_RANGES = new FastMap<Integer, Integer>().shared("Config.NPC_CHASE_RANGES");
+    // увод мобов
+    public static final FastMap<Integer, Integer> NPC_CHASE_RANGES = new FastMap<Integer, Integer>()
+            .shared("Config.NPC_CHASE_RANGES");
     //
     public static boolean HTMPARA_WELCOME;
     //
@@ -3088,22 +3138,26 @@ public final class Config {
     public static long BE_NEXTTIME;
     public static Location BE_EGG_LOC;
     public static final FastList<EventReward> BE_REWARDS = new FastList<EventReward>();
-    public static final FastMap<Integer, Integer> BE_GUARDS = new FastMap<Integer, Integer>().shared("Config.BE_GUARDS");
+    public static final FastMap<Integer, Integer> BE_GUARDS = new FastMap<Integer, Integer>()
+            .shared("Config.BE_GUARDS");
     //
     public static int OFFTRADE_COIN;
     public static int OFFTRADE_PRICE;
     public static String OFFTRADE_COIN_NAME;
     //
-    public static final FastMap<Integer, Integer> EPIC_JEWERLY_CHANCES = new FastMap<Integer, Integer>().shared("Config.EPIC_JEWERLY_CHANCES");
+    public static final FastMap<Integer, Integer> EPIC_JEWERLY_CHANCES = new FastMap<Integer, Integer>()
+            .shared("Config.EPIC_JEWERLY_CHANCES");
     //
     public static boolean ALLOW_GUILD_MOD;
     public static boolean ALLOW_GUILD_AURA;
-    public static final FastMap<Integer, String> GUILD_MOD_NAMES = new FastMap<Integer, String>().shared("Config.GUILD_MOD_NAMES");
+    public static final FastMap<Integer, String> GUILD_MOD_NAMES = new FastMap<Integer, String>()
+            .shared("Config.GUILD_MOD_NAMES");
     public static int GUILD_MOD_COIN;
     public static int GUILD_MOD_PRICE;
     public static String GUILD_MOD_COIN_NAME;
     public static int GUILD_MOD_PENALTYS_MAX;
-    public static final FastMap<Integer, Integer> GUILD_MOD_MASKS = new FastMap<Integer, Integer>().shared("Config.GUILD_MOD_MASKS");
+    public static final FastMap<Integer, Integer> GUILD_MOD_MASKS = new FastMap<Integer, Integer>()
+            .shared("Config.GUILD_MOD_MASKS");
     public static final FastList<EventReward> GUILD_MOD_REWARDS = new FastList<EventReward>();
     public static boolean GUILD_BALANCE_TEAM;
     // релог в босс зонах
@@ -3138,12 +3192,12 @@ public final class Config {
     public static boolean TRADE_ZONE_ENABLE;
     //
     public static EventReward CP_RESTORE;
-    //смена пола
+    // смена пола
     public static boolean CHGSEX_ENABLE;
     public static int CHGSEX_COIN;
     public static int CHGSEX_PRICE;
     public static String CHGSEX_COIN_NAME;
-    //смена класса
+    // смена класса
     public static boolean CHGCLASS_ENABLE;
     public static int CHGCLASS_COIN;
     public static int CHGCLASS_PRICE;
@@ -3156,7 +3210,7 @@ public final class Config {
     public static boolean SHOW_BOSS_RESPAWNS;
     //
     public static final FastList<Integer> FORBIDDEN_WH_ITEMS = new FastList<Integer>();
-    //запрещенные скиллы на олимпе
+    // запрещенные скиллы на олимпе
     public static final FastList<Integer> FORB_OLY_SKILLS = new FastList<Integer>();
     public static final FastList<Integer> FORB_EVENT_SKILLS = new FastList<Integer>();
     //
@@ -3168,39 +3222,44 @@ public final class Config {
     public static int GLD_80LVL_PRICE;
     public static int GLD_HEROCHAT_COIN;
     public static int GLD_HEROCHAT_PRICE;
-    //Сабы Phoenix
+    // Сабы Phoenix
     public static boolean ALT_SUBCLASS_PHOENIX;
-    //действия петов
-    public static final FastMap<Integer, Integer> PETS_ACTION_SKILLS = new FastMap<Integer, Integer>().shared("Config.ALT_SIEGE_GUARD_PRICES");
-    //анонс перед респавном рб
+    // действия петов
+    public static final FastMap<Integer, Integer> PETS_ACTION_SKILLS = new FastMap<Integer, Integer>()
+            .shared("Config.ALT_SIEGE_GUARD_PRICES");
+    // анонс перед респавном рб
     public static boolean ANNOUNCE_RAID_SPAWNS;
-    public static final FastMap<Integer, Long> ANNOUNCE_RAID_SPAWNS_TABLE = new FastMap<Integer, Long>().shared("Config.ANNOUNCE_RAID_SPAWNS_TABLE");
-    //задержка на вызов страйдера
+    public static final FastMap<Integer, Long> ANNOUNCE_RAID_SPAWNS_TABLE = new FastMap<Integer, Long>()
+            .shared("Config.ANNOUNCE_RAID_SPAWNS_TABLE");
+    // задержка на вызов страйдера
     public static long SUMMON_DELAY;
-    //оплата аренды пета
+    // оплата аренды пета
     public static final FastList<Integer> PET_RENT_PRICES = new FastList<Integer>();
     public static int PET_RENT_COIN;
     public static String PET_RENT_COIN_NAME;
-    //антифлуд на убийство мобов
-    /*public static boolean FARM_DELAY;
-     public static final FastList<Integer> FARM_DELAY_MOBS = new FastList<Integer>();
-     public static int FARM_DELAY_INTERVAL;
-     public static int FARM_CHECK_TYPE;
-     public static int FARM_TRYES_TELE;
-     public static Location FARM_TRYES_LOC;*/
-    //пвп зоны
+    // антифлуд на убийство мобов
+    /*
+     * public static boolean FARM_DELAY;
+     * public static final FastList<Integer> FARM_DELAY_MOBS = new
+     * FastList<Integer>();
+     * public static int FARM_DELAY_INTERVAL;
+     * public static int FARM_CHECK_TYPE;
+     * public static int FARM_TRYES_TELE;
+     * public static Location FARM_TRYES_LOC;
+     */
+    // пвп зоны
     public static boolean PVP_ZONE_REWARDS;
-    //доп дроп с сундуков
+    // доп дроп с сундуков
     public static boolean CUSTOM_CHEST_DROP;
-    //кристал точки
+    // кристал точки
     public static boolean ALLOW_CRYSTAL_SCROLLS;
-    //антилогаут-пати зона
+    // антилогаут-пати зона
     public static boolean ALLP_ZONE;
-    //отключение рефлекта по мобам
+    // отключение рефлекта по мобам
     public static boolean DISABLE_REFLECT_ON_MOBS;
-    //откат скиллов при лвлап
+    // откат скиллов при лвлап
     public static boolean LVLUP_RELOAD_SKILLS;
-    //Табличка вылетает при реге на Эвенты как на L2NextGen  ДА НЕТ на 5 сек
+    // Табличка вылетает при реге на Эвенты как на L2NextGen ДА НЕТ на 5 сек
     public static boolean EVENT_REG_POPUP;
     public static int EVENT_REG_POPUPLVL;
     //
@@ -3253,7 +3312,8 @@ public final class Config {
     public static int RB_CLANREP_CONUT;
     public static int RB_CLANREP_ID;
     //
-    public static final FastMap<Integer, EventReward> SUPER_MOBS = new FastMap<Integer, EventReward>().shared("Config.SUPER_MOBS");
+    public static final FastMap<Integer, EventReward> SUPER_MOBS = new FastMap<Integer, EventReward>()
+            .shared("Config.SUPER_MOBS");
     //
     public static boolean CASTLE_BONUS_SKILLS;
     //
@@ -3276,10 +3336,12 @@ public final class Config {
     public static final FastList<Integer> PREMIUM_ITEMS_LIST = new FastList<Integer>();
     //
     public static boolean MOB_FIXED_DAMAGE;
-    public static final FastMap<Integer, Double> MOB_FIXED_DAMAGE_LIST = new FastMap<Integer, Double>().shared("Config.MOB_FIXED_DAMAGE_LIST");
+    public static final FastMap<Integer, Double> MOB_FIXED_DAMAGE_LIST = new FastMap<Integer, Double>()
+            .shared("Config.MOB_FIXED_DAMAGE_LIST");
     //
     public static boolean TATOO_SKILLS;
-    public static final FastMap<Integer, Integer> TATOO_SKILLS_LIST = new FastMap<Integer, Integer>().shared("Config.TATOO_SKILLS_LIST");
+    public static final FastMap<Integer, Integer> TATOO_SKILLS_LIST = new FastMap<Integer, Integer>()
+            .shared("Config.TATOO_SKILLS_LIST");
     //
     public static boolean RUNNING_ON_VDS;
     //
@@ -3307,14 +3369,18 @@ public final class Config {
     public static boolean TALK_MOVE_DELAY;
     //
     public static boolean MOB_KILL_REPUTATION;
-    public static final FastMap<Integer, Integer> MOB_KILL_REPUTATION_TABLE = new FastMap<Integer, Integer>().shared("Config.MOB_KILL_REPUTATION_TABLE");
+    public static final FastMap<Integer, Integer> MOB_KILL_REPUTATION_TABLE = new FastMap<Integer, Integer>()
+            .shared("Config.MOB_KILL_REPUTATION_TABLE");
     //
     public static boolean ALT_DEBUFF_CHANCES;
-    public static final FastMap<Integer, Double> ALT_DEBUFF_CHANCES_TABLE = new FastMap<Integer, Double>().shared("Config.ALT_DEBUFF_CHANCES_TABLE");
+    public static final FastMap<Integer, Double> ALT_DEBUFF_CHANCES_TABLE = new FastMap<Integer, Double>()
+            .shared("Config.ALT_DEBUFF_CHANCES_TABLE");
     //
     public static boolean ALT_EVENT_BUFFS;
-    public static final FastMap<Integer, Integer> ALT_EVENT_BUFFS_MAGE = new FastMap<Integer, Integer>().shared("Config.ALT_EVENT_BUFFS_MAGE");
-    public static final FastMap<Integer, Integer> ALT_EVENT_BUFFS_FIGHTER = new FastMap<Integer, Integer>().shared("Config.ALT_EVENT_BUFFS_FIGHTER");
+    public static final FastMap<Integer, Integer> ALT_EVENT_BUFFS_MAGE = new FastMap<Integer, Integer>()
+            .shared("Config.ALT_EVENT_BUFFS_MAGE");
+    public static final FastMap<Integer, Integer> ALT_EVENT_BUFFS_FIGHTER = new FastMap<Integer, Integer>()
+            .shared("Config.ALT_EVENT_BUFFS_FIGHTER");
     //
     public static boolean ALT_HENNA_SUB;
     public static boolean ALT_HENNA_OLY_EVENT_DISABLE;
@@ -3334,7 +3400,8 @@ public final class Config {
     public static long LH_AFK_CHECK_START;
 
     /**
-     * This class initializes all global variables for configuration.<br> If key
+     * This class initializes all global variables for configuration.<br>
+     * If key
      * doesn't appear in properties file, a default value is setting on by this
      * class.
      *
@@ -3349,7 +3416,8 @@ public final class Config {
             is.close();
 
             GAMESERVER_HOSTNAME = serverSettings.getProperty("GameserverHostname");
-            //PORT_GAME = Integer.parseInt(serverSettings.getProperty("GameserverPort", "7777"));
+            // PORT_GAME = Integer.parseInt(serverSettings.getProperty("GameserverPort",
+            // "7777"));
             String[] ports = serverSettings.getProperty("GameserverPort", "7777").split(",");
             PORTS_GAME = new int[ports.length];
             int i = 0;
@@ -3373,8 +3441,10 @@ public final class Config {
             DATABASE_PASSWORD = serverSettings.getProperty("Password", "");
             DATABASE_MAX_CONNECTIONS = Integer.parseInt(serverSettings.getProperty("MaximumDbConnections", "10"));
 
-            MINCONNECTIONSPERPARTITION = Integer.parseInt(serverSettings.getProperty("MinConnectionsPerPartition", "10"));
-            MAXCONNECTIONSPERPARTITION = Integer.parseInt(serverSettings.getProperty("MaxConnectionsPerPartition", "30"));
+            MINCONNECTIONSPERPARTITION = Integer
+                    .parseInt(serverSettings.getProperty("MinConnectionsPerPartition", "10"));
+            MAXCONNECTIONSPERPARTITION = Integer
+                    .parseInt(serverSettings.getProperty("MaxConnectionsPerPartition", "30"));
             PARTITIONCOUNT = Integer.parseInt(serverSettings.getProperty("PartitionCount", "5"));
             ACQUIREINCREMENT = Integer.parseInt(serverSettings.getProperty("AcquireIncrement", "5"));
             IDLECONNECTIONTESTPERIOD = Integer.parseInt(serverSettings.getProperty("IdleConnectionTestPeriod", "10"));
@@ -3386,7 +3456,8 @@ public final class Config {
             CONNECTIONTIMEOUT = Integer.parseInt(serverSettings.getProperty("ConnectionTimeout", "0"));
 
             LAZYINIT = Boolean.parseBoolean(serverSettings.getProperty("LazyInit", "False"));
-            TRANSACTIONRECOVERYENABLED = Boolean.parseBoolean(serverSettings.getProperty("TransactionRecoveryEnabled", "False"));
+            TRANSACTIONRECOVERYENABLED = Boolean
+                    .parseBoolean(serverSettings.getProperty("TransactionRecoveryEnabled", "False"));
 
             DATAPACK_ROOT = new File(serverSettings.getProperty("DatapackRoot", ".")).getCanonicalFile();
 
@@ -3398,7 +3469,8 @@ public final class Config {
 
             MIN_PROTOCOL_REVISION = Integer.parseInt(serverSettings.getProperty("MinProtocolRevision", "660"));
             MAX_PROTOCOL_REVISION = Integer.parseInt(serverSettings.getProperty("MaxProtocolRevision", "665"));
-            SHOW_PROTOCOL_VERSIONS = Boolean.parseBoolean(serverSettings.getProperty("ShowProtocolsInConsole", "False"));
+            SHOW_PROTOCOL_VERSIONS = Boolean
+                    .parseBoolean(serverSettings.getProperty("ShowProtocolsInConsole", "False"));
             if (MIN_PROTOCOL_REVISION > MAX_PROTOCOL_REVISION) {
                 throw new Error("MinProtocolRevision is bigger than MaxProtocolRevision in server configuration file.");
             }
@@ -3414,16 +3486,20 @@ public final class Config {
                 SERVER_SERIAL_KEY = "wq34t43gt34t4g4ge4g";
             }
 
-            WEBSERVER_REFRESH_STATS = (int) TimeUnit.MINUTES.toMillis(Integer.parseInt(serverSettings.getProperty("WebServerRefreshTime", "15")));
+            WEBSERVER_REFRESH_STATS = (int) TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(serverSettings.getProperty("WebServerRefreshTime", "15")));
             WEBSERVER_PORT = Integer.parseInt(serverSettings.getProperty("WebServerPort", "0"));
             WEBSERVER_FOLDER = serverSettings.getProperty("WebServerFolder", "data/webserver/");
             WEBSERVER_PAGE = serverSettings.getProperty("WebServerIndex", "index.html");
 
             WEBSTAT_ENABLE = Boolean.parseBoolean(serverSettings.getProperty("WebStatEnable", "False"));
-            WEBSTAT_INTERVAL = (int) TimeUnit.MINUTES.toMillis(Integer.parseInt(serverSettings.getProperty("WebStatRefreshTime", "5")));
-            WEBSTAT_INTERVAL2 = (int) TimeUnit.MINUTES.toMillis(Integer.parseInt(serverSettings.getProperty("WebStatRefreshTimeEx", "30")));
+            WEBSTAT_INTERVAL = (int) TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(serverSettings.getProperty("WebStatRefreshTime", "5")));
+            WEBSTAT_INTERVAL2 = (int) TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(serverSettings.getProperty("WebStatRefreshTimeEx", "30")));
 
-            WEBSTAT_INTERVAL3 = (int) TimeUnit.MINUTES.toMillis(Integer.parseInt(serverSettings.getProperty("WebStatRefreshTimeOa", "5")));
+            WEBSTAT_INTERVAL3 = (int) TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(serverSettings.getProperty("WebStatRefreshTimeOa", "5")));
             WEBSTAT_ENCHANT = Integer.parseInt(serverSettings.getProperty("WebStatEnchant", "-1"));
             WEBSTAT_KILLS = Boolean.parseBoolean(serverSettings.getProperty("WebStatKills", "False"));
             WEBSTAT_CHEATS = Boolean.parseBoolean(serverSettings.getProperty("WebStatCheats", "False"));
@@ -3463,7 +3539,8 @@ public final class Config {
             optionsSettings.load(is);
             is.close();
 
-            EVERYBODY_HAS_ADMIN_RIGHTS = Boolean.parseBoolean(optionsSettings.getProperty("EverybodyHasAdminRights", "false"));
+            EVERYBODY_HAS_ADMIN_RIGHTS = Boolean
+                    .parseBoolean(optionsSettings.getProperty("EverybodyHasAdminRights", "false"));
 
             DEBUG = Boolean.parseBoolean(optionsSettings.getProperty("Debug", "false"));
             ASSERT = Boolean.parseBoolean(optionsSettings.getProperty("Assert", "false"));
@@ -3482,11 +3559,15 @@ public final class Config {
             for (String id : PROTECTED_ITEMS.split(",")) {
                 LIST_PROTECTED_ITEMS.add(Integer.parseInt(id));
             }
-            DESTROY_DROPPED_PLAYER_ITEM = Boolean.valueOf(optionsSettings.getProperty("DestroyPlayerDroppedItem", "false"));
-            DESTROY_EQUIPABLE_PLAYER_ITEM = Boolean.valueOf(optionsSettings.getProperty("DestroyEquipableItem", "false"));
+            DESTROY_DROPPED_PLAYER_ITEM = Boolean
+                    .valueOf(optionsSettings.getProperty("DestroyPlayerDroppedItem", "false"));
+            DESTROY_EQUIPABLE_PLAYER_ITEM = Boolean
+                    .valueOf(optionsSettings.getProperty("DestroyEquipableItem", "false"));
             SAVE_DROPPED_ITEM = Boolean.valueOf(optionsSettings.getProperty("SaveDroppedItem", "false"));
-            EMPTY_DROPPED_ITEM_TABLE_AFTER_LOAD = Boolean.valueOf(optionsSettings.getProperty("EmptyDroppedItemTableAfterLoad", "false"));
-            SAVE_DROPPED_ITEM_INTERVAL = Integer.parseInt(optionsSettings.getProperty("SaveDroppedItemInterval", "0")) * 60000;
+            EMPTY_DROPPED_ITEM_TABLE_AFTER_LOAD = Boolean
+                    .valueOf(optionsSettings.getProperty("EmptyDroppedItemTableAfterLoad", "false"));
+            SAVE_DROPPED_ITEM_INTERVAL = Integer.parseInt(optionsSettings.getProperty("SaveDroppedItemInterval", "0"))
+                    * 60000;
             CLEAR_DROPPED_ITEM_TABLE = Boolean.valueOf(optionsSettings.getProperty("ClearDroppedItemTable", "false"));
 
             PRECISE_DROP_CALCULATION = Boolean.valueOf(optionsSettings.getProperty("PreciseDropCalculation", "True"));
@@ -3521,13 +3602,14 @@ public final class Config {
             AUTOBAN_L2WALKER_ACC = Boolean.valueOf(optionsSettings.getProperty("AutobanL2WalkerAcc", "False"));
             GM_EDIT = Boolean.valueOf(optionsSettings.getProperty("GMEdit", "False"));
 
-            ACTIVATE_POSITION_RECORDER = Boolean.valueOf(optionsSettings.getProperty("ActivatePositionRecorder", "False"));
+            ACTIVATE_POSITION_RECORDER = Boolean
+                    .valueOf(optionsSettings.getProperty("ActivatePositionRecorder", "False"));
 
             DEFAULT_GLOBAL_CHAT = optionsSettings.getProperty("GlobalChat", "ON");
             DEFAULT_TRADE_CHAT = optionsSettings.getProperty("TradeChat", "ON");
 
             LOG_CHAT = Boolean.valueOf(optionsSettings.getProperty("LogChat", "false"));
-            //LOG_CHAT = false;
+            // LOG_CHAT = false;
             LOG_ITEMS = Boolean.valueOf(optionsSettings.getProperty("LogItems", "false"));
             String[] propertySplit = optionsSettings.getProperty("LogMultisell", "").split(",");
             for (String item : propertySplit) {
@@ -3544,10 +3626,14 @@ public final class Config {
 
             COMMUNITY_TYPE = optionsSettings.getProperty("CommunityType", "old").toLowerCase();
             BBS_DEFAULT = optionsSettings.getProperty("BBSDefault", "_bbshome");
-            SHOW_LEVEL_COMMUNITYBOARD = Boolean.valueOf(optionsSettings.getProperty("ShowLevelOnCommunityBoard", "False"));
-            SHOW_STATUS_COMMUNITYBOARD = Boolean.valueOf(optionsSettings.getProperty("ShowStatusOnCommunityBoard", "True"));
-            NAME_PAGE_SIZE_COMMUNITYBOARD = Integer.parseInt(optionsSettings.getProperty("NamePageSizeOnCommunityBoard", "50"));
-            NAME_PER_ROW_COMMUNITYBOARD = Integer.parseInt(optionsSettings.getProperty("NamePerRowOnCommunityBoard", "5"));
+            SHOW_LEVEL_COMMUNITYBOARD = Boolean
+                    .valueOf(optionsSettings.getProperty("ShowLevelOnCommunityBoard", "False"));
+            SHOW_STATUS_COMMUNITYBOARD = Boolean
+                    .valueOf(optionsSettings.getProperty("ShowStatusOnCommunityBoard", "True"));
+            NAME_PAGE_SIZE_COMMUNITYBOARD = Integer
+                    .parseInt(optionsSettings.getProperty("NamePageSizeOnCommunityBoard", "50"));
+            NAME_PER_ROW_COMMUNITYBOARD = Integer
+                    .parseInt(optionsSettings.getProperty("NamePerRowOnCommunityBoard", "5"));
 
             BBS_CURSED_SHOP = Boolean.valueOf(optionsSettings.getProperty("BbsCursedShop", "True"));
             BBS_CURSED_TELEPORT = Boolean.valueOf(optionsSettings.getProperty("BbsCursedTeleport", "True"));
@@ -3567,23 +3653,39 @@ public final class Config {
 
             FORCE_INVENTORY_UPDATE = Boolean.valueOf(optionsSettings.getProperty("ForceInventoryUpdate", "False"));
 
-            AUTODELETE_INVALID_QUEST_DATA = Boolean.valueOf(optionsSettings.getProperty("AutoDeleteInvalidQuestData", "False"));
+            AUTODELETE_INVALID_QUEST_DATA = Boolean
+                    .valueOf(optionsSettings.getProperty("AutoDeleteInvalidQuestData", "False"));
 
             //
             THREADING_MODEL = Integer.parseInt(optionsSettings.getProperty("ThreadingModel", "1"));
 
-            /*THREAD_P_MOVE = Integer.parseInt(optionsSettings.getProperty("ThreadPoolSizeMove", "50")); // 25
-             THREAD_P_EFFECTS = Integer.parseInt(optionsSettings.getProperty("ThreadPoolSizeEffects", "20")); // 10
-             THREAD_P_GENERAL = Integer.parseInt(optionsSettings.getProperty("ThreadPoolSizeGeneral", "26")); // 13
-             THREAD_P_PATHFIND = Integer.parseInt(optionsSettings.getProperty("ThreadPoolSizePathfind", "5"));
-             THREAD_AI_EXECUTOR = Integer.parseInt(optionsSettings.getProperty("ThreadAiExecutor", "5"));
-             THREAD_GENERAL_EXECUTOR = Integer.parseInt(optionsSettings.getProperty("ThreadGeneralExecutor", "5"));*/
-            SCHEDULED_THREAD_POOL_SIZE = Integer.parseInt(optionsSettings.getProperty("ScheduledThreadPoolSize", String.valueOf(NCPUS * 4)));
-            EXECUTOR_THREAD_POOL_SIZE = Integer.parseInt(optionsSettings.getProperty("ExecutorThreadPoolSize", String.valueOf(NCPUS * 2)));
+            /*
+             * THREAD_P_MOVE =
+             * Integer.parseInt(optionsSettings.getProperty("ThreadPoolSizeMove", "50")); //
+             * 25
+             * THREAD_P_EFFECTS =
+             * Integer.parseInt(optionsSettings.getProperty("ThreadPoolSizeEffects", "20"));
+             * // 10
+             * THREAD_P_GENERAL =
+             * Integer.parseInt(optionsSettings.getProperty("ThreadPoolSizeGeneral", "26"));
+             * // 13
+             * THREAD_P_PATHFIND =
+             * Integer.parseInt(optionsSettings.getProperty("ThreadPoolSizePathfind", "5"));
+             * THREAD_AI_EXECUTOR =
+             * Integer.parseInt(optionsSettings.getProperty("ThreadAiExecutor", "5"));
+             * THREAD_GENERAL_EXECUTOR =
+             * Integer.parseInt(optionsSettings.getProperty("ThreadGeneralExecutor", "5"));
+             */
+            SCHEDULED_THREAD_POOL_SIZE = Integer
+                    .parseInt(optionsSettings.getProperty("ScheduledThreadPoolSize", String.valueOf(NCPUS * 4)));
+            EXECUTOR_THREAD_POOL_SIZE = Integer
+                    .parseInt(optionsSettings.getProperty("ExecutorThreadPoolSize", String.valueOf(NCPUS * 2)));
 
-            IO_PACKET_THREAD_CORE_SIZE = Integer.parseInt(optionsSettings.getProperty("UrgentPacketThreadCoreSize", "5"));
+            IO_PACKET_THREAD_CORE_SIZE = Integer
+                    .parseInt(optionsSettings.getProperty("UrgentPacketThreadCoreSize", "5"));
 
-            GENERAL_PACKET_THREAD_CORE_SIZE = Integer.parseInt(optionsSettings.getProperty("GeneralPacketThreadCoreSize", "5"));
+            GENERAL_PACKET_THREAD_CORE_SIZE = Integer
+                    .parseInt(optionsSettings.getProperty("GeneralPacketThreadCoreSize", "5"));
             GENERAL_THREAD_CORE_SIZE = Integer.parseInt(optionsSettings.getProperty("GeneralThreadCoreSize", "8"));
 
             NPC_AI_MAX_THREAD = Integer.parseInt(optionsSettings.getProperty("NpcAiMaxThread", "10"));
@@ -3606,7 +3708,8 @@ public final class Config {
 
             GRIDS_ALWAYS_ON = Boolean.parseBoolean(optionsSettings.getProperty("GridsAlwaysOn", "False"));
             GRID_NEIGHBOR_TURNON_TIME = Integer.parseInt(optionsSettings.getProperty("GridNeighborTurnOnTime", "30"));
-            GRID_NEIGHBOR_TURNOFF_TIME = Integer.parseInt(optionsSettings.getProperty("GridNeighborTurnOffTime", "300"));
+            GRID_NEIGHBOR_TURNOFF_TIME = Integer
+                    .parseInt(optionsSettings.getProperty("GridNeighborTurnOffTime", "300"));
 
             // ---------------------------------------------------
             // Configuration values not found in config files
@@ -3631,9 +3734,11 @@ public final class Config {
             CHAT_GM_BROADCAST = Boolean.parseBoolean(optionsSettings.getProperty("ChatGmBroadcast", "False"));
             CHAT_NEW_FILTER_TEST = Boolean.parseBoolean(optionsSettings.getProperty("ChatFilterAll", "False"));
             SAY_PM_COUNT = Integer.parseInt(optionsSettings.getProperty("SayPmCount", "5"));
-            SAY_PM_INTERVAL = TimeUnit.SECONDS.toMillis(Integer.parseInt(optionsSettings.getProperty("SayPmInterval", "35")));
+            SAY_PM_INTERVAL = TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(optionsSettings.getProperty("SayPmInterval", "35")));
             SAY_PM_BAN_TYPE = Integer.parseInt(optionsSettings.getProperty("SayPmBanType", "3"));
-            SAY_PM_BAN_TIME = TimeUnit.MINUTES.toMillis(Integer.parseInt(optionsSettings.getProperty("SayPmBanChat", "180")));
+            SAY_PM_BAN_TIME = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(optionsSettings.getProperty("SayPmBanChat", "180")));
             ADVANCED_CHAT_FILTER = Boolean.parseBoolean(optionsSettings.getProperty("ChatFilterSpam", "False"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -3648,72 +3753,83 @@ public final class Config {
     }
 
     public static void loadFilterNew() {
-        /*CHAT_GM_BROADCAST_LIST.clear();
-         File file = new File("config/chat/sayfilter_broadcast.txt");
-         try {
-         BufferedReader fread = new BufferedReader(new FileReader(file));
-        
-         String line = null;
-         while ((line = fread.readLine()) != null) {
-         if (line.trim().length() == 0 || line.startsWith("#")) {
-         continue;
-         }
-         CHAT_GM_BROADCAST_LIST.add(line);
-         }
-         fread.close();
-         System.out.println("Loaded " + CHAT_GM_BROADCAST_LIST.size() + " Filter Words/sayfilter_broadcast.");
-         } catch (FileNotFoundException e) {
-         _log.info("Chat sayfilter_new: Error, file not found sayfilter_broadcast.txt.");
-         return;
-         } catch (IOException e) {
-         _log.info("Chat sayfilter_new: Error while reading sayfilter_broadcast.txt.");
-         return;
-         }*/
+        /*
+         * CHAT_GM_BROADCAST_LIST.clear();
+         * File file = new File("config/chat/sayfilter_broadcast.txt");
+         * try {
+         * BufferedReader fread = new BufferedReader(new FileReader(file));
+         * 
+         * String line = null;
+         * while ((line = fread.readLine()) != null) {
+         * if (line.trim().length() == 0 || line.startsWith("#")) {
+         * continue;
+         * }
+         * CHAT_GM_BROADCAST_LIST.add(line);
+         * }
+         * fread.close();
+         * System.out.println("Loaded " + CHAT_GM_BROADCAST_LIST.size() +
+         * " Filter Words/sayfilter_broadcast.");
+         * } catch (FileNotFoundException e) {
+         * _log.
+         * info("Chat sayfilter_new: Error, file not found sayfilter_broadcast.txt.");
+         * return;
+         * } catch (IOException e) {
+         * _log.info("Chat sayfilter_new: Error while reading sayfilter_broadcast.txt."
+         * );
+         * return;
+         * }
+         */
     }
 
     public static void loadSpamFilter() {
-        /*SPAM_FILTER_LIST.clear();
-         File file = new File("config/chat/sayfilter_spam.txt");
-         try {
-         BufferedReader fread = new BufferedReader(new FileReader(file));
-        
-         String line = null;
-         while ((line = fread.readLine()) != null) {
-         if (line.trim().length() == 0 || line.startsWith("#")) {
-         continue;
-         }
-         SPAM_FILTER_LIST.add(line);
-         }
-         fread.close();
-         System.out.println("Loaded " + SPAM_FILTER_LIST.size() + " Filter Words/sayfilter_spam.");
-         } catch (FileNotFoundException e) {
-         _log.info("Chat sayfilter_new: Error, file not found sayfilter_spam.txt.");
-         return;
-         } catch (IOException e) {
-         _log.info("Chat sayfilter_new: Error while reading sayfilter_spam.txt.");
-         return;
-         }
-        
-         file = new File("config/chat/sayfilter_spam_digits.txt");
-         try {
-         BufferedReader fread = new BufferedReader(new FileReader(file));
-        
-         String line = null;
-         while ((line = fread.readLine()) != null) {
-         if (line.trim().length() == 0 || line.startsWith("#")) {
-         continue;
-         }
-         SPAM_FILTER_DIGITS_LIST.add(line);
-         }
-         fread.close();
-         System.out.println("Loaded " + SPAM_FILTER_DIGITS_LIST.size() + " Filter Words/sayfilter_spam_digits.");
-         } catch (FileNotFoundException e) {
-         _log.info("Chat sayfilter_new: Error, file not found sayfilter_spam_digits.txt.");
-         return;
-         } catch (IOException e) {
-         _log.info("Chat sayfilter_new: Error while reading sayfilter_spam_digits.txt.");
-         return;
-         }*/
+        /*
+         * SPAM_FILTER_LIST.clear();
+         * File file = new File("config/chat/sayfilter_spam.txt");
+         * try {
+         * BufferedReader fread = new BufferedReader(new FileReader(file));
+         * 
+         * String line = null;
+         * while ((line = fread.readLine()) != null) {
+         * if (line.trim().length() == 0 || line.startsWith("#")) {
+         * continue;
+         * }
+         * SPAM_FILTER_LIST.add(line);
+         * }
+         * fread.close();
+         * System.out.println("Loaded " + SPAM_FILTER_LIST.size() +
+         * " Filter Words/sayfilter_spam.");
+         * } catch (FileNotFoundException e) {
+         * _log.info("Chat sayfilter_new: Error, file not found sayfilter_spam.txt.");
+         * return;
+         * } catch (IOException e) {
+         * _log.info("Chat sayfilter_new: Error while reading sayfilter_spam.txt.");
+         * return;
+         * }
+         * 
+         * file = new File("config/chat/sayfilter_spam_digits.txt");
+         * try {
+         * BufferedReader fread = new BufferedReader(new FileReader(file));
+         * 
+         * String line = null;
+         * while ((line = fread.readLine()) != null) {
+         * if (line.trim().length() == 0 || line.startsWith("#")) {
+         * continue;
+         * }
+         * SPAM_FILTER_DIGITS_LIST.add(line);
+         * }
+         * fread.close();
+         * System.out.println("Loaded " + SPAM_FILTER_DIGITS_LIST.size() +
+         * " Filter Words/sayfilter_spam_digits.");
+         * } catch (FileNotFoundException e) {
+         * _log.
+         * info("Chat sayfilter_new: Error, file not found sayfilter_spam_digits.txt.");
+         * return;
+         * } catch (IOException e) {
+         * _log.
+         * info("Chat sayfilter_new: Error while reading sayfilter_spam_digits.txt.");
+         * return;
+         * }
+         */
     }
 
     public static void loadTelnetCfg() {
@@ -3768,12 +3884,14 @@ public final class Config {
             INVENTORY_MAXIMUM_NO_DWARF = Integer.parseInt(otherSettings.getProperty("MaximumSlotsForNoDwarf", "80"));
             INVENTORY_MAXIMUM_DWARF = Integer.parseInt(otherSettings.getProperty("MaximumSlotsForDwarf", "100"));
             INVENTORY_MAXIMUM_GM = Integer.parseInt(otherSettings.getProperty("MaximumSlotsForGMPlayer", "250"));
-            MAX_ITEM_IN_PACKET = Math.max(INVENTORY_MAXIMUM_NO_DWARF, Math.max(INVENTORY_MAXIMUM_DWARF, INVENTORY_MAXIMUM_GM));
+            MAX_ITEM_IN_PACKET = Math.max(INVENTORY_MAXIMUM_NO_DWARF,
+                    Math.max(INVENTORY_MAXIMUM_DWARF, INVENTORY_MAXIMUM_GM));
 
             /*
              * Inventory slots limits
              */
-            WAREHOUSE_SLOTS_NO_DWARF = Integer.parseInt(otherSettings.getProperty("MaximumWarehouseSlotsForNoDwarf", "100"));
+            WAREHOUSE_SLOTS_NO_DWARF = Integer
+                    .parseInt(otherSettings.getProperty("MaximumWarehouseSlotsForNoDwarf", "100"));
             WAREHOUSE_SLOTS_DWARF = Integer.parseInt(otherSettings.getProperty("MaximumWarehouseSlotsForDwarf", "120"));
             WAREHOUSE_SLOTS_CLAN = Integer.parseInt(otherSettings.getProperty("MaximumWarehouseSlotsForClan", "150"));
             FREIGHT_SLOTS = Integer.parseInt(otherSettings.getProperty("MaximumFreightSlots", "20"));
@@ -3790,12 +3908,17 @@ public final class Config {
             MP_REGEN_MULTIPLIER = Double.parseDouble(otherSettings.getProperty("MpRegenMultiplier", "100")) / 100;
             CP_REGEN_MULTIPLIER = Double.parseDouble(otherSettings.getProperty("CpRegenMultiplier", "100")) / 100;
 
-            RAID_HP_REGEN_MULTIPLIER = Double.parseDouble(otherSettings.getProperty("RaidHpRegenMultiplier", "100")) / 100;
-            RAID_MP_REGEN_MULTIPLIER = Double.parseDouble(otherSettings.getProperty("RaidMpRegenMultiplier", "100")) / 100;
-            RAID_DEFENCE_MULTIPLIER = Double.parseDouble(otherSettings.getProperty("RaidDefenceMultiplier", "100")) / 100;
+            RAID_HP_REGEN_MULTIPLIER = Double.parseDouble(otherSettings.getProperty("RaidHpRegenMultiplier", "100"))
+                    / 100;
+            RAID_MP_REGEN_MULTIPLIER = Double.parseDouble(otherSettings.getProperty("RaidMpRegenMultiplier", "100"))
+                    / 100;
+            RAID_DEFENCE_MULTIPLIER = Double.parseDouble(otherSettings.getProperty("RaidDefenceMultiplier", "100"))
+                    / 100;
             RAID_MINION_RESPAWN_TIMER = Integer.parseInt(otherSettings.getProperty("RaidMinionRespawnTime", "300000"));
-            RAID_MIN_RESPAWN_MULTIPLIER = Float.parseFloat(otherSettings.getProperty("RaidMinRespawnMultiplier", "1.0"));
-            RAID_MAX_RESPAWN_MULTIPLIER = Float.parseFloat(otherSettings.getProperty("RaidMaxRespawnMultiplier", "1.0"));
+            RAID_MIN_RESPAWN_MULTIPLIER = Float
+                    .parseFloat(otherSettings.getProperty("RaidMinRespawnMultiplier", "1.0"));
+            RAID_MAX_RESPAWN_MULTIPLIER = Float
+                    .parseFloat(otherSettings.getProperty("RaidMaxRespawnMultiplier", "1.0"));
 
             UNSTUCK_INTERVAL = Integer.parseInt(otherSettings.getProperty("UnstuckInterval", "300"));
 
@@ -3803,7 +3926,8 @@ public final class Config {
              * Player protection after recovering from fake death (works against
              * mobs only)
              */
-            PLAYER_FAKEDEATH_UP_PROTECTION = Integer.parseInt(otherSettings.getProperty("PlayerFakeDeathUpProtection", "0"));
+            PLAYER_FAKEDEATH_UP_PROTECTION = Integer
+                    .parseInt(otherSettings.getProperty("PlayerFakeDeathUpProtection", "0"));
 
             /*
              * Defines some Party XP related values
@@ -3835,7 +3959,8 @@ public final class Config {
             for (String id : PET_RENT_NPC.split(",")) {
                 LIST_PET_RENT_NPC.add(Integer.parseInt(id));
             }
-            NONDROPPABLE_ITEMS = otherSettings.getProperty("ListOfNonDroppableItems", "1147,425,1146,461,10,2368,7,6,2370,2369,5598");
+            NONDROPPABLE_ITEMS = otherSettings.getProperty("ListOfNonDroppableItems",
+                    "1147,425,1146,461,10,2368,7,6,2370,2369,5598");
 
             LIST_NONDROPPABLE_ITEMS = new FastList<Integer>();
             for (String id : NONDROPPABLE_ITEMS.split(",")) {
@@ -3845,8 +3970,10 @@ public final class Config {
             ANNOUNCE_MAMMON_SPAWN = Boolean.parseBoolean(otherSettings.getProperty("AnnounceMammonSpawn", "True"));
 
             ALT_PRIVILEGES_ADMIN = Boolean.parseBoolean(otherSettings.getProperty("AltPrivilegesAdmin", "False"));
-            ALT_PRIVILEGES_SECURE_CHECK = Boolean.parseBoolean(otherSettings.getProperty("AltPrivilegesSecureCheck", "True"));
-            ALT_PRIVILEGES_DEFAULT_LEVEL = Integer.parseInt(otherSettings.getProperty("AltPrivilegesDefaultLevel", "100"));
+            ALT_PRIVILEGES_SECURE_CHECK = Boolean
+                    .parseBoolean(otherSettings.getProperty("AltPrivilegesSecureCheck", "True"));
+            ALT_PRIVILEGES_DEFAULT_LEVEL = Integer
+                    .parseInt(otherSettings.getProperty("AltPrivilegesDefaultLevel", "100"));
 
             MASTERACCESS_LEVEL = Integer.parseInt(otherSettings.getProperty("MasterAccessLevel", "127"));
             GM_HERO_AURA = Boolean.parseBoolean(otherSettings.getProperty("GMHeroAura", "True"));
@@ -3905,18 +4032,40 @@ public final class Config {
              */
             ENCHANT_SAFE_MAX_FULL = Integer.parseInt(enchSettings.getProperty("EnchantSafeMaxFull", "4"));
 
-            ENCHANT_CHANCE_WEAPON_CRYSTAL = Integer.parseInt(enchSettings.getProperty("EnchantChanceWeaponCrystal", "100"));
-            ENCHANT_CHANCE_ARMOR_CRYSTAL = Integer.parseInt(enchSettings.getProperty("EnchantChanceArmorCrystal", "100"));
-            ENCHANT_CHANCE_JEWELRY_CRYSTAL = Integer.parseInt(enchSettings.getProperty("EnchantChanceJewelryCrystal", "100"));
+            ENCHANT_CHANCE_WEAPON_CRYSTAL = Integer
+                    .parseInt(enchSettings.getProperty("EnchantChanceWeaponCrystal", "100"));
+            ENCHANT_CHANCE_ARMOR_CRYSTAL = Integer
+                    .parseInt(enchSettings.getProperty("EnchantChanceArmorCrystal", "100"));
+            ENCHANT_CHANCE_JEWELRY_CRYSTAL = Integer
+                    .parseInt(enchSettings.getProperty("EnchantChanceJewelryCrystal", "100"));
             /**
              * переделка заточки*
              */
-            ENCHANT_CHANCE_NEXT = Integer.parseInt(enchSettings.getProperty("EnchantXX", "15")); //переломный момент в шансах заточки
-            ENCHANT_FAILED_NUM = Integer.parseInt(enchSettings.getProperty("EnchantFailed", "0")); //при неудаче сброс заточки на это значение
-            MAGIC_CHANCE_BEFORE_NEXT = Float.parseFloat(enchSettings.getProperty("MagicEnchantSuccesRateBeforeXX", "25.0")); //шанс на заточку магического оружия до ENCHANT_CHANCE_NEXT
-            MAGIC_CHANCE_AFTER_NEXT = Float.parseFloat(enchSettings.getProperty("MagicEnchantSuccesRateAfterXX", "35.0")); //шанс на заточку магического оружия после ENCHANT_CHANCE_NEXT включительно
-            WEAPON_CHANCE_BEFORE_NEXT = Float.parseFloat(enchSettings.getProperty("WeaponEnchantSuccesRateBeforeXX", "30.0")); //шанс на заточку оружия до ENCHANT_CHANCE_NEXT
-            WEAPON_CHANCE_AFTER_NEXT = Float.parseFloat(enchSettings.getProperty("WeaponEnchantSuccesRateAfterXX", "30.0")); //шанс на заточку оружия после ENCHANT_CHANCE_NEXT включительно
+            ENCHANT_CHANCE_NEXT = Integer.parseInt(enchSettings.getProperty("EnchantXX", "15")); // переломный момент в
+                                                                                                 // шансах заточки
+            ENCHANT_FAILED_NUM = Integer.parseInt(enchSettings.getProperty("EnchantFailed", "0")); // при неудаче сброс
+                                                                                                   // заточки на это
+                                                                                                   // значение
+            MAGIC_CHANCE_BEFORE_NEXT = Float
+                    .parseFloat(enchSettings.getProperty("MagicEnchantSuccesRateBeforeXX", "25.0")); // шанс на заточку
+                                                                                                     // магического
+                                                                                                     // оружия до
+                                                                                                     // ENCHANT_CHANCE_NEXT
+            MAGIC_CHANCE_AFTER_NEXT = Float
+                    .parseFloat(enchSettings.getProperty("MagicEnchantSuccesRateAfterXX", "35.0")); // шанс на заточку
+                                                                                                    // магического
+                                                                                                    // оружия после
+                                                                                                    // ENCHANT_CHANCE_NEXT
+                                                                                                    // включительно
+            WEAPON_CHANCE_BEFORE_NEXT = Float
+                    .parseFloat(enchSettings.getProperty("WeaponEnchantSuccesRateBeforeXX", "30.0")); // шанс на заточку
+                                                                                                      // оружия до
+                                                                                                      // ENCHANT_CHANCE_NEXT
+            WEAPON_CHANCE_AFTER_NEXT = Float
+                    .parseFloat(enchSettings.getProperty("WeaponEnchantSuccesRateAfterXX", "30.0")); // шанс на заточку
+                                                                                                     // оружия после
+                                                                                                     // ENCHANT_CHANCE_NEXT
+                                                                                                     // включительно
 
             String[] ArmEncTable = enchSettings.getProperty("ArmorEnchantTable", "").split(";");
             for (String aet : ArmEncTable) {
@@ -3957,10 +4106,11 @@ public final class Config {
             EAT_ENCH_SCROLLS = Boolean.valueOf(enchSettings.getProperty("EatEnchScrolls", "True"));
 
             // альтернативный пакет
-            ENCHANT_ALT_PACKET = true;//Boolean.valueOf(enchSettings.getProperty("AltEnchantPacket", "True"));
+            ENCHANT_ALT_PACKET = true;// Boolean.valueOf(enchSettings.getProperty("AltEnchantPacket", "True"));
             if (ENCHANT_ALT_PACKET) {
                 ENCHANT_ALT_MAGICCAHNCE = Integer.parseInt(enchSettings.getProperty("EnchantAltMagicChance", "65"));
-                ENCHANT_ALT_MAGICCAHNCE_BLESS = Integer.parseInt(enchSettings.getProperty("EnchantAltMagicChanceBless", "65"));
+                ENCHANT_ALT_MAGICCAHNCE_BLESS = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltMagicChanceBless", "65"));
                 propertySplit = enchSettings.getProperty("EnchantAltMagicSteps", "1,100;2,100").split(";");
                 for (String augs : propertySplit) {
                     String[] aug = augs.split(",");
@@ -3974,19 +4124,32 @@ public final class Config {
                 }
 
                 ENCHANT_ALT_WEAPONCAHNCE = Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponChance", "75"));
-                ENCHANT_ALT_WEAPONCAHNCE_BLESS = Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponChanceBless", "75"));
-                //ENCHANT_ALT_WEAPONFAIL = Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponFail", "-100"));
-                ENCHANT_ALT_WEAPONFAILBLESS = Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail", "0"));
-                ENCHANT_ALT_WEAPONFAILBLESS1 = Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail1", "0"));
-                ENCHANT_ALT_WEAPONFAILBLESS2 = Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail2", "0"));
-                ENCHANT_ALT_WEAPONFAILBLESS3 = Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail3", "0"));
-                ENCHANT_ALT_WEAPONFAILBLESS4 = Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail4", "0"));
-                ENCHANT_ALT_WEAPONFAILBLESS5 = Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail5", "0"));
-                ENCHANT_ALT_WEAPONFAILBLESS6 = Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail6", "0"));
-                ENCHANT_ALT_WEAPONFAILBLESS7 = Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail7", "0"));
-                ENCHANT_ALT_WEAPONFAILBLESS8 = Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail8", "0"));
-                ENCHANT_ALT_WEAPONFAILBLESS9 = Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail9", "0"));
-                ENCHANT_ALT_WEAPONFAILCRYST = Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponCrystallFail", "0"));
+                ENCHANT_ALT_WEAPONCAHNCE_BLESS = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltWeaponChanceBless", "75"));
+                // ENCHANT_ALT_WEAPONFAIL =
+                // Integer.parseInt(enchSettings.getProperty("EnchantAltWeaponFail", "-100"));
+                ENCHANT_ALT_WEAPONFAILBLESS = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail", "0"));
+                ENCHANT_ALT_WEAPONFAILBLESS1 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail1", "0"));
+                ENCHANT_ALT_WEAPONFAILBLESS2 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail2", "0"));
+                ENCHANT_ALT_WEAPONFAILBLESS3 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail3", "0"));
+                ENCHANT_ALT_WEAPONFAILBLESS4 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail4", "0"));
+                ENCHANT_ALT_WEAPONFAILBLESS5 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail5", "0"));
+                ENCHANT_ALT_WEAPONFAILBLESS6 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail6", "0"));
+                ENCHANT_ALT_WEAPONFAILBLESS7 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail7", "0"));
+                ENCHANT_ALT_WEAPONFAILBLESS8 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail8", "0"));
+                ENCHANT_ALT_WEAPONFAILBLESS9 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltWeaponBlessFail9", "0"));
+                ENCHANT_ALT_WEAPONFAILCRYST = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltWeaponCrystallFail", "0"));
                 propertySplit = enchSettings.getProperty("EnchantAltWeaponSteps", "1,100;2,100").split(";");
                 for (String augs : propertySplit) {
                     String[] aug = augs.split(",");
@@ -4000,19 +4163,32 @@ public final class Config {
                 }
                 //
                 ENCHANT_ALT_ARMORCAHNCE = Integer.parseInt(enchSettings.getProperty("EnchantAltArmorChance", "75"));
-                ENCHANT_ALT_ARMORCAHNCE_BLESS = Integer.parseInt(enchSettings.getProperty("EnchantAltArmorChanceBless", "75"));
-                //ENCHANT_ALT_ARMORFAIL = Integer.parseInt(enchSettings.getProperty("EnchantAltArmorFail", "-100"));
-                ENCHANT_ALT_ARMORFAILBLESS = Integer.parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail", "0"));
-                ENCHANT_ALT_ARMORFAILBLESS1 = Integer.parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail1", "0"));
-                ENCHANT_ALT_ARMORFAILBLESS2 = Integer.parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail2", "0"));
-                ENCHANT_ALT_ARMORFAILBLESS3 = Integer.parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail3", "0"));
-                ENCHANT_ALT_ARMORFAILBLESS4 = Integer.parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail4", "0"));
-                ENCHANT_ALT_ARMORFAILBLESS5 = Integer.parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail5", "0"));
-                ENCHANT_ALT_ARMORFAILBLESS6 = Integer.parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail6", "0"));
-                ENCHANT_ALT_ARMORFAILBLESS7 = Integer.parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail7", "0"));
-                ENCHANT_ALT_ARMORFAILBLESS8 = Integer.parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail8", "0"));
-                ENCHANT_ALT_ARMORFAILBLESS9 = Integer.parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail9", "0"));
-                ENCHANT_ALT_ARMORFAILCRYST = Integer.parseInt(enchSettings.getProperty("EnchantAltArmorCrystallFail", "0"));
+                ENCHANT_ALT_ARMORCAHNCE_BLESS = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltArmorChanceBless", "75"));
+                // ENCHANT_ALT_ARMORFAIL =
+                // Integer.parseInt(enchSettings.getProperty("EnchantAltArmorFail", "-100"));
+                ENCHANT_ALT_ARMORFAILBLESS = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail", "0"));
+                ENCHANT_ALT_ARMORFAILBLESS1 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail1", "0"));
+                ENCHANT_ALT_ARMORFAILBLESS2 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail2", "0"));
+                ENCHANT_ALT_ARMORFAILBLESS3 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail3", "0"));
+                ENCHANT_ALT_ARMORFAILBLESS4 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail4", "0"));
+                ENCHANT_ALT_ARMORFAILBLESS5 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail5", "0"));
+                ENCHANT_ALT_ARMORFAILBLESS6 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail6", "0"));
+                ENCHANT_ALT_ARMORFAILBLESS7 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail7", "0"));
+                ENCHANT_ALT_ARMORFAILBLESS8 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail8", "0"));
+                ENCHANT_ALT_ARMORFAILBLESS9 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltArmorBlessFail9", "0"));
+                ENCHANT_ALT_ARMORFAILCRYST = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltArmorCrystallFail", "0"));
                 propertySplit = enchSettings.getProperty("EnchantAltArmorSteps", "1,100;2,100").split(";");
                 for (String augs : propertySplit) {
                     String[] aug = augs.split(",");
@@ -4026,19 +4202,32 @@ public final class Config {
                 }
                 //
                 ENCHANT_ALT_JEWERLYCAHNCE = Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyChance", "75"));
-                ENCHANT_ALT_JEWERLYCAHNCE_BLESS = Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyChanceBless", "75"));
-                //ENCHANT_ALT_JEWERLYFAIL = Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyFail", "-100"));
-                ENCHANT_ALT_JEWERLYFAILBLESS = Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail", "0"));
-                ENCHANT_ALT_JEWERLYFAILBLESS1 = Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail1", "0"));
-                ENCHANT_ALT_JEWERLYFAILBLESS2 = Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail2", "0"));
-                ENCHANT_ALT_JEWERLYFAILBLESS3 = Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail3", "0"));
-                ENCHANT_ALT_JEWERLYFAILBLESS4 = Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail4", "0"));
-                ENCHANT_ALT_JEWERLYFAILBLESS5 = Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail5", "0"));
-                ENCHANT_ALT_JEWERLYFAILBLESS6 = Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail6", "0"));
-                ENCHANT_ALT_JEWERLYFAILBLESS7 = Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail7", "0"));
-                ENCHANT_ALT_JEWERLYFAILBLESS8 = Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail8", "0"));
-                ENCHANT_ALT_JEWERLYFAILBLESS9 = Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail9", "0"));
-                ENCHANT_ALT_JEWERLYFAILCRYST = Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyCrystallFail", "0"));
+                ENCHANT_ALT_JEWERLYCAHNCE_BLESS = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltJewerlyChanceBless", "75"));
+                // ENCHANT_ALT_JEWERLYFAIL =
+                // Integer.parseInt(enchSettings.getProperty("EnchantAltJewerlyFail", "-100"));
+                ENCHANT_ALT_JEWERLYFAILBLESS = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail", "0"));
+                ENCHANT_ALT_JEWERLYFAILBLESS1 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail1", "0"));
+                ENCHANT_ALT_JEWERLYFAILBLESS2 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail2", "0"));
+                ENCHANT_ALT_JEWERLYFAILBLESS3 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail3", "0"));
+                ENCHANT_ALT_JEWERLYFAILBLESS4 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail4", "0"));
+                ENCHANT_ALT_JEWERLYFAILBLESS5 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail5", "0"));
+                ENCHANT_ALT_JEWERLYFAILBLESS6 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail6", "0"));
+                ENCHANT_ALT_JEWERLYFAILBLESS7 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail7", "0"));
+                ENCHANT_ALT_JEWERLYFAILBLESS8 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail8", "0"));
+                ENCHANT_ALT_JEWERLYFAILBLESS9 = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltJewerlyBlessFail9", "0"));
+                ENCHANT_ALT_JEWERLYFAILCRYST = Integer
+                        .parseInt(enchSettings.getProperty("EnchantAltJewerlyCrystallFail", "0"));
                 propertySplit = enchSettings.getProperty("EnchantAltJewerlySteps", "1,100;2,100").split(";");
                 for (String augs : propertySplit) {
                     String[] aug = augs.split(",");
@@ -4052,12 +4241,12 @@ public final class Config {
                 }
             }
             ENCHANT_ALT_FORMULA = Boolean.valueOf(enchSettings.getProperty("AltEnchantFormula", "False"));
-            //антиклик
+            // антиклик
             ENCH_ANTI_CLICK = Boolean.parseBoolean(enchSettings.getProperty("AntiClick", "False"));
             ENCH_ANTI_CLICK_STEP = Integer.parseInt(enchSettings.getProperty("AntiClickStep", "10"));
             ENCH_ANTI_CLICK_TYPE = Integer.parseInt(enchSettings.getProperty("AntiClickType", "0"));
             ENCH_ANTI_CLICK_STEP *= 2;
-            //предел заточки конкретных шмоток
+            // предел заточки конкретных шмоток
             propertySplit = enchSettings.getProperty("EnchantLimits", "0,0").split(";");
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
@@ -4083,13 +4272,15 @@ public final class Config {
             propertySplit = enchSettings.getProperty("GuardEnchantMinMax", "0,14").split(",");
             ENCH_GUARD_MINMAX = new PvpColor(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]));
 
-            //стековые точки
+            // стековые точки
             ENCH_STACK_SCROLLS = Boolean.parseBoolean(enchSettings.getProperty("StackableScrolls", "False"));
 
             // шаг заточки
             ENCHANT_ALT_STEP = Integer.parseInt(enchSettings.getProperty("AltEnchantStep", "1"));
             //
-            propertySplit = enchSettings.getProperty("BlessBonusScrolls1", "15000,15001,15002,15003,15004,15005,15006,15007,15008,15009").split(",");
+            propertySplit = enchSettings
+                    .getProperty("BlessBonusScrolls1", "15000,15001,15002,15003,15004,15005,15006,15007,15008,15009")
+                    .split(",");
             for (String buff : propertySplit) {
                 try {
                     BLESS_BONUSES.add(Integer.valueOf(buff));
@@ -4099,7 +4290,9 @@ public final class Config {
                     }
                 }
             }
-            propertySplit = enchSettings.getProperty("BlessBonusScrolls2", "15010,15011,15012,15013,15014,15015,15016,15017,15018,15019").split(",");
+            propertySplit = enchSettings
+                    .getProperty("BlessBonusScrolls2", "15010,15011,15012,15013,15014,15015,15016,15017,15018,15019")
+                    .split(",");
             for (String buff : propertySplit) {
                 try {
                     BLESS_BONUSES2.add(Integer.valueOf(buff));
@@ -4167,7 +4360,8 @@ public final class Config {
                 String[] aug = augs.split(",");
                 try {
                     AUGSALE_TABLE.put(Integer.valueOf(aug[0]), Integer.valueOf(aug[1]));
-                    //System.out.println("services.cfg: add: " + Integer.valueOf(aug[0]) + ":" + Integer.valueOf(aug[1]));
+                    // System.out.println("services.cfg: add: " + Integer.valueOf(aug[0]) + ":" +
+                    // Integer.valueOf(aug[1]));
                 } catch (NumberFormatException nfe) {
                     if (aug.length > 0) {
                         System.out.println("services.cfg: magicbuff error: " + aug[0]);
@@ -4211,7 +4405,9 @@ public final class Config {
                 }
             }
 
-            propertySplit = serviseSet.getProperty("ForbiddenProfileBuffs", "4,72,76,77,78,82,83,86,91,94,99,109,110,111,112,121,123,130,131,139,176,222,282,287,292,297,298,313,317,334,350,351,355,356,357,359,360,396,406,410,411,413,414,415,416,417,420,421,423,424,425,438,439,442,443,445,446,447,1001,1374,1410,1418,1427,3158,3142,3132,3133,3134,3135,3136,3199,3200,3201,3202,3203,3633,5104,5105").split(",");
+            propertySplit = serviseSet.getProperty("ForbiddenProfileBuffs",
+                    "4,72,76,77,78,82,83,86,91,94,99,109,110,111,112,121,123,130,131,139,176,222,282,287,292,297,298,313,317,334,350,351,355,356,357,359,360,396,406,410,411,413,414,415,416,417,420,421,423,424,425,438,439,442,443,445,446,447,1001,1374,1410,1418,1427,3158,3142,3132,3133,3134,3135,3136,3199,3200,3201,3202,3203,3633,5104,5105")
+                    .split(",");
             for (String buff : propertySplit) {
                 try {
                     F_PROFILE_BUFFS.add(Integer.valueOf(buff));
@@ -4239,14 +4435,17 @@ public final class Config {
             POST_BRIEFTEXT = serviseSet.getProperty("BriefText", ":)");
             POST_NPCNAME = serviseSet.getProperty("BriefNpc", "Ahosey");
             propertySplit = serviseSet.getProperty("BriefItem", "0,0").split(",");
-            POST_BRIEF_ITEM = new EventReward(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), 0);
+            POST_BRIEF_ITEM = new EventReward(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]),
+                    0);
 
             ALLOW_CLASS_MASTERS = Boolean.valueOf(serviseSet.getProperty("AllowClassMasters", "False"));
-            propertySplit = serviseSet.getProperty("ClassMasterPrices", "1,57,50000;2,57,500000;3,57,5000000").split(";");
+            propertySplit = serviseSet.getProperty("ClassMasterPrices", "1,57,50000;2,57,500000;3,57,5000000")
+                    .split(";");
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    CLASS_MASTERS_PRICES.put(Integer.parseInt(aug[0]), new EventReward(Integer.parseInt(aug[1]), Integer.parseInt(aug[2]), 0));
+                    CLASS_MASTERS_PRICES.put(Integer.parseInt(aug[0]),
+                            new EventReward(Integer.parseInt(aug[1]), Integer.parseInt(aug[2]), 0));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("services.cfg: ClassMasterPrices error: " + aug[0]);
@@ -4394,7 +4593,8 @@ public final class Config {
             PREMIUM_ITEMDROP = Double.parseDouble(serviseSet.getProperty("PremiumDropItem", "1.3"));
             PREMIUM_ITEMDROPMUL = Double.parseDouble(serviseSet.getProperty("PremiumDropMul", "1.3"));
             PREMIUM_SPOILRATE = Double.parseDouble(serviseSet.getProperty("PremiumDropSpoil", "1.3"));
-            //PREMIUM_ADENADROP = Float.parseFloat(serviseSet.getProperty("PremiumDropAdena", "1.3"));
+            // PREMIUM_ADENADROP =
+            // Float.parseFloat(serviseSet.getProperty("PremiumDropAdena", "1.3"));
             PREMIUM_ADENAMUL = Double.parseDouble(serviseSet.getProperty("PremiumAdenaMul", "1.3"));
             PREMIUM_PCCAFE_MUL = Double.parseDouble(serviseSet.getProperty("PremiumPcCafeMul", "1.3"));
             PREMIUM_AQURE_SKILL_MUL = Double.parseDouble(serviseSet.getProperty("PremiumClanSkillsMul", "0.7"));
@@ -4447,10 +4647,12 @@ public final class Config {
              * L2JMOD Wedding system
              */
             L2JMOD_ALLOW_WEDDING = Boolean.valueOf(serviseSet.getProperty("AllowWedding", "False"));
-            L2JMOD_WEDDING_PUNISH_INFIDELITY = Boolean.parseBoolean(serviseSet.getProperty("WeddingPunishInfidelity", "True"));
+            L2JMOD_WEDDING_PUNISH_INFIDELITY = Boolean
+                    .parseBoolean(serviseSet.getProperty("WeddingPunishInfidelity", "True"));
             L2JMOD_WEDDING_TELEPORT = Boolean.parseBoolean(serviseSet.getProperty("WeddingTeleport", "True"));
             L2JMOD_WEDDING_TELEPORT_PRICE = Integer.parseInt(serviseSet.getProperty("WeddingTeleportPrice", "50000"));
-            L2JMOD_WEDDING_TELEPORT_DURATION = Integer.parseInt(serviseSet.getProperty("WeddingTeleportDuration", "60"));
+            L2JMOD_WEDDING_TELEPORT_DURATION = Integer
+                    .parseInt(serviseSet.getProperty("WeddingTeleportDuration", "60"));
             L2JMOD_WEDDING_SAMESEX = Boolean.parseBoolean(serviseSet.getProperty("WeddingAllowSameSex", "False"));
             L2JMOD_WEDDING_FORMALWEAR = Boolean.parseBoolean(serviseSet.getProperty("WeddingFormalWear", "True"));
 
@@ -4462,16 +4664,19 @@ public final class Config {
             L2JMOD_WEDDING_DIVORCE_PRICE = Integer.parseInt(serviseSet.getProperty("WeddingDivorcePrice", "5"));
             L2JMOD_WEDDING_DIVORCE_COINNAME = serviseSet.getProperty("WeddingDivorceCoinName", "Coin Of Luck");
 
-            L2JMOD_WEDDING_INTERVAL = (int) TimeUnit.SECONDS.toMillis(Integer.parseInt(serviseSet.getProperty("WeddingInterval", "90")));
+            L2JMOD_WEDDING_INTERVAL = (int) TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(serviseSet.getProperty("WeddingInterval", "90")));
 
             propertySplit = serviseSet.getProperty("WeddingColors", "FFFFFF,FFFFFF").split(",");
-            WEDDING_COLORS = new PvpColor(Integer.decode("0x" + new TextBuilder(propertySplit[0]).reverse().toString()), Integer.decode("0x" + new TextBuilder(propertySplit[1]).reverse().toString()));
+            WEDDING_COLORS = new PvpColor(Integer.decode("0x" + new TextBuilder(propertySplit[0]).reverse().toString()),
+                    Integer.decode("0x" + new TextBuilder(propertySplit[1]).reverse().toString()));
 
             L2JMOD_WEDDING_BOW = Boolean.valueOf(serviseSet.getProperty("WeddingCupidBow", "False"));
             //
             L2TOP_ENABLE = Boolean.parseBoolean(serviseSet.getProperty("L2TopEnable", "False"));
             L2TOP_SERV_URL = serviseSet.getProperty("L2TopServerUrl", "empty");
-            L2TOP_UPDATE_DELAY = (int) TimeUnit.MINUTES.toMillis(Integer.parseInt(serviseSet.getProperty("L2TopUpdateDelay", "5")));
+            L2TOP_UPDATE_DELAY = (int) TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(serviseSet.getProperty("L2TopUpdateDelay", "5")));
 
             L2TOP_OFFLINE_ITEM = Integer.parseInt(serviseSet.getProperty("L2TopOfflineId", "0"));
             L2TOP_OFFLINE_COUNT = Integer.parseInt(serviseSet.getProperty("L2TopOfflineCount", "0"));
@@ -4480,7 +4685,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    L2TOP_ONLINE_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    L2TOP_ONLINE_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("services.cfg: L2TopOnlineRewards error: " + aug[0]);
@@ -4491,7 +4697,8 @@ public final class Config {
             //
             MMOTOP_ENABLE = Boolean.parseBoolean(serviseSet.getProperty("MmotopEnable", "False"));
             MMOTOP_STAT_LINK = serviseSet.getProperty("MmotopStatLink", "0");
-            MMOTOP_UPDATE_DELAY = (int) TimeUnit.MINUTES.toMillis(Integer.parseInt(serviseSet.getProperty("MmotopUpdateDelay", "5")));
+            MMOTOP_UPDATE_DELAY = (int) TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(serviseSet.getProperty("MmotopUpdateDelay", "5")));
 
             MMOTOP_OFFLINE_ITEM = Integer.parseInt(serviseSet.getProperty("MmotopOfflineId", "0"));
             MMOTOP_OFFLINE_COUNT = Integer.parseInt(serviseSet.getProperty("MmotopOfflineCount", "0"));
@@ -4500,7 +4707,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    MMOTOP_ONLINE_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    MMOTOP_ONLINE_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("services.cfg: MmotopOnlineRewards error: " + aug[0]);
@@ -4517,8 +4725,10 @@ public final class Config {
             EXPOSTA_NAME = serviseSet.getProperty("EpItemCoinName", "Coin Of Luck");
             //
             PC_CAFE_ENABLED = Boolean.parseBoolean(serviseSet.getProperty("PcCafeEnable", "False"));
-            PC_CAFE_INTERVAL = (int) TimeUnit.MINUTES.toMillis(Integer.parseInt(serviseSet.getProperty("PcCafeUpdateDelay", "60")));
-            //PC_CAFE_BONUS = Integer.parseInt(serviseSet.getProperty("PcCafeUpdateBonus", "60"));
+            PC_CAFE_INTERVAL = (int) TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(serviseSet.getProperty("PcCafeUpdateDelay", "60")));
+            // PC_CAFE_BONUS = Integer.parseInt(serviseSet.getProperty("PcCafeUpdateBonus",
+            // "60"));
             PC_CAFE_DOUBLE_CHANCE = Integer.parseInt(serviseSet.getProperty("PcCafeUpdateDoubleChance", "60"));
 
             propertySplit = serviseSet.getProperty("PcCafeUpdateBonus", "30,60").split(",");
@@ -4527,7 +4737,8 @@ public final class Config {
             CACHED_SERVER_STAT = Boolean.parseBoolean(serviseSet.getProperty("ServerStat", "False"));
             //
             QUED_ITEMS_ENABLE = Boolean.parseBoolean(serviseSet.getProperty("QuedItems", "False"));
-            QUED_ITEMS_INTERVAL = (int) TimeUnit.MINUTES.toMillis(Integer.parseInt(serviseSet.getProperty("QuedItemsInterval", "5")));
+            QUED_ITEMS_INTERVAL = (int) TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(serviseSet.getProperty("QuedItemsInterval", "5")));
             QUED_ITEMS_LOGTYPE = Integer.parseInt(serviseSet.getProperty("QuedItemsLog", "0"));
             //
             ALLOW_UNIQ_SKILLS = Boolean.parseBoolean(serviseSet.getProperty("AllowUniqSkills", "False"));
@@ -4610,7 +4821,7 @@ public final class Config {
             MPVP_ANC = Long.parseLong(eventsSettings.getProperty("AnnouncePeriod", "2"));
             MPVP_TP = Long.parseLong(eventsSettings.getProperty("Teleport", "5"));
             MPVP_PR = Long.parseLong(eventsSettings.getProperty("Buff", "60"));
-            //MPVP_WT;
+            // MPVP_WT;
             MPVP_MAX = Long.parseLong(eventsSettings.getProperty("Battle", "60"));
             MPVP_NEXT = Long.parseLong(eventsSettings.getProperty("Next", "24"));
             MPVP_MAXC = Integer.parseInt(eventsSettings.getProperty("Rounds", "5"));
@@ -4625,15 +4836,19 @@ public final class Config {
             TVT_NOBL = Boolean.valueOf(eventsSettings.getProperty("TvTOnlyNobless", "True"));
 
             String[] propertySplit = eventsSettings.getProperty("Npc", "116530,76141,-2730").split(",");
-            MPVP_NPCLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            MPVP_NPCLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]),
+                    Integer.parseInt(propertySplit[2]));
 
-            //propertySplit = eventsSettings.getProperty("Back", "116530,76141,-2730").split(",");
-            //MPVP_TPLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            // propertySplit = eventsSettings.getProperty("Back",
+            // "116530,76141,-2730").split(",");
+            // MPVP_TPLOC = new Location(Integer.parseInt(propertySplit[0]),
+            // Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
             propertySplit = eventsSettings.getProperty("Back", "116530,76141,-2730").split(";");
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    MPVP_TPLOC.add(new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    MPVP_TPLOC.add(
+                            new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("events.cfg: Back error: " + aug[0]);
@@ -4641,13 +4856,16 @@ public final class Config {
                 }
             }
 
-            //propertySplit = eventsSettings.getProperty("Cycle", "-92939,-251113,-3331").split(",");
-            //MPVP_CLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            // propertySplit = eventsSettings.getProperty("Cycle",
+            // "-92939,-251113,-3331").split(",");
+            // MPVP_CLOC = new Location(Integer.parseInt(propertySplit[0]),
+            // Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
             propertySplit = eventsSettings.getProperty("Cycle", "-92939,-251113,-3331").split(";");
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    MPVP_CLOC.add(new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    MPVP_CLOC.add(
+                            new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("events.cfg: Cycle error: " + aug[0]);
@@ -4655,34 +4873,46 @@ public final class Config {
                 }
             }
 
-            //propertySplit = eventsSettings.getProperty("Final", "-92939,-251113,-3331").split(",");
-            //MPVP_WLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
-            /*propertySplit = eventsSettings.getProperty("Final", "-92939,-251113,-3331").split(";");
-             for (String augs : propertySplit) {
-             String[] aug = augs.split(",");
-             try {
-             MPVP_WLOC.add(new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
-             } catch (NumberFormatException nfe) {
-             if (!aug[0].equals("")) {
-             System.out.println("events.cfg: Final error: " + aug[0]);
-             }
-             }
-             }*/
+            // propertySplit = eventsSettings.getProperty("Final",
+            // "-92939,-251113,-3331").split(",");
+            // MPVP_WLOC = new Location(Integer.parseInt(propertySplit[0]),
+            // Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            /*
+             * propertySplit = eventsSettings.getProperty("Final",
+             * "-92939,-251113,-3331").split(";");
+             * for (String augs : propertySplit) {
+             * String[] aug = augs.split(",");
+             * try {
+             * MPVP_WLOC.add(new Location(Integer.parseInt(aug[0]),
+             * Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+             * } catch (NumberFormatException nfe) {
+             * if (!aug[0].equals("")) {
+             * System.out.println("events.cfg: Final error: " + aug[0]);
+             * }
+             * }
+             * }
+             */
             TVT_EVENT_ENABLED = Boolean.parseBoolean(eventsSettings.getProperty("TvTEventEnabled", "false"));
             TVT_EVENT_INTERVAL = Integer.parseInt(eventsSettings.getProperty("TvTEventInterval", "18000"));
-            TVT_EVENT_PARTICIPATION_TIME = Integer.parseInt(eventsSettings.getProperty("TvTEventParticipationTime", "3600"));
+            TVT_EVENT_PARTICIPATION_TIME = Integer
+                    .parseInt(eventsSettings.getProperty("TvTEventParticipationTime", "3600"));
             TVT_EVENT_RUNNING_TIME = Integer.parseInt(eventsSettings.getProperty("TvTEventRunningTime", "1800"));
-            TVT_EVENT_PARTICIPATION_NPC_ID = Integer.parseInt(eventsSettings.getProperty("TvTEventParticipationNpcId", "0"));
+            TVT_EVENT_PARTICIPATION_NPC_ID = Integer
+                    .parseInt(eventsSettings.getProperty("TvTEventParticipationNpcId", "0"));
 
             if (TVT_EVENT_PARTICIPATION_NPC_ID == 0) {
                 TVT_EVENT_ENABLED = false;
-                System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventParticipationNpcId");
+                System.out.println(
+                        "TvTEventEngine[Config.load()]: invalid config property -> TvTEventParticipationNpcId");
             } else {
-                propertySplit = eventsSettings.getProperty("TvTEventParticipationNpcCoordinates", "83425,148585,-3406;83465,148485,-3406").split(";");
+                propertySplit = eventsSettings
+                        .getProperty("TvTEventParticipationNpcCoordinates", "83425,148585,-3406;83465,148485,-3406")
+                        .split(";");
                 for (String augs : propertySplit) {
                     String[] aug = augs.split(",");
                     try {
-                        TVT_EVENT_PARTICIPATION_NPC_COORDINATES.add(new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                        TVT_EVENT_PARTICIPATION_NPC_COORDINATES.add(new Location(Integer.parseInt(aug[0]),
+                                Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
                     } catch (NumberFormatException nfe) {
                         if (!aug[0].equals("")) {
                             System.out.println("events.cfg: TvTEventParticipationNpcCoordinates error: " + aug[0]);
@@ -4690,12 +4920,16 @@ public final class Config {
                     }
                 }
 
-                TVT_EVENT_MIN_PLAYERS_IN_TEAMS = Integer.parseInt(eventsSettings.getProperty("TvTEventMinPlayersInTeams", "1"));
-                TVT_EVENT_MAX_PLAYERS_IN_TEAMS = Integer.parseInt(eventsSettings.getProperty("TvTEventMaxPlayersInTeams", "20"));
+                TVT_EVENT_MIN_PLAYERS_IN_TEAMS = Integer
+                        .parseInt(eventsSettings.getProperty("TvTEventMinPlayersInTeams", "1"));
+                TVT_EVENT_MAX_PLAYERS_IN_TEAMS = Integer
+                        .parseInt(eventsSettings.getProperty("TvTEventMaxPlayersInTeams", "20"));
                 TVT_EVENT_MIN_LVL = (byte) Integer.parseInt(eventsSettings.getProperty("TvTEventMinPlayerLevel", "1"));
                 TVT_EVENT_MAX_LVL = (byte) Integer.parseInt(eventsSettings.getProperty("TvTEventMaxPlayerLevel", "80"));
-                TVT_EVENT_RESPAWN_TELEPORT_DELAY = Integer.parseInt(eventsSettings.getProperty("TvTEventRespawnTeleportDelay", "20"));
-                TVT_EVENT_START_LEAVE_TELEPORT_DELAY = Integer.parseInt(eventsSettings.getProperty("TvTEventStartLeaveTeleportDelay", "20"));
+                TVT_EVENT_RESPAWN_TELEPORT_DELAY = Integer
+                        .parseInt(eventsSettings.getProperty("TvTEventRespawnTeleportDelay", "20"));
+                TVT_EVENT_START_LEAVE_TELEPORT_DELAY = Integer
+                        .parseInt(eventsSettings.getProperty("TvTEventStartLeaveTeleportDelay", "20"));
 
                 TVT_HIDE_NAMES = Boolean.parseBoolean(eventsSettings.getProperty("TvtHideNames", "False"));
                 TVT_ALT_NAME = eventsSettings.getProperty("TvtForbidMagic", "False");
@@ -4705,7 +4939,8 @@ public final class Config {
                 for (String augs : propertySplit) {
                     String[] aug = augs.split(",");
                     try {
-                        TVT_EVENT_TEAM_1_COORDINATES.add(new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                        TVT_EVENT_TEAM_1_COORDINATES.add(new Location(Integer.parseInt(aug[0]),
+                                Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
                     } catch (NumberFormatException nfe) {
                         if (!aug[0].equals("")) {
                             System.out.println("events.cfg: TvTEventTeam1Coordinates error: " + aug[0]);
@@ -4718,7 +4953,8 @@ public final class Config {
                 for (String augs : propertySplit) {
                     String[] aug = augs.split(",");
                     try {
-                        TVT_EVENT_TEAM_2_COORDINATES.add(new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                        TVT_EVENT_TEAM_2_COORDINATES.add(new Location(Integer.parseInt(aug[0]),
+                                Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
                     } catch (NumberFormatException nfe) {
                         if (!aug[0].equals("")) {
                             System.out.println("events.cfg: TvTEventTeam1Coordinates error: " + aug[0]);
@@ -4730,7 +4966,8 @@ public final class Config {
                 for (String augs : propertySplit) {
                     String[] aug = augs.split(",");
                     try {
-                        TVT_RETURN_COORDINATES.add(new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                        TVT_RETURN_COORDINATES.add(new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                                Integer.parseInt(aug[2])));
                     } catch (NumberFormatException nfe) {
                         if (!aug[0].equals("")) {
                             System.out.println("events.cfg: TvTReturnCoordinates error: " + aug[0]);
@@ -4743,46 +4980,61 @@ public final class Config {
                     String[] rewardSplit = reward.split(",");
 
                     if (rewardSplit.length != 2) {
-                        System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventReward \"" + reward + "\"");
+                        System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventReward \""
+                                + reward + "\"");
                     } else {
                         try {
-                            TVT_EVENT_REWARDS.add(new int[]{Integer.valueOf(rewardSplit[0]), Integer.valueOf(rewardSplit[1])});
+                            TVT_EVENT_REWARDS.add(
+                                    new int[] { Integer.valueOf(rewardSplit[0]), Integer.valueOf(rewardSplit[1]) });
                         } catch (NumberFormatException nfe) {
                             if (!reward.equals("")) {
-                                System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventReward \"" + reward + "\"");
+                                System.out.println(
+                                        "TvTEventEngine[Config.load()]: invalid config property -> TvTEventReward \""
+                                                + reward + "\"");
                             }
                         }
                     }
                 }
 
-                TVT_EVENT_REWARDS_TOP_KILLS = Integer.parseInt(eventsSettings.getProperty("TvTEventRewardTopKills", "0"));
+                TVT_EVENT_REWARDS_TOP_KILLS = Integer
+                        .parseInt(eventsSettings.getProperty("TvTEventRewardTopKills", "0"));
                 propertySplit = eventsSettings.getProperty("TvTEventRewardTop", "57,100000").split(";");
                 for (String reward : propertySplit) {
                     String[] rewardSplit = reward.split(",");
 
                     if (rewardSplit.length != 2) {
-                        System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventRewardTop \"" + reward + "\"");
+                        System.out.println(
+                                "TvTEventEngine[Config.load()]: invalid config property -> TvTEventRewardTop \""
+                                        + reward + "\"");
                     } else {
                         try {
-                            TVT_EVENT_REWARDS_TOP.add(new int[]{Integer.valueOf(rewardSplit[0]), Integer.valueOf(rewardSplit[1])});
+                            TVT_EVENT_REWARDS_TOP.add(
+                                    new int[] { Integer.valueOf(rewardSplit[0]), Integer.valueOf(rewardSplit[1]) });
                         } catch (NumberFormatException nfe) {
                             if (!reward.equals("")) {
-                                System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventRewardTop \"" + reward + "\"");
+                                System.out.println(
+                                        "TvTEventEngine[Config.load()]: invalid config property -> TvTEventRewardTop \""
+                                                + reward + "\"");
                             }
                         }
                     }
                 }
 
-                TVT_EVENT_TARGET_TEAM_MEMBERS_ALLOWED = Boolean.parseBoolean(eventsSettings.getProperty("TvTEventTargetTeamMembersAllowed", "true"));
-                TVT_EVENT_POTIONS_ALLOWED = Boolean.parseBoolean(eventsSettings.getProperty("TvTEventPotionsAllowed", "false"));
-                TVT_EVENT_SUMMON_BY_ITEM_ALLOWED = Boolean.parseBoolean(eventsSettings.getProperty("TvTEventSummonByItemAllowed", "false"));
+                TVT_EVENT_TARGET_TEAM_MEMBERS_ALLOWED = Boolean
+                        .parseBoolean(eventsSettings.getProperty("TvTEventTargetTeamMembersAllowed", "true"));
+                TVT_EVENT_POTIONS_ALLOWED = Boolean
+                        .parseBoolean(eventsSettings.getProperty("TvTEventPotionsAllowed", "false"));
+                TVT_EVENT_SUMMON_BY_ITEM_ALLOWED = Boolean
+                        .parseBoolean(eventsSettings.getProperty("TvTEventSummonByItemAllowed", "false"));
                 propertySplit = eventsSettings.getProperty("TvTEventDoorsCloseOpenOnStartEnd", "").split(";");
                 for (String door : propertySplit) {
                     try {
                         TVT_EVENT_DOOR_IDS.add(Integer.valueOf(door));
                     } catch (NumberFormatException nfe) {
                         if (!door.equals("")) {
-                            System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventDoorsCloseOpenOnStartEnd \"" + door + "\"");
+                            System.out.println(
+                                    "TvTEventEngine[Config.load()]: invalid config property -> TvTEventDoorsCloseOpenOnStartEnd \""
+                                            + door + "\"");
                         }
                     }
                 }
@@ -4793,7 +5045,9 @@ public final class Config {
                         TVT_WHITE_POTINS.add(Integer.valueOf(potion));
                     } catch (NumberFormatException nfe) {
                         if (!potion.equals("")) {
-                            System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventAllowedPotionsList \"" + potion + "\"");
+                            System.out.println(
+                                    "TvTEventEngine[Config.load()]: invalid config property -> TvTEventAllowedPotionsList \""
+                                            + potion + "\"");
                         }
                     }
                 }
@@ -4804,7 +5058,8 @@ public final class Config {
             TVT_REWARD_TOP = Boolean.parseBoolean(eventsSettings.getProperty("TvTRewardTop", "False"));
             TVT_TEAM_PROTECT = Boolean.parseBoolean(eventsSettings.getProperty("TvTTeamProtect", "False"));
             TVT_NO_DEADS = Boolean.parseBoolean(eventsSettings.getProperty("TvTNoDeads", "False"));
-            TVT_TELE_PROTECT = (int) TimeUnit.SECONDS.toMillis(Integer.parseInt(eventsSettings.getProperty("TvTTeleProtect", "0")));
+            TVT_TELE_PROTECT = (int) TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(eventsSettings.getProperty("TvTTeleProtect", "0")));
 
             //
             ALLOW_SCH = Boolean.valueOf(eventsSettings.getProperty("AllowSchuttgart", "False"));
@@ -4845,7 +5100,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    OS_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    OS_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (aug.length > 0) {
                         System.out.println("events.cfg: OsRewards error: " + aug[0]);
@@ -4867,11 +5123,13 @@ public final class Config {
             ELH_NPCID = Integer.parseInt(eventsSettings.getProperty("LhRegNpcId", "55558"));
 
             propertySplit = eventsSettings.getProperty("LhRegNpcLoc", "83101,148396,-3407").split(",");
-            ELH_NPCLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            ELH_NPCLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]),
+                    Integer.parseInt(propertySplit[2]));
             ELH_NPCTOWN = eventsSettings.getProperty("LhRegNpcTown", "Гиране");
 
             propertySplit = eventsSettings.getProperty("LhBattleLoc", "83101,148396,-3407").split(",");
-            ELH_TPLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            ELH_TPLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]),
+                    Integer.parseInt(propertySplit[2]));
 
             ELH_TICKETID = Integer.parseInt(eventsSettings.getProperty("LhTicketId", "0"));
             ELH_TICKETCOUNT = Integer.parseInt(eventsSettings.getProperty("LhTicketCount", "0"));
@@ -4880,7 +5138,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    ELH_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    ELH_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (aug.length > 0) {
                         System.out.println("events.cfg: LhRewards error: " + aug[0]);
@@ -4912,18 +5171,21 @@ public final class Config {
 
             //
             ALLOW_XM_SPAWN = Boolean.parseBoolean(eventsSettings.getProperty("AllowChristmassEvent", "False"));
-            propertySplit = eventsSettings.getProperty("ChristmassDrop", "5556,3,10;5557,3,10;5558,3,10;5559,3,10").split(";");
+            propertySplit = eventsSettings.getProperty("ChristmassDrop", "5556,3,10;5557,3,10;5558,3,10;5559,3,10")
+                    .split(";");
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    XM_DROP.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    XM_DROP.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (aug.length > 0) {
                         System.out.println("events.cfg: ChristmassDrop error: " + aug[0]);
                     }
                 }
             }
-            XM_TREE_LIFE = TimeUnit.MINUTES.toMillis(Integer.parseInt(eventsSettings.getProperty("ChristmassTreeLife", "0")));
+            XM_TREE_LIFE = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(eventsSettings.getProperty("ChristmassTreeLife", "0")));
 
             //
             ALLOW_MEDAL_EVENT = Boolean.parseBoolean(eventsSettings.getProperty("AllowMedalsEvent", "False"));
@@ -4931,7 +5193,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    MEDAL_EVENT_DROP.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    MEDAL_EVENT_DROP.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("events.cfg: MedalsDrop error: " + aug[0]);
@@ -4954,12 +5217,15 @@ public final class Config {
             EBC_NPCID = Integer.parseInt(eventsSettings.getProperty("CbRegNpcId", "55558"));
 
             propertySplit = eventsSettings.getProperty("CbRegNpcLoc", "83101,148396,-3407").split(",");
-            EBC_NPCLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            EBC_NPCLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]),
+                    Integer.parseInt(propertySplit[2]));
 
             propertySplit = eventsSettings.getProperty("CbBase1Loc", "175732,-87983,-5107").split(",");
-            EBC_BASE1_LOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            EBC_BASE1_LOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]),
+                    Integer.parseInt(propertySplit[2]));
             propertySplit = eventsSettings.getProperty("CbBase2Loc", "175732,-87983,-5107").split(",");
-            EBC_BASE2_LOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            EBC_BASE2_LOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]),
+                    Integer.parseInt(propertySplit[2]));
 
             EBC_NPCTOWN = eventsSettings.getProperty("CbRegNpcTown", "Гиране");
 
@@ -4976,7 +5242,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    EBC_TPLOC1.add(new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    EBC_TPLOC1.add(
+                            new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("events.cfg: CbPlayersLoc1 error: " + aug[0]);
@@ -4987,7 +5254,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    EBC_TPLOC2.add(new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    EBC_TPLOC2.add(
+                            new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("events.cfg: CbPlayersLoc2 error: " + aug[0]);
@@ -4998,7 +5266,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    EBC_RETURN_COORDINATES.add(new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    EBC_RETURN_COORDINATES.add(
+                            new Location(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("events.cfg: CbReturnCoordinates error: " + aug[0]);
@@ -5013,7 +5282,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    EBC_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    EBC_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("additions.cfg: CbRewards error: " + aug[0]);
@@ -5036,11 +5306,13 @@ public final class Config {
             EENC_NPCID = Integer.parseInt(eventsSettings.getProperty("EncRegNpcId", "55558"));
 
             propertySplit = eventsSettings.getProperty("EncRegNpcLoc", "83101,148396,-3407").split(",");
-            EENC_NPCLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            EENC_NPCLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]),
+                    Integer.parseInt(propertySplit[2]));
             EENC_NPCTOWN = eventsSettings.getProperty("EncRegNpcTown", "Гиране");
 
             propertySplit = eventsSettings.getProperty("EncBattleLoc", "83101,148396,-3407").split(",");
-            EENC_TPLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            EENC_TPLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]),
+                    Integer.parseInt(propertySplit[2]));
 
             EENC_TICKETID = Integer.parseInt(eventsSettings.getProperty("EncTicketId", "0"));
             EENC_TICKETCOUNT = Integer.parseInt(eventsSettings.getProperty("EncTicketCount", "0"));
@@ -5049,7 +5321,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    EENC_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    EENC_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (aug.length > 0) {
                         System.out.println("events.cfg: EncRewards error: " + aug[0]);
@@ -5057,7 +5330,9 @@ public final class Config {
                 }
             }
 
-            propertySplit = eventsSettings.getProperty("EncItemPoints", "3433#83101,148396,-3407:83201,148296,-3407:83301,148196,-3407;4355#83101,148396,-3407:83201,148296,-3407:83301,148196,-3407").split(";");
+            propertySplit = eventsSettings.getProperty("EncItemPoints",
+                    "3433#83101,148396,-3407:83201,148296,-3407:83301,148196,-3407;4355#83101,148396,-3407:83201,148296,-3407:83301,148196,-3407")
+                    .split(";");
             for (String augs : propertySplit) {
                 String[] aug = augs.split("#");
                 int itemId = Integer.parseInt(aug[0]);
@@ -5066,9 +5341,10 @@ public final class Config {
                 for (String points : locs) {
                     String[] loc = points.split(",");
                     try {
-                        locfl.add(new Location(Integer.parseInt(loc[0]), Integer.parseInt(loc[1]), Integer.parseInt(loc[2])));
+                        locfl.add(new Location(Integer.parseInt(loc[0]), Integer.parseInt(loc[1]),
+                                Integer.parseInt(loc[2])));
                     } catch (NumberFormatException nfe) {
-                    	if (aug.length > 0) {
+                        if (aug.length > 0) {
                             System.out.println("events.cfg: EncItemPoints error: " + aug[0]);
                         }
                     }
@@ -5079,7 +5355,8 @@ public final class Config {
             ANARCHY_ENABLE = Boolean.parseBoolean(eventsSettings.getProperty("AnarchyEnable", "False"));
             ANARCHY_DAY = Integer.parseInt(eventsSettings.getProperty("AnarchyDay", "3")) + 1;
             ANARCHY_HOUR = Integer.parseInt(eventsSettings.getProperty("AnarchyHour", "12"));
-            ANARCHY_DELAY = TimeUnit.MINUTES.toMillis(Integer.parseInt(eventsSettings.getProperty("AnarchyDuration", "60")));
+            ANARCHY_DELAY = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(eventsSettings.getProperty("AnarchyDuration", "60")));
             String anarchy_towns = eventsSettings.getProperty("AnarchyProtectedTowns", "-1,-2");
             anarchy_towns += ",0";
             propertySplit = anarchy_towns.split(",");
@@ -5093,7 +5370,8 @@ public final class Config {
             FIGHTING_REGTIME = Integer.parseInt(eventsSettings.getProperty("FightingRegTime", "3"));
             FIGHTING_ANNDELAY = Integer.parseInt(eventsSettings.getProperty("AnarchyAnounceDelay", "3"));
             FIGHTING_TPDELAY = Integer.parseInt(eventsSettings.getProperty("AnarchyBattleDelay", "3"));
-            //FIGHTING_FIGHTDELAY = Integer.parseInt(eventsSettings.getProperty("AnarchyDay", "3")) + 1;
+            // FIGHTING_FIGHTDELAY =
+            // Integer.parseInt(eventsSettings.getProperty("AnarchyDay", "3")) + 1;
 
             FIGHTING_MINLVL = Integer.parseInt(eventsSettings.getProperty("FightingMinLevel", "70"));
             FIGHTING_MINP = Integer.parseInt(eventsSettings.getProperty("FightingMinPlayers", "10"));
@@ -5105,10 +5383,12 @@ public final class Config {
             FIGHTING_NPCID = Integer.parseInt(eventsSettings.getProperty("FightingNpcId", "4037"));
 
             propertySplit = eventsSettings.getProperty("FightingNpcLoc", "83101,148396,-3407").split(",");
-            FIGHTING_NPCLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            FIGHTING_NPCLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]),
+                    Integer.parseInt(propertySplit[2]));
 
             propertySplit = eventsSettings.getProperty("FightingBattleLoc", "83101,148396,-3407").split(",");
-            FIGHTING_TPLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            FIGHTING_TPLOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]),
+                    Integer.parseInt(propertySplit[2]));
 
             //
             EVENTS_SAME_IP = Boolean.valueOf(eventsSettings.getProperty("AllowEventsSameIp", "True"));
@@ -5213,12 +5493,14 @@ public final class Config {
             BE_RESTART = TimeUnit.MINUTES.toMillis(Integer.parseInt(eventsSettings.getProperty("BeggRestart", "60")));
             BE_NEXTTIME = TimeUnit.MINUTES.toMillis(Integer.parseInt(eventsSettings.getProperty("BeggNext", "60")));
             propertySplit = eventsSettings.getProperty("BeggLoc", "83101,148396,-3407").split(",");
-            BE_EGG_LOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            BE_EGG_LOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]),
+                    Integer.parseInt(propertySplit[2]));
             propertySplit = eventsSettings.getProperty("BeggRewards", "57,1,1;57,1,1").split(";");
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    BE_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    BE_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (aug.length > 0) {
                         System.out.println("events.cfg: BeggRewards error: " + aug[0]);
@@ -5275,7 +5557,8 @@ public final class Config {
 
                 String[] aug = augs.split(",");
                 try {
-                    GUILD_MOD_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    GUILD_MOD_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("events.cfg: GuildModRewards error: " + aug[0]);
@@ -5292,7 +5575,8 @@ public final class Config {
 
                 String[] aug = augs.split(",");
                 try {
-                    RUNE_SKILLS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    RUNE_SKILLS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (augs.equals("n,n,n")) {
                         System.out.println("events.cfg: RuneSkills error: " + aug[0]);
@@ -5319,7 +5603,8 @@ public final class Config {
 
                 String[] aug = augs.split(",");
                 try {
-                    EVENT_KILLSITEMS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    EVENT_KILLSITEMS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("events.cfg: OnKillRewards error: " + aug[0]);
@@ -5338,7 +5623,8 @@ public final class Config {
 
                 String[] aug = augs.split(",");
                 try {
-                    TVT_KILLSITEMS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    TVT_KILLSITEMS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("events.cfg: OnKillTvtItems error: " + aug[0]);
@@ -5357,7 +5643,8 @@ public final class Config {
 
                 String[] aug = augs.split(",");
                 try {
-                    MASSPVP_KILLSITEMS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    MASSPVP_KILLSITEMS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("events.cfg: OnKillMassPvpItems error: " + aug[0]);
@@ -5376,7 +5663,8 @@ public final class Config {
 
                 String[] aug = augs.split(",");
                 try {
-                    LASTHERO_KILLSITEMS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    LASTHERO_KILLSITEMS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("events.cfg: OnKillLastHeroItems error: " + aug[0]);
@@ -5395,7 +5683,8 @@ public final class Config {
 
                 String[] aug = augs.split(",");
                 try {
-                    CAPBASE_KILLSITEMS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    CAPBASE_KILLSITEMS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("events.cfg: OnKillBaseItems error: " + aug[0]);
@@ -5460,7 +5749,8 @@ public final class Config {
             PLAYER_RATE_DROP = Integer.parseInt(ratesSettings.getProperty("PlayerRateDrop", "5"));
             PLAYER_RATE_DROP_ITEM = Integer.parseInt(ratesSettings.getProperty("PlayerRateDropItem", "70"));
             PLAYER_RATE_DROP_EQUIP = Integer.parseInt(ratesSettings.getProperty("PlayerRateDropEquip", "25"));
-            PLAYER_RATE_DROP_EQUIP_WEAPON = Integer.parseInt(ratesSettings.getProperty("PlayerRateDropEquipWeapon", "5"));
+            PLAYER_RATE_DROP_EQUIP_WEAPON = Integer
+                    .parseInt(ratesSettings.getProperty("PlayerRateDropEquipWeapon", "5"));
 
             PET_XP_RATE = Float.parseFloat(ratesSettings.getProperty("PetXpRate", "1."));
             PET_FOOD_RATE = Integer.parseInt(ratesSettings.getProperty("PetFoodRate", "1"));
@@ -5470,7 +5760,8 @@ public final class Config {
             KARMA_RATE_DROP = Integer.parseInt(ratesSettings.getProperty("KarmaRateDrop", "70"));
             KARMA_RATE_DROP_ITEM = Integer.parseInt(ratesSettings.getProperty("KarmaRateDropItem", "50"));
             KARMA_RATE_DROP_EQUIP = Integer.parseInt(ratesSettings.getProperty("KarmaRateDropEquip", "40"));
-            KARMA_RATE_DROP_EQUIP_WEAPON = Integer.parseInt(ratesSettings.getProperty("KarmaRateDropEquipWeapon", "10"));
+            KARMA_RATE_DROP_EQUIP_WEAPON = Integer
+                    .parseInt(ratesSettings.getProperty("KarmaRateDropEquipWeapon", "10"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -5501,10 +5792,13 @@ public final class Config {
             ALT_GAME_CREATION_SPEED = Double.parseDouble(altSettings.getProperty("AltGameCreationSpeed", "1"));
             ALT_GAME_CREATION_XP_RATE = Double.parseDouble(altSettings.getProperty("AltGameCreationRateXp", "1"));
             ALT_GAME_CREATION_SP_RATE = Double.parseDouble(altSettings.getProperty("AltGameCreationRateSp", "1"));
-            ALT_BLACKSMITH_USE_RECIPES = Boolean.parseBoolean(altSettings.getProperty("AltBlacksmithUseRecipes", "true"));
+            ALT_BLACKSMITH_USE_RECIPES = Boolean
+                    .parseBoolean(altSettings.getProperty("AltBlacksmithUseRecipes", "true"));
             ALT_GAME_SKILL_LEARN = Boolean.parseBoolean(altSettings.getProperty("AltGameSkillLearn", "false"));
-            ALT_GAME_CANCEL_BOW = altSettings.getProperty("AltGameCancelByHit", "Cast").equalsIgnoreCase("bow") || altSettings.getProperty("AltGameCancelByHit", "Cast").equalsIgnoreCase("all");
-            ALT_GAME_CANCEL_CAST = altSettings.getProperty("AltGameCancelByHit", "Cast").equalsIgnoreCase("cast") || altSettings.getProperty("AltGameCancelByHit", "Cast").equalsIgnoreCase("all");
+            ALT_GAME_CANCEL_BOW = altSettings.getProperty("AltGameCancelByHit", "Cast").equalsIgnoreCase("bow")
+                    || altSettings.getProperty("AltGameCancelByHit", "Cast").equalsIgnoreCase("all");
+            ALT_GAME_CANCEL_CAST = altSettings.getProperty("AltGameCancelByHit", "Cast").equalsIgnoreCase("cast")
+                    || altSettings.getProperty("AltGameCancelByHit", "Cast").equalsIgnoreCase("all");
             ALT_GAME_SHIELD_BLOCKS = Boolean.parseBoolean(altSettings.getProperty("AltShieldBlocks", "false"));
             ALT_PERFECT_SHLD_BLOCK = Integer.parseInt(altSettings.getProperty("AltPerfectShieldBlockRate", "10"));
             ALT_GAME_DELEVEL = Boolean.parseBoolean(altSettings.getProperty("Delevel", "true"));
@@ -5523,18 +5817,25 @@ public final class Config {
             SP_BOOK_NEEDED = Boolean.parseBoolean(altSettings.getProperty("SpBookNeeded", "true"));
             ES_SP_BOOK_NEEDED = Boolean.parseBoolean(altSettings.getProperty("EnchantSkillSpBookNeeded", "true"));
             AUTO_LOOT_HERBS = altSettings.getProperty("AutoLootHerbs").equalsIgnoreCase("True");
-            ALT_GAME_KARMA_PLAYER_CAN_BE_KILLED_IN_PEACEZONE = Boolean.valueOf(altSettings.getProperty("AltKarmaPlayerCanBeKilledInPeaceZone", "false"));
+            ALT_GAME_KARMA_PLAYER_CAN_BE_KILLED_IN_PEACEZONE = Boolean
+                    .valueOf(altSettings.getProperty("AltKarmaPlayerCanBeKilledInPeaceZone", "false"));
             ALT_GAME_KARMA_PLAYER_CAN_SHOP = Boolean.valueOf(altSettings.getProperty("AltKarmaPlayerCanShop", "true"));
-            ALT_GAME_KARMA_PLAYER_CAN_USE_GK = Boolean.valueOf(altSettings.getProperty("AltKarmaPlayerCanUseGK", "false"));
-            ALT_GAME_KARMA_PLAYER_CAN_TELEPORT = Boolean.valueOf(altSettings.getProperty("AltKarmaPlayerCanTeleport", "true"));
-            ALT_GAME_KARMA_PLAYER_CAN_TRADE = Boolean.valueOf(altSettings.getProperty("AltKarmaPlayerCanTrade", "true"));
-            ALT_GAME_KARMA_PLAYER_CAN_USE_WAREHOUSE = Boolean.valueOf(altSettings.getProperty("AltKarmaPlayerCanUseWareHouse", "true"));
+            ALT_GAME_KARMA_PLAYER_CAN_USE_GK = Boolean
+                    .valueOf(altSettings.getProperty("AltKarmaPlayerCanUseGK", "false"));
+            ALT_GAME_KARMA_PLAYER_CAN_TELEPORT = Boolean
+                    .valueOf(altSettings.getProperty("AltKarmaPlayerCanTeleport", "true"));
+            ALT_GAME_KARMA_PLAYER_CAN_TRADE = Boolean
+                    .valueOf(altSettings.getProperty("AltKarmaPlayerCanTrade", "true"));
+            ALT_GAME_KARMA_PLAYER_CAN_USE_WAREHOUSE = Boolean
+                    .valueOf(altSettings.getProperty("AltKarmaPlayerCanUseWareHouse", "true"));
             ALT_GAME_FREE_TELEPORT = Integer.parseInt(altSettings.getProperty("AltFreeTeleporting", "0"));
             ALT_RECOMMEND = Boolean.parseBoolean(altSettings.getProperty("AltRecommend", "False"));
             ALT_PLAYER_PROTECTION_LEVEL = Integer.parseInt(altSettings.getProperty("AltPlayerProtectionLevel", "0"));
             ALT_GAME_VIEWNPC = Boolean.parseBoolean(altSettings.getProperty("AltGameViewNpc", "False"));
-            ALT_GAME_NEW_CHAR_ALWAYS_IS_NEWBIE = Boolean.parseBoolean(altSettings.getProperty("AltNewCharAlwaysIsNewbie", "False"));
-            ALT_MEMBERS_CAN_WITHDRAW_FROM_CLANWH = Boolean.parseBoolean(altSettings.getProperty("AltMembersCanWithdrawFromClanWH", "False"));
+            ALT_GAME_NEW_CHAR_ALWAYS_IS_NEWBIE = Boolean
+                    .parseBoolean(altSettings.getProperty("AltNewCharAlwaysIsNewbie", "False"));
+            ALT_MEMBERS_CAN_WITHDRAW_FROM_CLANWH = Boolean
+                    .parseBoolean(altSettings.getProperty("AltMembersCanWithdrawFromClanWH", "False"));
             ALT_MAX_NUM_OF_CLANS_IN_ALLY = Integer.parseInt(altSettings.getProperty("AltMaxNumOfClansInAlly", "3"));
             DWARF_RECIPE_LIMIT = Integer.parseInt(altSettings.getProperty("DwarfRecipeLimit", "50"));
             COMMON_RECIPE_LIMIT = Integer.parseInt(altSettings.getProperty("CommonRecipeLimit", "50"));
@@ -5543,10 +5844,14 @@ public final class Config {
             ALT_CLAN_JOIN_DAYS = Integer.parseInt(altSettings.getProperty("DaysBeforeJoinAClan", "5"));
             ALT_CLAN_CREATE_DAYS = Integer.parseInt(altSettings.getProperty("DaysBeforeCreateAClan", "10"));
             ALT_CLAN_DISSOLVE_DAYS = Integer.parseInt(altSettings.getProperty("DaysToPassToDissolveAClan", "7"));
-            ALT_ALLY_JOIN_DAYS_WHEN_LEAVED = Integer.parseInt(altSettings.getProperty("DaysBeforeJoinAllyWhenLeaved", "1"));
-            ALT_ALLY_JOIN_DAYS_WHEN_DISMISSED = Integer.parseInt(altSettings.getProperty("DaysBeforeJoinAllyWhenDismissed", "1"));
-            ALT_ACCEPT_CLAN_DAYS_WHEN_DISMISSED = Integer.parseInt(altSettings.getProperty("DaysBeforeAcceptNewClanWhenDismissed", "1"));
-            ALT_CREATE_ALLY_DAYS_WHEN_DISSOLVED = Integer.parseInt(altSettings.getProperty("DaysBeforeCreateNewAllyWhenDissolved", "10"));
+            ALT_ALLY_JOIN_DAYS_WHEN_LEAVED = Integer
+                    .parseInt(altSettings.getProperty("DaysBeforeJoinAllyWhenLeaved", "1"));
+            ALT_ALLY_JOIN_DAYS_WHEN_DISMISSED = Integer
+                    .parseInt(altSettings.getProperty("DaysBeforeJoinAllyWhenDismissed", "1"));
+            ALT_ACCEPT_CLAN_DAYS_WHEN_DISMISSED = Integer
+                    .parseInt(altSettings.getProperty("DaysBeforeAcceptNewClanWhenDismissed", "1"));
+            ALT_CREATE_ALLY_DAYS_WHEN_DISSOLVED = Integer
+                    .parseInt(altSettings.getProperty("DaysBeforeCreateNewAllyWhenDissolved", "10"));
             ALT_CLAN_REP_MUL = Float.parseFloat(altSettings.getProperty("AltClanReputationRate", "1.0"));
             ALT_CLAN_CREATE_LEVEL = Integer.parseInt(altSettings.getProperty("AltClanCreateLevel", "1"));
             ALT_CLAN_REP_WAR = Integer.parseInt(altSettings.getProperty("AltClanReputationKillBonus", "2"));
@@ -5612,7 +5917,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    ALT_HERO_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    ALT_HERO_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("altsettings.cfg: AltHeroRewards error: " + aug[0]);
@@ -5622,7 +5928,8 @@ public final class Config {
             OLY_ALT_REWARD = Boolean.parseBoolean(altSettings.getProperty("AltOlyRewardSystem", "false"));
             OLY_ALT_REWARD_TYPE = Integer.parseInt(altSettings.getProperty("AltOlyRewardType", "0"));
             propertySplit = altSettings.getProperty("AltOlyRewardItems", "1,2").split(",");
-            OLY_ALT_REWARD_ITEM = new EventReward(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), 0);
+            OLY_ALT_REWARD_ITEM = new EventReward(Integer.parseInt(propertySplit[0]),
+                    Integer.parseInt(propertySplit[1]), 0);
             OLY_ALT_REWARD_ITEM_NAME = altSettings.getProperty("AltOlyRewardName", "Coin Of Luck");
 
             //
@@ -5630,8 +5937,10 @@ public final class Config {
             ALT_MANOR_REFRESH_MIN = Integer.parseInt(altSettings.getProperty("AltManorRefreshMin", "00"));
             ALT_MANOR_APPROVE_TIME = Integer.parseInt(altSettings.getProperty("AltManorApproveTime", "6"));
             ALT_MANOR_APPROVE_MIN = Integer.parseInt(altSettings.getProperty("AltManorApproveMin", "00"));
-            ALT_MANOR_MAINTENANCE_PERIOD = Integer.parseInt(altSettings.getProperty("AltManorMaintenancePeriod", "360000"));
-            ALT_MANOR_SAVE_ALL_ACTIONS = Boolean.parseBoolean(altSettings.getProperty("AltManorSaveAllActions", "false"));
+            ALT_MANOR_MAINTENANCE_PERIOD = Integer
+                    .parseInt(altSettings.getProperty("AltManorMaintenancePeriod", "360000"));
+            ALT_MANOR_SAVE_ALL_ACTIONS = Boolean
+                    .parseBoolean(altSettings.getProperty("AltManorSaveAllActions", "false"));
             ALT_MANOR_SAVE_PERIOD_RATE = Integer.parseInt(altSettings.getProperty("AltManorSavePeriodRate", "2"));
 
             ALT_LOTTERY_PRIZE = Integer.parseInt(altSettings.getProperty("AltLotteryPrize", "50000"));
@@ -5639,7 +5948,8 @@ public final class Config {
             ALT_LOTTERY_5_NUMBER_RATE = Float.parseFloat(altSettings.getProperty("AltLottery5NumberRate", "0.6"));
             ALT_LOTTERY_4_NUMBER_RATE = Float.parseFloat(altSettings.getProperty("AltLottery4NumberRate", "0.2"));
             ALT_LOTTERY_3_NUMBER_RATE = Float.parseFloat(altSettings.getProperty("AltLottery3NumberRate", "0.2"));
-            ALT_LOTTERY_2_AND_1_NUMBER_PRIZE = Integer.parseInt(altSettings.getProperty("AltLottery2and1NumberPrize", "200"));
+            ALT_LOTTERY_2_AND_1_NUMBER_PRIZE = Integer
+                    .parseInt(altSettings.getProperty("AltLottery2and1NumberPrize", "200"));
 
             DISABLE_GRADE_PENALTY = Boolean.parseBoolean(altSettings.getProperty("DisableGradePenalty", "false"));
             DISABLE_WEIGHT_PENALTY = Boolean.parseBoolean(altSettings.getProperty("DisableWeightPenalty", "false"));
@@ -5698,7 +6008,8 @@ public final class Config {
             PROTECT_GATE_PVP = Boolean.parseBoolean(altSettings.getProperty("ProtectGatePvp", "False"));
             MAX_HENNA_BONUS = Integer.parseInt(altSettings.getProperty("MaxHennaBonus", "5"));
             ALT_ANY_SUBCLASS = Boolean.parseBoolean(altSettings.getProperty("AltAnySubClass", "False"));
-            ALT_ANY_SUBCLASS_OVERCRAF = Boolean.parseBoolean(altSettings.getProperty("AltAnySubClassOverCraft", "False"));
+            ALT_ANY_SUBCLASS_OVERCRAF = Boolean
+                    .parseBoolean(altSettings.getProperty("AltAnySubClassOverCraft", "False"));
             SUBS_3RD_PROFF = Boolean.parseBoolean(altSettings.getProperty("Subs3rdProff", "False"));
             ALT_SUBCLASS_PHOENIX = Boolean.parseBoolean(altSettings.getProperty("AltSubClassPhoenix", "False"));
             ALT_AUGMENT_HERO = Boolean.parseBoolean(altSettings.getProperty("AltAugmentHeroWeapons", "False"));
@@ -5719,7 +6030,8 @@ public final class Config {
             //
             SIEGE_GUARDS_SPAWN = Boolean.parseBoolean(altSettings.getProperty("SpawnSiegeGuards", "True"));
             //
-            TELEPORT_PROTECTION = TimeUnit.SECONDS.toMillis(Integer.parseInt(altSettings.getProperty("TeleportProtection", "0")));
+            TELEPORT_PROTECTION = TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(altSettings.getProperty("TeleportProtection", "0")));
             //
             MAX_MATKSPD_DELAY = Integer.parseInt(altSettings.getProperty("MaxMAtkDelay", "655350"));
             MAX_PATKSPD_DELAY = Integer.parseInt(altSettings.getProperty("MaxPAtkDelay", "655350"));
@@ -5733,7 +6045,8 @@ public final class Config {
             //
             DISABLE_CLAN_REQUREMENTS = Boolean.parseBoolean(altSettings.getProperty("FreeClanLevelUp5", "False"));
             //
-            MOUNT_EXPIRE = (int) TimeUnit.MINUTES.toMillis(Integer.parseInt(altSettings.getProperty("MountTime", "10")));
+            MOUNT_EXPIRE = (int) TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(altSettings.getProperty("MountTime", "10")));
             //
             OLY_RELOAD_SKILLS_BEGIN = Boolean.parseBoolean(altSettings.getProperty("OlyReloadSkillsArena", "True"));
             OLY_RELOAD_SKILLS_END = Boolean.parseBoolean(altSettings.getProperty("OlyReloadSkillsBack", "True"));
@@ -5772,7 +6085,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    ANNOUNCE_RAID_SPAWNS_TABLE.put(Integer.parseInt(aug[0]), TimeUnit.MINUTES.toMillis(Integer.parseInt(aug[1])));
+                    ANNOUNCE_RAID_SPAWNS_TABLE.put(Integer.parseInt(aug[0]),
+                            TimeUnit.MINUTES.toMillis(Integer.parseInt(aug[1])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("altsettings.cfg: RaidSpawnAnnounceTable error: " + aug[0]);
@@ -5780,19 +6094,19 @@ public final class Config {
                 }
             }
 
-            //кол-во чаров для апа клана
+            // кол-во чаров для апа клана
             CLAN_CHAR_LEVEL6 = Integer.parseInt(altSettings.getProperty("clancharlevel6", "30"));
             CLAN_CHAR_LEVEL7 = Integer.parseInt(altSettings.getProperty("clancharlevel7", "80"));
             CLAN_CHAR_LEVEL8 = Integer.parseInt(altSettings.getProperty("clancharlevel8", "120"));
 
-            //кол-во htgs для апа клана
+            // кол-во htgs для апа клана
             CLAN_REP_LEVEL6 = Integer.parseInt(altSettings.getProperty("clanreplevel6", "10000"));
             CLAN_REP_LEVEL7 = Integer.parseInt(altSettings.getProperty("clanreplevel7", "20000"));
             CLAN_REP_LEVEL8 = Integer.parseInt(altSettings.getProperty("clanreplevel8", "40000"));
 
-            //твт баф
+            // твт баф
             TVT_BUFF = Boolean.parseBoolean(altSettings.getProperty("tvtbuff", "False"));
-            //старт баф
+            // старт баф
             ON_BUFFS = Boolean.parseBoolean(altSettings.getProperty("StartBuff", "False"));
             ON_BUFFS_LVL = Integer.parseInt(altSettings.getProperty("StartBufflvl", "40"));
 
@@ -5871,7 +6185,8 @@ public final class Config {
             }
             //
             ALT_HENNA_SUB = Boolean.parseBoolean(altSettings.getProperty("AltHennaSub", "False"));
-            ALT_HENNA_OLY_EVENT_DISABLE = Boolean.parseBoolean(altSettings.getProperty("AltHennaOlyEventDisable", "False"));
+            ALT_HENNA_OLY_EVENT_DISABLE = Boolean
+                    .parseBoolean(altSettings.getProperty("AltHennaOlyEventDisable", "False"));
             //
             propertySplit = altSettings.getProperty("PetRentPrices", "1800,7200,720000,6480000").split(",");
             for (String npc_id : propertySplit) {
@@ -5904,8 +6219,10 @@ public final class Config {
             SevenSettings.load(is);
             is.close();
 
-            ALT_GAME_REQUIRE_CASTLE_DAWN = Boolean.parseBoolean(SevenSettings.getProperty("AltRequireCastleForDawn", "False"));
-            ALT_GAME_REQUIRE_CLAN_CASTLE = Boolean.parseBoolean(SevenSettings.getProperty("AltRequireClanCastle", "False"));
+            ALT_GAME_REQUIRE_CASTLE_DAWN = Boolean
+                    .parseBoolean(SevenSettings.getProperty("AltRequireCastleForDawn", "False"));
+            ALT_GAME_REQUIRE_CLAN_CASTLE = Boolean
+                    .parseBoolean(SevenSettings.getProperty("AltRequireClanCastle", "False"));
             ALT_FESTIVAL_MIN_PLAYER = Integer.parseInt(SevenSettings.getProperty("AltFestivalMinPlayer", "5"));
             ALT_MAXIMUM_PLAYER_CONTRIB = Integer.parseInt(SevenSettings.getProperty("AltMaxPlayerContrib", "1000000"));
             ALT_FESTIVAL_MANAGER_START = Long.parseLong(SevenSettings.getProperty("AltFestivalManagerStart", "120000"));
@@ -5929,10 +6246,12 @@ public final class Config {
             InputStream is = new FileInputStream(new File(CLANHALL_CONFIG_FILE));
             clanhallSettings.load(is);
             is.close();
-            CH_TELE_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallTeleportFunctionFeeRation", "86400000"));
+            CH_TELE_FEE_RATIO = Long
+                    .valueOf(clanhallSettings.getProperty("ClanHallTeleportFunctionFeeRation", "86400000"));
             CH_TELE1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallTeleportFunctionFeeLvl1", "86400000"));
             CH_TELE2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallTeleportFunctionFeeLvl2", "86400000"));
-            CH_SUPPORT_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallSupportFunctionFeeRation", "86400000"));
+            CH_SUPPORT_FEE_RATIO = Long
+                    .valueOf(clanhallSettings.getProperty("ClanHallSupportFunctionFeeRation", "86400000"));
             CH_SUPPORT1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallSupportFeeLvl1", "86400000"));
             CH_SUPPORT2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallSupportFeeLvl2", "86400000"));
             CH_SUPPORT3_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallSupportFeeLvl3", "86400000"));
@@ -5941,13 +6260,15 @@ public final class Config {
             CH_SUPPORT6_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallSupportFeeLvl6", "86400000"));
             CH_SUPPORT7_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallSupportFeeLvl7", "86400000"));
             CH_SUPPORT8_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallSupportFeeLvl8", "86400000"));
-            CH_MPREG_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallMpRegenerationFunctionFeeRation", "86400000"));
+            CH_MPREG_FEE_RATIO = Long
+                    .valueOf(clanhallSettings.getProperty("ClanHallMpRegenerationFunctionFeeRation", "86400000"));
             CH_MPREG1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallMpRegenerationFeeLvl1", "86400000"));
             CH_MPREG2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallMpRegenerationFeeLvl2", "86400000"));
             CH_MPREG3_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallMpRegenerationFeeLvl3", "86400000"));
             CH_MPREG4_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallMpRegenerationFeeLvl4", "86400000"));
             CH_MPREG5_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallMpRegenerationFeeLvl5", "86400000"));
-            CH_HPREG_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFunctionFeeRation", "86400000"));
+            CH_HPREG_FEE_RATIO = Long
+                    .valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFunctionFeeRation", "86400000"));
             CH_HPREG1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl1", "86400000"));
             CH_HPREG2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl2", "86400000"));
             CH_HPREG3_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl3", "86400000"));
@@ -5957,28 +6278,50 @@ public final class Config {
             CH_HPREG7_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl7", "86400000"));
             CH_HPREG8_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl8", "86400000"));
             CH_HPREG9_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl9", "86400000"));
-            CH_HPREG10_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl10", "86400000"));
-            CH_HPREG11_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl11", "86400000"));
-            CH_HPREG12_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl12", "86400000"));
-            CH_HPREG13_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl13", "86400000"));
-            CH_EXPREG_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFunctionFeeRation", "86400000"));
-            CH_EXPREG1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl1", "86400000"));
-            CH_EXPREG2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl2", "86400000"));
-            CH_EXPREG3_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl3", "86400000"));
-            CH_EXPREG4_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl4", "86400000"));
-            CH_EXPREG5_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl5", "86400000"));
-            CH_EXPREG6_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl6", "86400000"));
-            CH_EXPREG7_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl7", "86400000"));
-            CH_ITEM_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallItemCreationFunctionFeeRation", "86400000"));
-            CH_ITEM1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallItemCreationFunctionFeeLvl1", "86400000"));
-            CH_ITEM2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallItemCreationFunctionFeeLvl2", "86400000"));
-            CH_ITEM3_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallItemCreationFunctionFeeLvl3", "86400000"));
-            CH_CURTAIN_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallCurtainFunctionFeeRation", "86400000"));
-            CH_CURTAIN1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallCurtainFunctionFeeLvl1", "86400000"));
-            CH_CURTAIN2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallCurtainFunctionFeeLvl2", "86400000"));
-            CH_FRONT_FEE_RATIO = Long.valueOf(clanhallSettings.getProperty("ClanHallFrontPlatformFunctionFeeRation", "86400000"));
-            CH_FRONT1_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallFrontPlatformFunctionFeeLvl1", "86400000"));
-            CH_FRONT2_FEE = Integer.valueOf(clanhallSettings.getProperty("ClanHallFrontPlatformFunctionFeeLvl2", "86400000"));
+            CH_HPREG10_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl10", "86400000"));
+            CH_HPREG11_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl11", "86400000"));
+            CH_HPREG12_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl12", "86400000"));
+            CH_HPREG13_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallHpRegenerationFeeLvl13", "86400000"));
+            CH_EXPREG_FEE_RATIO = Long
+                    .valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFunctionFeeRation", "86400000"));
+            CH_EXPREG1_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl1", "86400000"));
+            CH_EXPREG2_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl2", "86400000"));
+            CH_EXPREG3_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl3", "86400000"));
+            CH_EXPREG4_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl4", "86400000"));
+            CH_EXPREG5_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl5", "86400000"));
+            CH_EXPREG6_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl6", "86400000"));
+            CH_EXPREG7_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallExpRegenerationFeeLvl7", "86400000"));
+            CH_ITEM_FEE_RATIO = Long
+                    .valueOf(clanhallSettings.getProperty("ClanHallItemCreationFunctionFeeRation", "86400000"));
+            CH_ITEM1_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallItemCreationFunctionFeeLvl1", "86400000"));
+            CH_ITEM2_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallItemCreationFunctionFeeLvl2", "86400000"));
+            CH_ITEM3_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallItemCreationFunctionFeeLvl3", "86400000"));
+            CH_CURTAIN_FEE_RATIO = Long
+                    .valueOf(clanhallSettings.getProperty("ClanHallCurtainFunctionFeeRation", "86400000"));
+            CH_CURTAIN1_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallCurtainFunctionFeeLvl1", "86400000"));
+            CH_CURTAIN2_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallCurtainFunctionFeeLvl2", "86400000"));
+            CH_FRONT_FEE_RATIO = Long
+                    .valueOf(clanhallSettings.getProperty("ClanHallFrontPlatformFunctionFeeRation", "86400000"));
+            CH_FRONT1_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallFrontPlatformFunctionFeeLvl1", "86400000"));
+            CH_FRONT2_FEE = Integer
+                    .valueOf(clanhallSettings.getProperty("ClanHallFrontPlatformFunctionFeeLvl2", "86400000"));
 
             CLANHALL_PAYMENT = Integer.valueOf(clanhallSettings.getProperty("ClanHallPaymentId", "57"));
             CLANHALL_FEE_ID = Integer.valueOf(clanhallSettings.getProperty("ClanHallFeeId", "57"));
@@ -6043,21 +6386,26 @@ public final class Config {
             L2JMOD_CHAMP_MAX_LVL_BLUE = Integer.parseInt(npc_conf.getProperty("ChampionMaxLevelBlue", "60"));
             L2JMOD_CHAMPION_HP_BLUE = Integer.parseInt(npc_conf.getProperty("ChampionHpBlue", "7"));
             L2JMOD_CHAMPION_HP_REGEN_BLUE = Float.parseFloat(npc_conf.getProperty("ChampionHpRegenBlue", "1."));
-            L2JMOD_CHAMPION_REWARDS_CHANCE_BLUE = Double.parseDouble(npc_conf.getProperty("ChampionRewardsChanceBlue", "2"));
-            L2JMOD_CHAMPION_REWARDS_COUNT_BLUE = Double.parseDouble(npc_conf.getProperty("ChampionRewardsCountBlue", "2"));
+            L2JMOD_CHAMPION_REWARDS_CHANCE_BLUE = Double
+                    .parseDouble(npc_conf.getProperty("ChampionRewardsChanceBlue", "2"));
+            L2JMOD_CHAMPION_REWARDS_COUNT_BLUE = Double
+                    .parseDouble(npc_conf.getProperty("ChampionRewardsCountBlue", "2"));
             L2JMOD_CHAMPION_REWARDS_EXP_BLUE = Double.parseDouble(npc_conf.getProperty("ChampionRewardsExpBlue", "2"));
             L2JMOD_CHAMPION_REWARDS_SP_BLUE = Double.parseDouble(npc_conf.getProperty("ChampionRewardsSpBlue", "2"));
-            L2JMOD_CHAMPION_ADENAS_REWARDS_BLUE = Double.parseDouble(npc_conf.getProperty("ChampionAdenasRewardsBlue", "1"));
+            L2JMOD_CHAMPION_ADENAS_REWARDS_BLUE = Double
+                    .parseDouble(npc_conf.getProperty("ChampionAdenasRewardsBlue", "1"));
             L2JMOD_CHAMPION_ATK_BLUE = Float.parseFloat(npc_conf.getProperty("ChampionAtkBlue", "1."));
             L2JMOD_CHAMPION_SPD_ATK_BLUE = Float.parseFloat(npc_conf.getProperty("ChampionSpdAtkBlue", "1."));
-            L2JMOD_CHAMPION_REWARD_BLUE = Boolean.parseBoolean(npc_conf.getProperty("ChampionRewardBonusBlue", "False"));
+            L2JMOD_CHAMPION_REWARD_BLUE = Boolean
+                    .parseBoolean(npc_conf.getProperty("ChampionRewardBonusBlue", "False"));
 
             RAID_CUSTOM_DROP = Boolean.parseBoolean(npc_conf.getProperty("AllowCustomRaidDrop", "False"));
             String[] propertySplit = npc_conf.getProperty("CustomRaidDrop", "57,1,100").split(";");
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    NPC_RAID_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    NPC_RAID_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (aug.length > 0) {
                         System.out.println("npc.cfg: CustomRaidDrop error: " + aug[0]);
@@ -6082,7 +6430,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    NPC_EPIC_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    NPC_EPIC_REWARDS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (aug.length > 0) {
                         System.out.println("npc.cfg: CustomEpicShadowDrop error: " + aug[0]);
@@ -6094,7 +6443,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    L2JMOD_CHAMPION_REWARD_LIST.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    L2JMOD_CHAMPION_REWARD_LIST.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (aug.length > 0) {
                         System.out.println("npc.cfg: ChampionRewardList error: " + aug[0]);
@@ -6106,7 +6456,8 @@ public final class Config {
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
-                    L2JMOD_CHAMPION_REWARD_LIST_BLUE.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    L2JMOD_CHAMPION_REWARD_LIST_BLUE.add(new EventReward(Integer.parseInt(aug[0]),
+                            Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (aug.length > 0) {
                         System.out.println("npc.cfg: ChampionRewardListBlue error: " + aug[0]);
@@ -6117,44 +6468,60 @@ public final class Config {
             RAID_CLANPOINTS_REWARD = Integer.parseInt(npc_conf.getProperty("BossClanPointsReward", "0"));
             EPIC_CLANPOINTS_REWARD = Integer.parseInt(npc_conf.getProperty("EpicClanPointsReward", "0"));
 
-            ANTARAS_CLOSE_PORT = TimeUnit.SECONDS.toMillis(Integer.parseInt(npc_conf.getProperty("AntharasClosePort", "30")));
-            ANTARAS_UPDATE_LAIR = TimeUnit.MINUTES.toMillis(Integer.parseInt(npc_conf.getProperty("AntharasUpdateLair", "10")));
+            ANTARAS_CLOSE_PORT = TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("AntharasClosePort", "30")));
+            ANTARAS_UPDATE_LAIR = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("AntharasUpdateLair", "10")));
             ANTARAS_MIN_RESPAWN = convertTime(npc_conf.getProperty("AntharasMinRespawn", "160"));
             ANTARAS_MAX_RESPAWN = convertTime(npc_conf.getProperty("AntharasMaxRespawn", "180"));
-            ANTARAS_RESTART_DELAY = TimeUnit.MINUTES.toMillis(Integer.parseInt(npc_conf.getProperty("AntharasRestartDelay", "5")));
-            ANTARAS_SPAWN_DELAY = TimeUnit.MINUTES.toMillis(Integer.parseInt(npc_conf.getProperty("AntharasSpawnDelay", "10")));
+            ANTARAS_RESTART_DELAY = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("AntharasRestartDelay", "5")));
+            ANTARAS_SPAWN_DELAY = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("AntharasSpawnDelay", "10")));
             // valik
-            VALAKAS_CLOSE_PORT = TimeUnit.SECONDS.toMillis(Integer.parseInt(npc_conf.getProperty("ValakasClosePort", "30")));
-            VALAKAS_UPDATE_LAIR = TimeUnit.MINUTES.toMillis(Integer.parseInt(npc_conf.getProperty("ValakasUpdateLair", "10")));
+            VALAKAS_CLOSE_PORT = TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("ValakasClosePort", "30")));
+            VALAKAS_UPDATE_LAIR = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("ValakasUpdateLair", "10")));
             VALAKAS_MIN_RESPAWN = convertTime(npc_conf.getProperty("ValakasMinRespawn", "160"));
             VALAKAS_MAX_RESPAWN = convertTime(npc_conf.getProperty("ValakasMaxRespawn", "180"));
-            VALAKAS_RESTART_DELAY = TimeUnit.MINUTES.toMillis(Integer.parseInt(npc_conf.getProperty("ValakasRestartDelay", "5")));
-            VALAKAS_SPAWN_DELAY = TimeUnit.MINUTES.toMillis(Integer.parseInt(npc_conf.getProperty("ValakasSpawnDelay", "10")));
+            VALAKAS_RESTART_DELAY = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("ValakasRestartDelay", "5")));
+            VALAKAS_SPAWN_DELAY = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("ValakasSpawnDelay", "10")));
             // baium
-            BAIUM_CLOSE_PORT = TimeUnit.SECONDS.toMillis(Integer.parseInt(npc_conf.getProperty("BaiumClosePort", "30")));
-            BAIUM_UPDATE_LAIR = TimeUnit.MINUTES.toMillis(Integer.parseInt(npc_conf.getProperty("BaiumUpdateLair", "2")));
+            BAIUM_CLOSE_PORT = TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("BaiumClosePort", "30")));
+            BAIUM_UPDATE_LAIR = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("BaiumUpdateLair", "2")));
             BAIUM_MIN_RESPAWN = convertTime(npc_conf.getProperty("BaiumMinRespawn", "110"));
             BAIUM_MAX_RESPAWN = convertTime(npc_conf.getProperty("BaiumMaxRespawn", "130"));
-            BAIUM_RESTART_DELAY = TimeUnit.MINUTES.toMillis(Integer.parseInt(npc_conf.getProperty("BaiumRestartDelay", "5")));
+            BAIUM_RESTART_DELAY = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("BaiumRestartDelay", "5")));
             // ant queen
             AQ_MIN_RESPAWN = convertTime(npc_conf.getProperty("AqMinRespawn", "22"));
             AQ_MAX_RESPAWN = convertTime(npc_conf.getProperty("AqMaxRespawn", "26"));
             AQ_RESTART_DELAY = TimeUnit.MINUTES.toMillis(Integer.parseInt(npc_conf.getProperty("AqRestartDelay", "5")));
             AQ_PLAYER_MAX_LVL = Integer.parseInt(npc_conf.getProperty("AqMaxPlayerLvl", "80"));
-            AQ_NURSE_RESPAWN = TimeUnit.SECONDS.toMillis(Integer.parseInt(npc_conf.getProperty("AqNurseRespawn", "15")));
+            AQ_NURSE_RESPAWN = TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("AqNurseRespawn", "15")));
             // zaken
             ZAKEN_MIN_RESPAWN = convertTime(npc_conf.getProperty("ZakenMinRespawn", "22"));
             ZAKEN_MAX_RESPAWN = convertTime(npc_conf.getProperty("ZakenMaxRespawn", "26"));
-            ZAKEN_RESTART_DELAY = TimeUnit.MINUTES.toMillis(Integer.parseInt(npc_conf.getProperty("ZakenRestartDelay", "5")));
+            ZAKEN_RESTART_DELAY = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("ZakenRestartDelay", "5")));
             ZAKEN_PLAYER_MAX_LVL = Integer.parseInt(npc_conf.getProperty("ZakenMaxPlayerLvl", "80"));
             // frinta
             FRINTA_MMIN_PARTIES = Integer.parseInt(npc_conf.getProperty("FrintMinPartys", "2"));
             FRINTA_MMIN_PLAYERS = Integer.parseInt(npc_conf.getProperty("FrintMinPartyPlayers", "9"));
-            FRINTA_UPDATE_LAIR = TimeUnit.MINUTES.toMillis(Integer.parseInt(npc_conf.getProperty("FrintUpdateLair", "30")));
+            FRINTA_UPDATE_LAIR = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("FrintUpdateLair", "30")));
             FRINTA_MIN_RESPAWN = convertTime(npc_conf.getProperty("FrintMinRespawn", "48"));
             FRINTA_MAX_RESPAWN = convertTime(npc_conf.getProperty("FrintMinRespawn", "52"));
-            FRINTA_RESTART_DELAY = TimeUnit.MINUTES.toMillis(Integer.parseInt(npc_conf.getProperty("FrintRestartDelay", "5")));
-            FRINTA_SPAWN_DELAY = TimeUnit.MINUTES.toMillis(Integer.parseInt(npc_conf.getProperty("FrintSpawnDelay", "5")));
+            FRINTA_RESTART_DELAY = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("FrintRestartDelay", "5")));
+            FRINTA_SPAWN_DELAY = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(npc_conf.getProperty("FrintSpawnDelay", "5")));
 
             //
             ALLOW_HIT_NPC = Boolean.parseBoolean(npc_conf.getProperty("AllowHitNpc", "True"));
@@ -6170,7 +6537,8 @@ public final class Config {
                 NPC_HIT_PROTECTET.add(Integer.parseInt(npc_id));
             }
             propertySplit = npc_conf.getProperty("HitNpcLocation", "0,0,0").split(",");
-            NPC_HIT_LOCATION = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            NPC_HIT_LOCATION = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]),
+                    Integer.parseInt(propertySplit[2]));
             //
             MOB_PVP_FLAG = Boolean.parseBoolean(npc_conf.getProperty("MobPvpFlag", "False"));
             MOB_PVP_FLAG_CONUT = Integer.parseInt(npc_conf.getProperty("MobPvpFlagCount", "0"));
@@ -6184,7 +6552,7 @@ public final class Config {
             RB_CLANREP = Boolean.parseBoolean(npc_conf.getProperty("rbcrp", "False"));
             RB_CLANREP_CONUT = Integer.parseInt(npc_conf.getProperty("crpcount", "0"));
             if (RB_CLANREP) {
-                    RB_CLANREP_ID = Integer.parseInt(npc_conf.getProperty("crprbid", "0"));
+                RB_CLANREP_ID = Integer.parseInt(npc_conf.getProperty("crprbid", "0"));
 
             }
 
@@ -6204,7 +6572,8 @@ public final class Config {
             FORBID_RAID_BOSS_HEAL = Boolean.parseBoolean(npc_conf.getProperty("AllowRaidBossHeal", "True"));
             //
             propertySplit = npc_conf.getProperty("ZakenSpawnLoc", "55256,219114,-3224").split(",");
-            ZAKEN_SPAWN_LOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]), Integer.parseInt(propertySplit[2]));
+            ZAKEN_SPAWN_LOC = new Location(Integer.parseInt(propertySplit[0]), Integer.parseInt(propertySplit[1]),
+                    Integer.parseInt(propertySplit[2]));
             //
             PROTECT_MOBS_ITEMS = Boolean.parseBoolean(npc_conf.getProperty("PlayerPenaltyItems", "False"));
             //
@@ -6247,7 +6616,8 @@ public final class Config {
                 }
             }
             //
-            propertySplit = npc_conf.getProperty("EpicJewerlyChances", "6660,100;6657,100;6658,100;6656,100;6662,100;6661,100;6659,100;8191,100").split(";");
+            propertySplit = npc_conf.getProperty("EpicJewerlyChances",
+                    "6660,100;6657,100;6658,100;6656,100;6662,100;6661,100;6659,100;8191,100").split(";");
             for (String augs : propertySplit) {
                 String[] aug = augs.split(",");
                 try {
@@ -6261,7 +6631,8 @@ public final class Config {
             //
             BOSS_ZONE_LOGOUT = Boolean.parseBoolean(npc_conf.getProperty("BossZoneLogout", "True"));
             //
-            propertySplit = npc_conf.getProperty("ForbidNpcHello", "30675,30761,30762,30763,31074,31665,31752").split(",");
+            propertySplit = npc_conf.getProperty("ForbidNpcHello", "30675,30761,30762,30763,31074,31665,31752")
+                    .split(",");
             for (String itemid : propertySplit) {
                 try {
                     FORBID_NPC_HELLO.add(Integer.valueOf(itemid));
@@ -6333,7 +6704,9 @@ public final class Config {
 
             ALLOW_HERO_SUBSKILL = Boolean.parseBoolean(customSettings.getProperty("CustomHeroSubSkill", "False"));
             SUB_START_LVL = Byte.parseByte(customSettings.getProperty("SubStartLvl", "40"));
-
+            MULTILANG_ENABLE = Boolean.parseBoolean(customSettings.getProperty("MultilangEnable", "False"));
+            MULTILANG_DEFAULT = customSettings.getProperty("MultilangDefault", "ru");
+            MULTILANG_ALLOWED = Arrays.asList(customSettings.getProperty("MultilangAllowed", "ru").split(","));
             RUN_SPD_BOOST = Integer.parseInt(customSettings.getProperty("RunSpeedBoost", "0"));
             MAX_RUN_SPEED = Integer.parseInt(customSettings.getProperty("MaxRunSpeed", "250"));
             MAX_PCRIT_RATE = Integer.parseInt(customSettings.getProperty("MaxPCritRate", "500"));
@@ -6357,13 +6730,16 @@ public final class Config {
                 loadChatFilter();
             }
 
-            ALT_GAME_NEW_CHAR_ALWAYS_IS_NOBLE = Boolean.parseBoolean(customSettings.getProperty("AltNewCharAlwaysIsNoble", "False"));
+            ALT_GAME_NEW_CHAR_ALWAYS_IS_NOBLE = Boolean
+                    .parseBoolean(customSettings.getProperty("AltNewCharAlwaysIsNoble", "False"));
             ALT_START_LEVEL = Integer.parseInt(customSettings.getProperty("AltStartedLevel", "0"));
             ALT_START_SP = Integer.parseInt(customSettings.getProperty("AltStartedSP", "0"));
-            ALT_ALLOW_AUGMENT_ON_OLYMP = Boolean.parseBoolean(customSettings.getProperty("AllowAugmnetOlympiad", "True"));
+            ALT_ALLOW_AUGMENT_ON_OLYMP = Boolean
+                    .parseBoolean(customSettings.getProperty("AllowAugmnetOlympiad", "True"));
             ALT_ALLOW_AUC = Boolean.parseBoolean(customSettings.getProperty("AllowAuction", "True"));
 
-            ALT_GAME_SUBCLASS_WITHOUT_QUESTS = Boolean.parseBoolean(customSettings.getProperty("AltSubClassWithoutQuests", "False"));
+            ALT_GAME_SUBCLASS_WITHOUT_QUESTS = Boolean
+                    .parseBoolean(customSettings.getProperty("AltSubClassWithoutQuests", "False"));
 
             AUTO_LEARN_SKILLS = Boolean.parseBoolean(customSettings.getProperty("AutoLearnSkills", "false"));
 
@@ -6404,14 +6780,17 @@ public final class Config {
             BLOW_DAMAGE_ROBE = Double.parseDouble(customSettings.getProperty("BlowDamageRobe", "1"));
 
             SONLINE_ANNOUNE = Boolean.parseBoolean(customSettings.getProperty("AnnounceOnline", "False"));
-            SONLINE_ANNOUNCE_DELAY = (int) TimeUnit.MINUTES.toMillis(Integer.parseInt(customSettings.getProperty("AnnounceDelay", "10")));
+            SONLINE_ANNOUNCE_DELAY = (int) TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(customSettings.getProperty("AnnounceDelay", "10")));
             SONLINE_SHOW_MAXONLINE = Boolean.parseBoolean(customSettings.getProperty("ShowMaxOnline", "False"));
-            SONLINE_SHOW_MAXONLINE_DATE = Boolean.parseBoolean(customSettings.getProperty("ShowMaxOnlineDate", "False"));
+            SONLINE_SHOW_MAXONLINE_DATE = Boolean
+                    .parseBoolean(customSettings.getProperty("ShowMaxOnlineDate", "False"));
             SONLINE_SHOW_OFFLINE = Boolean.parseBoolean(customSettings.getProperty("ShowOfflineTraders", "False"));
             SONLINE_LOGIN_ONLINE = Boolean.parseBoolean(customSettings.getProperty("AnnounceOnLogin", "False"));
             SONLINE_LOGIN_MAX = Boolean.parseBoolean(customSettings.getProperty("ShowLoginMaxOnline", "False"));
             SONLINE_LOGIN_DATE = Boolean.parseBoolean(customSettings.getProperty("ShowLoginMaxOnlineDate", "False"));
-            SONLINE_LOGIN_OFFLINE = Boolean.parseBoolean(customSettings.getProperty("ShowLoginOfflineTraders", "False"));
+            SONLINE_LOGIN_OFFLINE = Boolean
+                    .parseBoolean(customSettings.getProperty("ShowLoginOfflineTraders", "False"));
 
             ALTCLASS_MANAGER = Boolean.parseBoolean(customSettings.getProperty("startclass", "False"));
 
@@ -6429,7 +6808,8 @@ public final class Config {
             FORBIDDEN_EVENT_ITMES = Boolean.parseBoolean(customSettings.getProperty("ForbiddenOnEvents", "False"));
 
             INVIS_SHOW = Boolean.parseBoolean(customSettings.getProperty("BroadcastInvis", "True"));
-            CLAN_CH_CLEAN = TimeUnit.DAYS.toMillis(Integer.parseInt(customSettings.getProperty("ClanHallFreeAfter", "7")));
+            CLAN_CH_CLEAN = TimeUnit.DAYS
+                    .toMillis(Integer.parseInt(customSettings.getProperty("ClanHallFreeAfter", "7")));
             CHECK_SKILLS = Boolean.parseBoolean(customSettings.getProperty("CheckSkills", "True"));
             //
             String tickets = customSettings.getProperty("MultisellTickets", "");
@@ -6438,7 +6818,8 @@ public final class Config {
                 for (String augs : propertySplit) {
                     String[] aug = augs.split(",");
                     try {
-                        MULTVIP_CARDS.put(Integer.valueOf(aug[0]), new EventReward(Integer.valueOf(aug[1]), Integer.valueOf(aug[2]), 0));
+                        MULTVIP_CARDS.put(Integer.valueOf(aug[0]),
+                                new EventReward(Integer.valueOf(aug[1]), Integer.valueOf(aug[2]), 0));
                     } catch (NumberFormatException nfe) {
                         if (aug.length > 0) {
                             System.out.println("custom.cfg: MultisellTickets error: " + aug[0]);
@@ -6450,7 +6831,8 @@ public final class Config {
             ALLOW_APELLA_BONUSES = Boolean.parseBoolean(customSettings.getProperty("AllowApellaPassives", "True"));
             SHOW_ENTER_WARNINGS = Boolean.parseBoolean(customSettings.getProperty("ShowLoginWarnings", "False"));
             //
-            CASTLE_SIEGE_REWARD_STATIC = Boolean.parseBoolean(customSettings.getProperty("CastleSiegeRewardsStatic", "False"));
+            CASTLE_SIEGE_REWARD_STATIC = Boolean
+                    .parseBoolean(customSettings.getProperty("CastleSiegeRewardsStatic", "False"));
             propertySplit = customSettings.getProperty("CastleSiegeRewards", "").split(";");
             for (String augs : propertySplit) {
                 if (augs.equals("")) {
@@ -6464,9 +6846,10 @@ public final class Config {
                 for (String points : locs) {
                     String[] loc = points.split(",");
                     try {
-                        locfl.add(new EventReward(Integer.parseInt(loc[0]), Integer.parseInt(loc[1]), Integer.parseInt(loc[2])));
+                        locfl.add(new EventReward(Integer.parseInt(loc[0]), Integer.parseInt(loc[1]),
+                                Integer.parseInt(loc[2])));
                     } catch (NumberFormatException nfe) {
-                    	if (aug.length > 0) {
+                        if (aug.length > 0) {
                             System.out.println("custom.cfg: CastleSiegeRewards error: " + aug[0]);
                         }
                     }
@@ -6487,9 +6870,10 @@ public final class Config {
                 for (String points : locs) {
                     String[] loc = points.split(",");
                     try {
-                        locfl.add(new EventReward(Integer.parseInt(loc[0]), Integer.parseInt(loc[1]), Integer.parseInt(loc[2])));
+                        locfl.add(new EventReward(Integer.parseInt(loc[0]), Integer.parseInt(loc[1]),
+                                Integer.parseInt(loc[2])));
                     } catch (NumberFormatException nfe) {
-                    	if (aug.length > 0) {
+                        if (aug.length > 0) {
                             System.out.println("custom.cfg: CastleProtectRewards error: " + aug[0]);
                         }
                     }
@@ -6497,7 +6881,8 @@ public final class Config {
                 CASTLE_RPOTECT_REWARDS.put(castleId, locfl);
             }
             //
-            CASTLE_SIEGE_SKILLS_DELETE = Boolean.parseBoolean(customSettings.getProperty("CastleSiegeSkillDelete", "False"));
+            CASTLE_SIEGE_SKILLS_DELETE = Boolean
+                    .parseBoolean(customSettings.getProperty("CastleSiegeSkillDelete", "False"));
             String cssr = customSettings.getProperty("CastleSiegeSkillRewards", "Off");
             if (!cssr.equalsIgnoreCase("Off")) {
                 propertySplit = cssr.split(";");
@@ -6510,9 +6895,10 @@ public final class Config {
                     int castleId = Integer.parseInt(aug[0]);
                     String[] locs = aug[1].split(",");
                     try {
-                        CASTLE_SIEGE_SKILLS.put(castleId, new EventReward(Integer.parseInt(locs[0]), Integer.parseInt(locs[1]), 0));
+                        CASTLE_SIEGE_SKILLS.put(castleId,
+                                new EventReward(Integer.parseInt(locs[0]), Integer.parseInt(locs[1]), 0));
                     } catch (NumberFormatException nfe) {
-                    	if (aug.length > 0) {
+                        if (aug.length > 0) {
                             System.out.println("custom.cfg: CastleSiegeSkillRewards error: " + aug[0]);
                         }
                     }
@@ -6521,7 +6907,8 @@ public final class Config {
             }
             //
             ALT_BUFF_TIMEMUL = Integer.parseInt(customSettings.getProperty("BuffTimeMul", "0"));
-            propertySplit = customSettings.getProperty("BuffTimeTable", "").split(";"); // AltBuffTimeTable = 12#1204,112;36#1040,1243;45#1005
+            propertySplit = customSettings.getProperty("BuffTimeTable", "").split(";"); // AltBuffTimeTable =
+                                                                                        // 12#1204,112;36#1040,1243;45#1005
             for (String augs : propertySplit) {
                 if (augs.equals("")) {
                     continue;
@@ -6800,7 +7187,8 @@ public final class Config {
             //
             STARTUP_TITLE = customSettings.getProperty("StartUpTitle", "off");
             //
-            PICKUP_PENALTY = TimeUnit.SECONDS.toMillis(Integer.parseInt(customSettings.getProperty("PickUpPenalty", "15")));
+            PICKUP_PENALTY = TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(customSettings.getProperty("PickUpPenalty", "15")));
             //
             SKILLS_CHANCE_MIN = Double.parseDouble(customSettings.getProperty("SkillsChanceMin", "5.0d"));
             SKILLS_CHANCE_MAX = Double.parseDouble(customSettings.getProperty("SkillsChanceMax", "95.0d"));
@@ -6814,7 +7202,8 @@ public final class Config {
             PROTECT_SAY = Boolean.parseBoolean(customSettings.getProperty("ChatFloodFilter", "False"));
             PROTECT_SAY_COUNT = Integer.parseInt(customSettings.getProperty("ChatFloodFilterCount", "5"));
             PROTECT_SAY_BAN = Integer.parseInt(customSettings.getProperty("ChatFloodFilterBan", "5")) * 60;
-            PROTECT_SAY_INTERVAL = TimeUnit.SECONDS.toMillis(Integer.parseInt(customSettings.getProperty("ChatFloodFilterInterval", "10")));
+            PROTECT_SAY_INTERVAL = TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(customSettings.getProperty("ChatFloodFilterInterval", "10")));
             //
             MIRAGE_CHANCE = Integer.parseInt(customSettings.getProperty("MirageChanse", "50"));
             //
@@ -6897,8 +7286,10 @@ public final class Config {
             KARMA_PK_LIMIT = Integer.parseInt(pvpSettings.getProperty("MinimumPKRequiredToDrop", "5"));
             KARMA_PK_NPC_DROP = Boolean.parseBoolean(pvpSettings.getProperty("DropKilledByNpc", "True"));
 
-            KARMA_NONDROPPABLE_PET_ITEMS = pvpSettings.getProperty("ListOfPetItems", "2375,3500,3501,3502,4422,4423,4424,4425,6648,6649,6650");
-            KARMA_NONDROPPABLE_ITEMS = pvpSettings.getProperty("ListOfNonDroppableItems", "57,1147,425,1146,461,10,2368,7,6,2370,2369,6842,6611,6612,6613,6614,6615,6616,6617,6618,6619,6620,6621");
+            KARMA_NONDROPPABLE_PET_ITEMS = pvpSettings.getProperty("ListOfPetItems",
+                    "2375,3500,3501,3502,4422,4423,4424,4425,6648,6649,6650");
+            KARMA_NONDROPPABLE_ITEMS = pvpSettings.getProperty("ListOfNonDroppableItems",
+                    "57,1147,425,1146,461,10,2368,7,6,2370,2369,6842,6611,6612,6613,6614,6615,6616,6617,6618,6619,6620,6621");
 
             KARMA_LIST_NONDROPPABLE_PET_ITEMS = new FastList<Integer>();
             for (String id : KARMA_NONDROPPABLE_PET_ITEMS.split(",")) {
@@ -6955,7 +7346,8 @@ public final class Config {
 
                 String[] aug = augs.split(",");
                 try {
-                    PVPPK_PVPITEMS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    PVPPK_PVPITEMS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("pvp.cfg: PvpExpSp error: " + aug[0]);
@@ -6970,7 +7362,8 @@ public final class Config {
 
                 String[] aug = augs.split(",");
                 try {
-                    PVPPK_PKITEMS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                    PVPPK_PKITEMS.add(new EventReward(Integer.parseInt(aug[0]), Integer.parseInt(aug[1]),
+                            Integer.parseInt(aug[2])));
                 } catch (NumberFormatException nfe) {
                     if (!aug[0].equals("")) {
                         System.out.println("pvp.cfg: PvpExpSp error: " + aug[0]);
@@ -6987,7 +7380,8 @@ public final class Config {
                 for (String augs : propertySplit) {
                     String[] aug = augs.split(",");
                     try {
-                        PVPBONUS_ITEMS.put(Integer.parseInt(aug[0]), new PvpColor(Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
+                        PVPBONUS_ITEMS.put(Integer.parseInt(aug[0]),
+                                new PvpColor(Integer.parseInt(aug[1]), Integer.parseInt(aug[2])));
                     } catch (NumberFormatException nfe) {
                         if (!aug[0].equals("")) {
                             System.out.println("pvp.cfg: PvpBonusStepsRewards error: " + aug[0]);
@@ -7035,12 +7429,14 @@ public final class Config {
                 for (String augs : propertySplit) {
                     String[] aug = augs.split(",");
                     try {
-                        //10-20,Новичек,8001,1
+                        // 10-20,Новичек,8001,1
                         String[] minmax = aug[0].split("-");
                         int min = Integer.parseInt(minmax[0]);
                         int max = Integer.parseInt(minmax[1]);
-                        //PVPBONUS_TITLE.add(new PvpColor(aug[1], Integer.parseInt(aug[2]), Integer.parseInt(aug[3])));
-                        PVPBONUS_TITLE.add(new PvpTitleBonus(aug[1], min, max, Integer.parseInt(aug[2]), Integer.parseInt(aug[3])));
+                        // PVPBONUS_TITLE.add(new PvpColor(aug[1], Integer.parseInt(aug[2]),
+                        // Integer.parseInt(aug[3])));
+                        PVPBONUS_TITLE.add(new PvpTitleBonus(aug[1], min, max, Integer.parseInt(aug[2]),
+                                Integer.parseInt(aug[3])));
                     } catch (NumberFormatException nfe) {
                         if (!aug[0].equals("")) {
                             System.out.println("pvp.cfg: PvpBonusStepsRewards error: " + aug[0]);
@@ -7129,7 +7525,7 @@ public final class Config {
             cmd.load(is);
             is.close();
 
-            //.menu
+            // .menu
             CMD_MENU = Boolean.parseBoolean(cmd.getProperty("AllowMenu", "False"));
             VS_NOEXP = Boolean.parseBoolean(cmd.getProperty("NoExp", "False"));
             VS_NOREQ = Boolean.parseBoolean(cmd.getProperty("NoRequests", "False"));
@@ -7147,7 +7543,7 @@ public final class Config {
             VS_PATHFIND_VAL = Integer.parseInt(cmd.getProperty("GeoPathFindingDefault", "0"));
             VS_SKILL_CHANCES_VAL = Integer.parseInt(cmd.getProperty("SkillChancesDefault", "0"));
 
-            //.security
+            // .security
             VS_HWID = Boolean.parseBoolean(cmd.getProperty("HWID", "False"));
             VS_PWD = Boolean.parseBoolean(cmd.getProperty("Password", "False"));
             VS_EMAIL = Boolean.parseBoolean(cmd.getProperty("Email", "False"));
@@ -7163,9 +7559,11 @@ public final class Config {
 
             CMD_ADENA_COL = Boolean.parseBoolean(cmd.getProperty("CmdAdenaCol", "False"));
             String[] pSplit = cmd.getProperty("AdenaToCol", "4037,1,2000000000").split(",");
-            CMD_AC_ADENA = new EventReward(Integer.parseInt(pSplit[0]), Integer.parseInt(pSplit[1]), Integer.parseInt(pSplit[2]));
+            CMD_AC_ADENA = new EventReward(Integer.parseInt(pSplit[0]), Integer.parseInt(pSplit[1]),
+                    Integer.parseInt(pSplit[2]));
             pSplit = cmd.getProperty("ColToAdena", "57,1700000000,1").split(",");
-            CMD_AC_COL = new EventReward(Integer.parseInt(pSplit[0]), Integer.parseInt(pSplit[1]), Integer.parseInt(pSplit[2]));
+            CMD_AC_COL = new EventReward(Integer.parseInt(pSplit[0]), Integer.parseInt(pSplit[1]),
+                    Integer.parseInt(pSplit[2]));
             pSplit = null;
             CMD_AC_ADENA_LIMIT = Integer.parseInt(cmd.getProperty("AdenaToColLimit", "0"));
             CMD_AC_COL_LIMIT = Integer.parseInt(cmd.getProperty("ColToAdenaLimit", "0"));
@@ -7240,16 +7638,24 @@ public final class Config {
             ALLOW_FAKE_PLAYERS_PLUS = Boolean.parseBoolean(fake.getProperty("AllowFake", "False"));
 
             FAKE_PLAYERS_PLUS_COUNT_FIRST = Integer.parseInt(fake.getProperty("FirstCount", "50"));
-            FAKE_PLAYERS_PLUS_DELAY_FIRST = TimeUnit.MINUTES.toMillis(Integer.parseInt(fake.getProperty("FirstDelay", "5")));
-            FAKE_PLAYERS_PLUS_DESPAWN_FIRST = TimeUnit.MINUTES.toMillis(Integer.parseInt(fake.getProperty("FirstDespawn", "60")));
-            FAKE_PLAYERS_PLUS_DELAY_SPAWN_FIRST = (int) TimeUnit.SECONDS.toMillis(Integer.parseInt(fake.getProperty("FirstDelaySpawn", "1")));
-            FAKE_PLAYERS_PLUS_DELAY_DESPAWN_FIRST = (int) TimeUnit.SECONDS.toMillis(Integer.parseInt(fake.getProperty("FirstDelayDespawn", "20")));
+            FAKE_PLAYERS_PLUS_DELAY_FIRST = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(fake.getProperty("FirstDelay", "5")));
+            FAKE_PLAYERS_PLUS_DESPAWN_FIRST = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(fake.getProperty("FirstDespawn", "60")));
+            FAKE_PLAYERS_PLUS_DELAY_SPAWN_FIRST = (int) TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(fake.getProperty("FirstDelaySpawn", "1")));
+            FAKE_PLAYERS_PLUS_DELAY_DESPAWN_FIRST = (int) TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(fake.getProperty("FirstDelayDespawn", "20")));
 
             FAKE_PLAYERS_PLUS_COUNT_NEXT = Integer.parseInt(fake.getProperty("NextCount", "50"));
-            FAKE_PLAYERS_PLUS_DELAY_NEXT = TimeUnit.MINUTES.toMillis(Integer.parseInt(fake.getProperty("NextDelay", "15")));
-            FAKE_PLAYERS_PLUS_DESPAWN_NEXT = TimeUnit.MINUTES.toMillis(Integer.parseInt(fake.getProperty("NextDespawn", "90")));
-            FAKE_PLAYERS_PLUS_DELAY_SPAWN_NEXT = (int) TimeUnit.SECONDS.toMillis(Integer.parseInt(fake.getProperty("NextDelaySpawn", "20")));
-            FAKE_PLAYERS_PLUS_DELAY_DESPAWN_NEXT = (int) TimeUnit.SECONDS.toMillis(Integer.parseInt(fake.getProperty("NextDelayDespawn", "30")));
+            FAKE_PLAYERS_PLUS_DELAY_NEXT = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(fake.getProperty("NextDelay", "15")));
+            FAKE_PLAYERS_PLUS_DESPAWN_NEXT = TimeUnit.MINUTES
+                    .toMillis(Integer.parseInt(fake.getProperty("NextDespawn", "90")));
+            FAKE_PLAYERS_PLUS_DELAY_SPAWN_NEXT = (int) TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(fake.getProperty("NextDelaySpawn", "20")));
+            FAKE_PLAYERS_PLUS_DELAY_DESPAWN_NEXT = (int) TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(fake.getProperty("NextDelayDespawn", "30")));
 
             String[] ppp = fake.getProperty("FakeEnchant", "0,14").split(",");
             FAKE_PLAYERS_ENCHANT = new PvpColor(Integer.parseInt(ppp[0]), Integer.parseInt(ppp[1]));
@@ -7304,7 +7710,8 @@ public final class Config {
             is.close();
 
             GAMEGUARD_ENABLED = Boolean.parseBoolean(guard.getProperty("GameGuardEnable", "False"));
-            GAMEGUARD_INTERVAL = (int) TimeUnit.SECONDS.toMillis(Integer.parseInt(guard.getProperty("GameGuardInterval", "60")));
+            GAMEGUARD_INTERVAL = (int) TimeUnit.SECONDS
+                    .toMillis(Integer.parseInt(guard.getProperty("GameGuardInterval", "60")));
 
             GAMEGUARD_LOG = Boolean.parseBoolean(guard.getProperty("GameGuardLog", "False"));
             GAMEGUARD_PUNISH = Integer.parseInt(guard.getProperty("GameGuardPunish", "1"));
@@ -7367,7 +7774,7 @@ public final class Config {
                 loadCatsGuardCfg();
             }
             loadHexidCfg();
-            //}
+            // }
         } else {
             _log.severe("Could not Load Config: server mode was not set");
         }
@@ -7423,7 +7830,7 @@ public final class Config {
     /**
      * Set a new value to a game parameter from the admin console.
      *
-     * @param pName (String) : name of the parameter to change
+     * @param pName  (String) : name of the parameter to change
      * @param pValue (String) : new value of the parameter
      * @return boolean : true if modification has been made
      * @link useAdminCommand
@@ -7437,7 +7844,7 @@ public final class Config {
      *
      * @param player (L2PcInstance) : Player trying to use L2Walker
      * @return boolean : true if (L2Walker allowed as a general rule) or
-     * (L2Walker client allowed for GM and player is a GM)
+     *         (L2Walker client allowed for GM and player is a GM)
      */
     public static boolean allowL2Walker(L2PcInstance player) {
         return (ALLOW_L2WALKER_CLIENT == L2WalkerAllowed.True
@@ -7463,7 +7870,7 @@ public final class Config {
     /**
      * Save hexadecimal ID of the server in the properties file.
      *
-     * @param hexId (String) : hexadecimal ID of the server to store
+     * @param hexId    (String) : hexadecimal ID of the server to store
      * @param fileName (String) : name of the properties file
      */
     public static void saveHexid(int serverId, String hexId, String fileName) {

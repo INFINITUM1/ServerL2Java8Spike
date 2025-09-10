@@ -1,0 +1,732 @@
+
+=== altsettings.cfg ===
+СТАРОЕ: Delevel = True
+НОВОЕ: Delevel = False
+MOBIUS: Delevel
+
+СТАРОЕ: AltKarmaPlayerCanTeleport = True
+НОВОЕ: AltKarmaPlayerCanTeleport = False
+MOBIUS:AltKarmaPlayerCanTeleport
+
+СТАРОЕ: AltKarmaPlayerCanTrade = True
+НОВОЕ: AltKarmaPlayerCanTrade = False
+MOBIUS: AltKarmaPlayerCanTrade
+
+СТАРОЕ: AltKarmaPlayerCanUseWareHouse = True
+НОВОЕ: AltKarmaPlayerCanUseWareHouse = False
+MOBIUS: AltKarmaPlayerCanUseWareHouse
+
+СТАРОЕ: LifeCrystalNeeded = True
+НОВОЕ: LifeCrystalNeeded = False
+MOBIUS: LifeCrystalNeeded
+
+СТАРОЕ: SpBookNeeded = True
+НОВОЕ: SpBookNeeded = False
+MOBIUS: ??????????
+
+СТАРОЕ: DisableWeightPenalty = False
+НОВОЕ: DisableWeightPenalty = True
+MOBIUS: -----------
+
+СТАРОЕ: AltOlyMinClass = 10
+НОВОЕ: AltOlyMinClass = 2
+MOBIUS: OlympiadClassedParticipants
+
+СТАРОЕ: AltOlyMinNonClass = 10
+НОВОЕ: AltOlyMinNonClass = 2
+MOBIUS: OlympiadNonClassedParticipants
+
+СТАРОЕ: EpicQuests = True
+НОВОЕ: EpicQuests = False
+MOBIUS: --------
+
+СТАРОЕ: UseSoulShots = True
+НОВОЕ: UseSoulShots = False
+MOBIUS: -----
+
+СТАРОЕ: ConsumeArrows = True
+НОВОЕ: ConsumeArrows = False
+MOBIUS: -------
+
+СТАРОЕ: ClearBuffOnDeath = True
+НОВОЕ: ClearBuffOnDeath = False
+MOBIUS: ------------
+
+СТАРОЕ: AltAnySubClass = False
+НОВОЕ: AltAnySubClass = True
+MOBIUS: ???????????
+
+СТАРОЕ: AltAnySubClassOverCraft = False
+НОВОЕ: AltAnySubClassOverCraft = True
+MOBIUS: -------------
+
+СТАРОЕ: TeleportProtection = 5
+НОВОЕ: TeleportProtection = 2
+MOBIUS: PlayerTeleportProtection
+
+СТАРОЕ: StackedLifeStones = False
+НОВОЕ: StackedLifeStones = True
+MOBIUS: ----------
+
+
+=== commands.cfg ===
+СТАРОЕ: AllowMenu = False
+НОВОЕ: AllowMenu = True
+MOBIUS: ---------???
+
+СТАРОЕ: ShowOnline = False
+НОВОЕ: ShowOnline = True
+MOBIUS: EnableOnlineCommand ///////
+
+СТАРОЕ: ShowRestartTime = False
+НОВОЕ: ShowRestartTime = True
+MOBIUS: ---------
+
+СТАРОЕ: CmdAdenaCol = False
+НОВОЕ: CmdAdenaCol = True
+MOBIUS: BankingEnabled
+
+СТАРОЕ: CmdEvents = False
+НОВОЕ: CmdEvents = True
+MOBIUS: --------
+
+
+=== custom.cfg ===
+СТАРОЕ: SubStartLvl = 40
+НОВОЕ: SubStartLvl = 80
+MOBIUS: BaseSubclassLevel
+
+СТАРОЕ: RunSpeedBoost = 0
+НОВОЕ: RunSpeedBoost = 140
+MOBIUS: RunSpeedBoost
+
+СТАРОЕ: AltWeightLimit = 10
+НОВОЕ: AltWeightLimit = 100
+MOBIUS: AltWeightLimit
+
+СТАРОЕ: MaxPAtkSpeed = 1500
+НОВОЕ: MaxPAtkSpeed = 8000
+MOBIUS: MaxPAtkSpeed
+
+СТАРОЕ: MaxMAtkSpeed = 2400
+НОВОЕ: MaxMAtkSpeed = 11000
+MOBIUS:
+
+СТАРОЕ: WaterSpeed = 60
+НОВОЕ: WaterSpeed = 200
+MOBIUS: -----------
+
+СТАРОЕ: MaxBuffAmount = 24
+НОВОЕ: MaxBuffAmount = 100
+MOBIUS: MaxBuffAmount
+
+СТАРОЕ: AutoLoot = False
+НОВОЕ: AutoLoot = True
+MOBIUS: AutoLoot
+
+СТАРОЕ: AutoLootRaid = False
+НОВОЕ: AutoLootRaid = True
+MOBIUS: AutoLootRaids
+
+СТАРОЕ: AutoLootEpicJewerly = False
+НОВОЕ: AutoLootEpicJewerly = True
+MOBIUS: AutoLootItemIds ////
+
+СТАРОЕ: AutoLearnSkills = False
+НОВОЕ: AutoLearnSkills = True
+MOBIUS: AutoLearnSkills
+
+СТАРОЕ: AltSubClassWithoutQuests = False
+НОВОЕ: AltSubClassWithoutQuests = True
+MOBIUS: AltSubClassWithoutQuests
+
+СТАРОЕ: MaxSubClasses = 3
+НОВОЕ: MaxSubClasses = 5
+MOBIUS: MaxSubclass
+
+СТАРОЕ: AltNewCharAlwaysIsNoble = False
+НОВОЕ: AltNewCharAlwaysIsNoble = True
+MOBIUS: ----------
+
+СТАРОЕ: CustomHeroSubSkill = False
+НОВОЕ: CustomHeroSubSkill = True
+MOBIUS: ----------
+
+СТАРОЕ: AltStartedLevel = 1
+НОВОЕ: AltStartedLevel = 80
+MOBIUS: StartingLevel
+
+СТАРОЕ: AltStartedSP = 0
+НОВОЕ: AltStartedSP = 2000000000
+MOBIUS: 
+
+СТАРОЕ: StartingAdena = 0
+НОВОЕ: StartingAdena = 25000
+MOBIUS:
+
+СТАРОЕ: AugmentSkillNormal = 11
+НОВОЕ: AugmentSkillNormal = 1
+MOBIUS: AugmentationNGGlowChance
+
+СТАРОЕ: AugmentSkillMid = 11
+НОВОЕ: AugmentSkillMid = 1
+MOBIUS:
+
+СТАРОЕ: AugmentSkillHigh = 11
+НОВОЕ: AugmentSkillHigh = 1
+MOBIUS:
+
+СТАРОЕ: AnnounceOnline = False
+НОВОЕ: AnnounceOnline = True
+MOBIUS: ------
+
+СТАРОЕ: AnnounceDelay = 15
+НОВОЕ: AnnounceDelay = 16
+MOBIUS: --------------
+
+СТАРОЕ: AnnounceOnLogin = False
+НОВОЕ: AnnounceOnLogin = True
+MOBIUS: -----------
+
+СТАРОЕ: AutoAnnouncementsAllow = False
+НОВОЕ: AutoAnnouncementsAllow = True
+MOBIUS: ------------------
+
+СТАРОЕ: AutoAnnouncementsDelay = 45
+НОВОЕ: AutoAnnouncementsDelay = 21
+MOBIUS: ---------------
+
+СТАРОЕ: BuffTimeMul = 1
+НОВОЕ: BuffTimeMul = 30
+MOBIUS: --------
+
+СТАРОЕ: BuffTimeTable =
+НОВОЕ: BuffTimeTable = 1200#2283;1800#3662;1800#3663;1800#3664;1800#3665
+MOBIUS: ------------
+
+СТАРОЕ: FixedReuseSkills =
+НОВОЕ: FixedReuseSkills = 3660,3661,3662,3663,3664
+MOBIUS: SkillReuseList
+
+СТАРОЕ: StartUpTitle = off
+НОВОЕ: StartUpTitle = <New Player>
+MOBIUS: EnableStartingTitle
+
+СТАРОЕ: ForbiddenBowClasses =
+НОВОЕ: ForbiddenBowClasses = 5,90,113,46,106,91,99,89,3,6,8,114,48,44,45,46,88,2,5,4,33,7,93
+MOBIUS: -------
+
+СТАРОЕ: MultisellProtect = True
+НОВОЕ: MultisellProtect = False
+MOBIUS: MultiSellFloodProtector ??? 
+
+СТАРОЕ: ManaRestore = 800
+НОВОЕ: ManaRestore = 15000
+MOBIUS: --------
+
+СТАРОЕ: AllowNpcChat = False
+НОВОЕ: AllowNpcChat = True
+MOBIUS: 
+
+СТАРОЕ: NpcChatChanse = 99
+НОВОЕ: NpcChatChanse = 15
+MOBIUS:-------------
+
+СТАРОЕ: AltStartedSP = 0
+НОВОЕ: AltStartedSP = 2000000000
+MOBIUS: 
+
+СТАРОЕ: AnnounceCastleOwner = False
+НОВОЕ: AnnounceCastleOwner = True
+MOBIUS: ----------
+
+СТАРОЕ: CpRestoreValues = 50,200
+НОВОЕ: CpRestoreValues = 300,1000
+MOBIUS: ----------
+
+СТАРОЕ: TeleDewalkedZone = True
+НОВОЕ: TeleDewalkedZone = True
+MOBIUS: 
+
+
+=== enchants.cfg ===
+СТАРОЕ: EnchantMaxWeapon = 30
+НОВОЕ: EnchantMaxWeapon = 25
+MOBIUS:
+
+СТАРОЕ: EnchantMaxArmor = 30
+НОВОЕ: EnchantMaxArmor = 16
+MOBIUS:
+
+СТАРОЕ: EnchantMaxJewelry = 30
+НОВОЕ: EnchantMaxJewelry = 16
+MOBIUS:
+
+СТАРОЕ: EnchantSafeMaxFull = 4
+НОВОЕ: EnchantSafeMaxFull = 3
+MOBIUS:
+
+СТАРОЕ: EnchantAltMagicChanceBless = 75
+НОВОЕ: EnchantAltMagicChanceBless = 100
+MOBIUS:
+
+СТАРОЕ: EnchantAltWeaponChanceBless = 65
+НОВОЕ: EnchantAltWeaponChanceBless = 100
+MOBIUS:
+
+СТАРОЕ: EnchantAltArmorChanceBless = 75
+НОВОЕ: EnchantAltArmorChanceBless = 100
+MOBIUS:
+
+СТАРОЕ: EnchantAltJewerlyChanceBless = 75
+НОВОЕ: EnchantAltJewerlyChanceBless = 100
+MOBIUS:
+
+СТАРОЕ: EnchantAltMagicSteps = 10,55;15,45;20,35
+НОВОЕ: EnchantAltMagicSteps = 1,100;
+MOBIUS:
+
+СТАРОЕ: EnchantAltWeaponSteps = 10,60;15,50;20,40
+НОВОЕ: EnchantAltWeaponSteps = 1,100;
+MOBIUS:
+
+СТАРОЕ: EnchantAltArmorSteps = 10,60;15,50;20,40
+НОВОЕ: EnchantAltArmorSteps = 1,100;
+MOBIUS:
+
+СТАРОЕ: EnchantAltJewerlySteps = 10,60;15,50;20,40
+НОВОЕ: EnchantAltJewerlySteps = 1,100;
+MOBIUS:
+
+СТАРОЕ: EnchantAltWeaponBlessFail = 0
+НОВОЕ: EnchantAltWeaponBlessFail = 5
+MOBIUS:
+
+СТАРОЕ: EnchantAltWeaponCrystallFail = 0
+НОВОЕ: EnchantAltWeaponCrystallFail = 5
+MOBIUS:
+
+СТАРОЕ: EnchantAltArmorBlessFail = 0
+НОВОЕ: EnchantAltArmorBlessFail = 5
+MOBIUS:
+
+СТАРОЕ: EnchantAltArmorCrystallFail = 0
+НОВОЕ: EnchantAltArmorCrystallFail = 5
+MOBIUS:
+
+СТАРОЕ: EnchantAltJewerlyBlessFail = 0
+НОВОЕ: EnchantAltJewerlyBlessFail = 5
+MOBIUS:
+
+СТАРОЕ: EnchantAltJewerlyCrystallFail = 0
+НОВОЕ: EnchantAltJewerlyCrystallFail = 5
+MOBIUS:
+
+СТАРОЕ: EnchantPenalty = True
+НОВОЕ: EnchantPenalty = False
+MOBIUS:
+
+СТАРОЕ: EnchHeroWeapons = False
+НОВОЕ: EnchHeroWeapons = True
+MOBIUS:
+
+СТАРОЕ: EnchantLimits = 1,16
+НОВОЕ: EnchantLimits = 13333,10;13334,10;13335,10;13336,10
+MOBIUS:
+
+
+=== events.cfg ===
+СТАРОЕ: AllowEventsSameIp = False
+НОВОЕ: AllowEventsSameIp = True
+MOBIUS:
+
+СТАРОЕ: TvTEventEnabled = False
+НОВОЕ: TvTEventEnabled = True
+MOBIUS:
+
+СТАРОЕ: TvTEventInterval = 120
+НОВОЕ: TvTEventInterval = 45
+MOBIUS:
+
+СТАРОЕ: TvTEventParticipationTime = 15
+НОВОЕ: TvTEventParticipationTime = 3
+MOBIUS:
+
+СТАРОЕ: TvTEventRunningTime = 20
+НОВОЕ: TvTEventRunningTime = 3
+MOBIUS:
+
+СТАРОЕ: TvTEventParticipationNpcCoordinates = 83425,148585,-3406
+НОВОЕ: TvTEventParticipationNpcCoordinates = 11045,-24417,-3643
+MOBIUS:
+
+СТАРОЕ: TvTEventRespawnTeleportDelay = 10
+НОВОЕ: TvTEventRespawnTeleportDelay = 5
+MOBIUS:
+
+СТАРОЕ: TvTEventStartLeaveTeleportDelay = 10
+НОВОЕ: TvTEventStartLeaveTeleportDelay = 5
+MOBIUS:
+
+СТАРОЕ: TvTEventTeam1Name = Team1
+НОВОЕ: TvTEventTeam1Name =
+MOBIUS:
+
+СТАРОЕ: TvTEventTeam2Name = Team2
+НОВОЕ: TvTEventTeam2Name =
+MOBIUS:
+
+СТАРОЕ: TvTEventReward = 6673,5
+НОВОЕ: TvTEventReward = 57,10000000
+MOBIUS:
+
+СТАРОЕ: TvTEventPotionsAllowed = False
+НОВОЕ: TvTEventPotionsAllowed = True
+MOBIUS:
+
+СТАРОЕ: TvtAltName = TvT
+НОВОЕ: TvtAltName =
+MOBIUS:
+
+СТАРОЕ: CbBase1Loc = -77426,-233982,-3332
+НОВОЕ: CbTeam1Name = Alfa
+MOBIUS:
+
+
+=== npc.cfg ===
+СТАРОЕ: AllowHitNpc = False
+НОВОЕ: AllowHitNpc = True
+MOBIUS:
+
+СТАРОЕ: AnnounceEpicStates = False
+НОВОЕ: AnnounceEpicStates = True
+MOBIUS:
+
+СТАРОЕ: AllowRaidBossPetrified = True
+НОВОЕ: AllowRaidBossPetrified = False
+MOBIUS:
+
+СТАРОЕ: ChampionEnable = False
+НОВОЕ: ChampionEnable = True
+MOBIUS:
+
+СТАРОЕ: ChampionFrequency = 3
+НОВОЕ: ChampionFrequency = 15
+MOBIUS:
+
+СТАРОЕ: ChampionMinLevel = 76
+НОВОЕ: ChampionMinLevel = 20
+MOBIUS:
+
+СТАРОЕ: ChampionMaxLevel = 80
+НОВОЕ: ChampionMaxLevel = 85
+MOBIUS:
+
+СТАРОЕ: ChampionAdenasRewards = 10
+НОВОЕ: ChampionAdenasRewards = 4
+MOBIUS:
+
+СТАРОЕ: ChampionAtk = 1.5
+НОВОЕ: ChampionAtk = 2.0
+MOBIUS:
+
+СТАРОЕ: ChampionSpdAtk = 1.2
+НОВОЕ: ChampionSpdAtk = 1.8
+MOBIUS:
+
+СТАРОЕ: ChampionRewardsChance = 2
+НОВОЕ: ChampionRewardsChance = 1
+MOBIUS:
+
+СТАРОЕ: ChampionRewardsCount = 2
+НОВОЕ: ChampionRewardsCount = 1
+MOBIUS:
+
+
+=== options.cfg ===
+СТАРОЕ: GlobalChat = ON
+НОВОЕ: GlobalChat = GLOBAL
+MOBIUS:
+
+СТАРОЕ: TradeChat = LIMITED
+НОВОЕ: TradeChat = GLOBAL
+MOBIUS:
+
+СТАРОЕ: AllowDiscardItem = False
+НОВОЕ: AllowDiscardItem = true
+MOBIUS:
+
+СТАРОЕ: ShowNpcLevel = True
+НОВОЕ: ShowNpcLevel = False
+MOBIUS:
+
+СТАРОЕ: AllowCursedWeapons = True
+НОВОЕ: AllowCursedWeapons = False
+MOBIUS:
+
+СТАРОЕ: AllowNpcWalkers = False
+НОВОЕ: AllowNpcWalkers = true
+MOBIUS:
+
+
+=== other.cfg ===
+СТАРОЕ: UnstuckInterval = 300
+НОВОЕ: UnstuckInterval = 10
+MOBIUS:
+
+СТАРОЕ: PlayerSpawnProtection = 0
+НОВОЕ: PlayerSpawnProtection = 2
+MOBIUS:
+
+СТАРОЕ: RespawnRestoreCP = 0
+НОВОЕ: RespawnRestoreCP = 100
+MOBIUS:
+
+СТАРОЕ: RespawnRestoreHP = 70
+НОВОЕ: RespawnRestoreHP = 100
+MOBIUS:
+
+СТАРОЕ: RespawnRestoreMP = 70
+НОВОЕ: RespawnRestoreMP = 100
+MOBIUS:
+
+СТАРОЕ: DeathPenaltyChance = 20
+НОВОЕ: DeathPenaltyChance = 0
+MOBIUS:
+
+СТАРОЕ: AugmentExcludeNotdone = False
+НОВОЕ: AugmentExcludeNotdone = False
+MOBIUS:
+
+
+=== pvp.cfg ===
+СТАРОЕ: ListOfNonDroppableItems = 57,1147,425,1146,461,10,2368,7,6,2370,2369,6842,6611,6612,6613,6614,6615,6616,6617,6618,6619,6620,6621,7694,8181,5575,7694
+НОВОЕ: ListOfNonDroppableItems = 57,7123,1147,425,1146,461,10,2368,7,6,2370,2369,6842,6611,6612,6613,6614,6615,6616,6617,6618,6619,6620,6621,7694,8181,5575,7694,11700
+MOBIUS:
+
+СТАРОЕ: DropKilledByNpc = True
+НОВОЕ: DropKilledByNpc = False
+MOBIUS:
+
+СТАРОЕ: AllowPvpPkReward = False
+НОВОЕ: AllowPvpPkReward = True
+MOBIUS:
+
+СТАРОЕ: PvpPkInterval = 30000
+НОВОЕ: PvpPkInterval = 100
+MOBIUS:
+
+СТАРОЕ: PvpPkIpPenalty = True
+НОВОЕ: PvpPkIpPenalty = False
+MOBIUS:
+
+СТАРОЕ: PvpBonusStepsColors = 500,66CC66,66CC66;700,99CC00,33CC00
+НОВОЕ: PvpBonusStepsColors = 5,FFFF00,FFFF00;10,FFCC00,FFCC00;15,FF9900,FF9900;20,FFEE00,FFEE00;25,CCFF00,CCFF00;30,99FF00,99FF00;35,66FF00,66FF00;40,00FF00,00FF00;45,00FF66,00FF66;50,00FF99,00FF99;55,00FFFF,00FFFF;60,00CCFF,00CCFF;65,0099FF,0099FF;70,0066FF,0066FF;75,0000FF,0000FF;80,0033CC,0033CC;85,001A80,001A80;90,336666,336666;95,333333,333333;100,010101,010101;
+MOBIUS:
+
+
+=== rates.cfg ===
+СТАРОЕ: RateXp = 1.
+НОВОЕ: RateXp = 10000.
+MOBIUS:
+
+СТАРОЕ: RateSp = 1.
+НОВОЕ: RateSp = 10000.
+MOBIUS:
+
+СТАРОЕ: RateCommonHerbs = 0.
+НОВОЕ: RateCommonHerbs = 50.
+MOBIUS:
+
+СТАРОЕ: RateHpMpHerbs = 0.
+НОВОЕ: RateHpMpHerbs = 50.
+MOBIUS:
+
+СТАРОЕ: RateGreaterHerbs = 0.
+НОВОЕ: RateGreaterHerbs = 50.
+MOBIUS:
+
+СТАРОЕ: RateSuperiorHerbs = 0.
+НОВОЕ: RateSuperiorHerbs = 50.
+MOBIUS:
+
+СТАРОЕ: RateSpecialHerbs = 0.
+НОВОЕ: RateSpecialHerbs = 50.
+MOBIUS:
+
+
+=== server.cfg ===
+СТАРОЕ: GameserverHostname = 127.0.0.1
+НОВОЕ: GameserverHostname = 185.93.6.184
+MOBIUS:
+
+СТАРОЕ: GameserverPort = 7777,7778,7779
+НОВОЕ: GameserverPort = 7777
+MOBIUS:
+
+СТАРОЕ: ExternalHostname = 127.0.0.1
+НОВОЕ: ExternalHostname = 185.93.6.184
+MOBIUS:
+
+СТАРОЕ: LoginHost = 127.0.0.1
+НОВОЕ: LoginHost = 185.93.6.184
+MOBIUS:
+
+СТАРОЕ: URL=jdbc:mysql://localhost/pw?useUnicode=true&characterEncoding=UTF-8
+НОВОЕ: URL=jdbc:mysql://localhost/spike_main?useUnicode=true&characterEncoding=UTF-8
+MOBIUS:
+
+СТАРОЕ: Login = l2usergame
+НОВОЕ: Login = root
+MOBIUS:
+
+СТАРОЕ: Password =
+НОВОЕ: Password = P159875369874123_p
+MOBIUS:
+
+
+=== services.cfg ===
+СТАРОЕ: ClanCoin = 5962
+НОВОЕ: ClanCoin = 57
+MOBIUS:
+
+СТАРОЕ: ClanCoinName = Gold Golem
+НОВОЕ: ClanCoinName = Adena
+MOBIUS:
+
+СТАРОЕ: ClanPointsPrice = 5
+НОВОЕ: ClanPointsPrice = 5000000
+MOBIUS:
+
+СТАРОЕ: ClanSkillsPrice = 10
+НОВОЕ: ClanSkillsPrice = 100000000
+MOBIUS:
+
+СТАРОЕ: AugsaleCoin = 5962
+НОВОЕ: AugsaleCoin = 57
+MOBIUS:
+
+СТАРОЕ: AugsaleCoinName = Gold Golem
+НОВОЕ: AugsaleCoinName = Adena
+MOBIUS:
+
+СТАРОЕ: AugsalePrice = 20
+НОВОЕ: AugsalePrice = 20000000
+MOBIUS:
+
+СТАРОЕ: Magical = 1085,3;1059,3;1078,6;1204,2;1048,6;1397,3;1303,2;1040,3;1035,4;1062,2;273,1;276,1;4703,13;349,1;363,1;365,1;1413,1;1036,2;1389,3;4554,4
+НОВОЕ: Magical = 305,1;1284,3;1045,6;1257,3;1073,2;1044,3;1304,3;1243,6;1087,3;1085,3;1059,3;1078,6;1204,2;1048,6;1397,3;1303,2;1040,3;1035,4;1062,2;4703,13;1413,1;1036,2;1389,3;274,1;277,1;272,1;273,1;271,1;,276,1;275,1;309,1;307,1;310,1;311,1;365,1;267,1;268,1;269,1;265,1;264,1;266,1;306,1;304,1;308,1;363,1;349,1;
+MOBIUS:
+
+СТАРОЕ: Fighter = 1068,3;1040,3;1086,2;1204,2;1077,3;1242,2;1268,4;1035,4;1036,2;1045,6;1388,3;1363,1;271,1;275,1;274,1;269,1;264,1;304,1;1364,1;4699,13
+НОВОЕ: Fighter = 305,1;1284,3;1048,6;1257,3;1073,2;1044,3;1304,3;1243,6;1087,3;1240,3;1062,2;1068,3;1040,3;1086,2;1204,2;1077,3;1242,2;1268,4;1035,4;1036,2;1045,6;1388,3;1363,1;1364,1;4699,13;274,1;277,1;272,1;273,1;271,1;,276,1;275,1;309,1;307,1;310,1;311,1;365,1;267,1;268,1;269,1;265,1;264,1;266,1;306,1;304,1;308,1;363,1;349,1;
+MOBIUS:
+
+СТАРОЕ: ForbiddenProfileBuffs = 4,72,76,77,78,82,83,86,91,94,99,109,110,111,112,121,123,130,131,139,176,222,282,287,292,297,298,313,317,334,350,351,355,356,357,359,360,396,406,410,411,413,414,415,416,417,420,421,423,424,425,438,439,442,443,445,446,447,1001,1374,1410,1418,1427,3158,3142,3132,3133,3134,3135,3136,3199,3200,3201,3202,3203,3633,5104,5105
+НОВОЕ: ForbiddenProfileBuffs = 3660,3661,3662,3663,3664,4,72,76,77,78,82,83,86,91,94,99,109,110,111,112,121,123,130,131,139,176,222,282,287,292,297,298,313,317,334,350,351,355,356,357,359,360,396,406,410,411,413,414,415,416,417,420,421,423,424,425,438,439,442,443,445,446,447,1001,1374,1410,1418,1427,3158,3142,3132,3133,3134,3135,3136,3199,3200,3201,3202,3203,3633,5104,5105
+MOBIUS:
+
+СТАРОЕ: AdditionBuffs = 4552,4554
+НОВОЕ: AdditionBuffs = 4553,4554
+MOBIUS:
+
+СТАРОЕ: AllowClassMasters = False
+НОВОЕ: AllowClassMasters = True
+MOBIUS:
+
+СТАРОЕ: MasterNpc = My PvP Server
+НОВОЕ: MasterNpc = Master
+MOBIUS:
+
+СТАРОЕ: ClassMasterPrices = 1,57,50000;2,57,500000;3,57,5000000
+НОВОЕ: ClassMasterPrices = 1,57,0;2,57,0;3,57,0
+MOBIUS:
+
+СТАРОЕ: MClanCoin = 5962
+НОВОЕ: MClanCoin = 57
+MOBIUS:
+
+СТАРОЕ: MClanCoinName = Gold Golem
+НОВОЕ: MClanCoinName = Adena
+MOBIUS:
+
+СТАРОЕ: Level6 = 10
+НОВОЕ: Level6 = 5000000
+MOBIUS:
+
+СТАРОЕ: Level7 = 20
+НОВОЕ: Level7 = 10000000
+MOBIUS:
+
+СТАРОЕ: Level8 = 40
+НОВОЕ: Level8 = 15000000
+MOBIUS:
+
+СТАРОЕ: PremiumEnable = False
+НОВОЕ: PremiumEnable = True
+MOBIUS:
+
+СТАРОЕ: PremiumCoin = 5962
+НОВОЕ: PremiumCoin = 57
+MOBIUS:
+
+СТАРОЕ: PremiumPrice = 1
+НОВОЕ: PremiumPrice = 1000000000
+MOBIUS:
+
+СТАРОЕ: PremiumExp = 1.5
+НОВОЕ: PremiumExp = 1
+MOBIUS:
+
+СТАРОЕ: PremiumSp = 1.5
+НОВОЕ: PremiumSp = 1
+MOBIUS:
+
+СТАРОЕ: PremiumDropItem = 1.5
+НОВОЕ: PremiumDropItem = 1.0
+MOBIUS:
+
+СТАРОЕ: PremiumDropMul = 1.5
+НОВОЕ: PremiumDropMul = 1.0
+MOBIUS:
+
+СТАРОЕ: PremiumAdenaMul = 1.5
+НОВОЕ: PremiumAdenaMul = 1.66
+MOBIUS:
+
+СТАРОЕ: PremiumEnchSkillRate = 5
+НОВОЕ: PremiumEnchSkillRate = 0
+MOBIUS:
+
+СТАРОЕ: PremiumCursedRate = 5
+НОВОЕ: PremiumCursedRate = 0
+MOBIUS:
+
+СТАРОЕ: PremiumPcCafeMul = 1.5
+НОВОЕ: PremiumPcCafeMul = 1.0
+MOBIUS:
+
+СТАРОЕ: PremiumAugmentRate = 10
+НОВОЕ: PremiumAugmentRate = 0
+MOBIUS:
+
+СТАРОЕ: PremiumClanSkillsMul = 0.75
+НОВОЕ: PremiumClanSkillsMul = 1
+MOBIUS:
+
+СТАРОЕ: PremiumAnnounceEnter = False
+НОВОЕ: PremiumAnnounceEnter = True
+MOBIUS:
+
+СТАРОЕ: PremiumAnnouncePhrase =  %player%   .
+НОВОЕ: PremiumAnnouncePhrase = %player%   .
+MOBIUS:
+
+СТАРОЕ: PremiumNamePrefix = [VIP]
+НОВОЕ: HeroNewCharHours = 0
+MOBIUS:
+
+СТАРОЕ: PcCafeEnable = False
+НОВОЕ: PcCafeEnable = True
+MOBIUS:
+

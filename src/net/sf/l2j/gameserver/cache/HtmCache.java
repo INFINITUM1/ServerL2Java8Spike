@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 
 import javolution.util.FastMap;
 import net.sf.l2j.Config;
+import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.util.log.AbstractLogger;
 
@@ -62,7 +63,8 @@ public class HtmCache {
         if (!Config.LAZY_CACHE) {
             _log.info("HtmCache: cache start...");
             parseDir(f);
-            _log.info("HtmCache: " + String.format("%.3f", getMemoryUsage()) + " megabytes on " + getLoadedFiles() + " files loaded");
+            _log.info("HtmCache: " + String.format("%.3f", getMemoryUsage()) + " megabytes on " + getLoadedFiles()
+                    + " files loaded");
         } else {
             _cache.clear();
             _cache.setName("HtmCache._cache");
@@ -184,15 +186,48 @@ public class HtmCache {
         return content;
     }
 
+    public String getHtm(L2PcInstance player, String path) {
+        String content = null;
+        String newPath = path;
+
+        if (player != null && Config.MULTILANG_ENABLE) {
+            String lang = player.getLang();
+            if (lang != null && !lang.isEmpty() && !lang.equals(Config.MULTILANG_DEFAULT)) {
+                // заменяем только "data/html/" в начале
+                if (path.startsWith("data/html/")) {
+                    newPath = path.replaceFirst("data/html", "data/html-" + lang);
+                }
+
+                content = _cache.get(newPath.hashCode());
+
+                if (Config.LAZY_CACHE && content == null) {
+                    content = loadFile(new File(Config.DATAPACK_ROOT, newPath));
+                }
+            }
+        }
+
+        // если для языка не нашли → пробуем дефолт
+        if (content == null) {
+            content = _cache.get(path.hashCode());
+
+            if (Config.LAZY_CACHE && content == null) {
+                content = loadFile(new File(Config.DATAPACK_ROOT, path));
+            }
+        }
+
+        return content;
+    }
+
     public boolean contains(String path) {
         return _cache.containsKey(path.hashCode());
     }
 
     /**
      * Check if an HTM exists and can be loaded
+     * 
      * @param
-     * path The path to the HTM
-     * */
+     * path        The path to the HTM
+     */
     public boolean isLoadable(String path) {
         File file = new File(path);
         HtmFilter filter = new HtmFilter();
