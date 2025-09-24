@@ -1,4 +1,3 @@
-
 package scripts.commands.voicedcommandhandlers;
 
 import net.sf.l2j.Config;

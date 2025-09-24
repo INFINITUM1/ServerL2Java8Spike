@@ -1410,4 +1410,49 @@ public abstract class Inventory extends ItemContainer {
         }
         return false;
     }
+
+    public static int getPaperdollIndex(int slot)
+    {
+        switch(slot)
+        {
+            case L2Item.SLOT_UNDERWEAR:
+                return PAPERDOLL_UNDER;
+            case L2Item.SLOT_R_EAR:
+                return PAPERDOLL_REAR;
+            case L2Item.SLOT_L_EAR:
+                return PAPERDOLL_LEAR;
+            case L2Item.SLOT_NECK:
+                return PAPERDOLL_NECK;
+            case L2Item.SLOT_R_FINGER:
+                return PAPERDOLL_RFINGER;
+            case L2Item.SLOT_L_FINGER:
+                return PAPERDOLL_LFINGER;
+            case L2Item.SLOT_HEAD:
+                return PAPERDOLL_HEAD;
+            case L2Item.SLOT_R_HAND:
+                return PAPERDOLL_RHAND;
+            case L2Item.SLOT_L_HAND:
+                return PAPERDOLL_LHAND;
+            case L2Item.SLOT_LR_HAND:
+                return PAPERDOLL_RHAND;
+            case L2Item.SLOT_GLOVES:
+                return PAPERDOLL_GLOVES;
+            case L2Item.SLOT_CHEST:
+            case L2Item.SLOT_FULL_ARMOR:
+            //case L2Item.SLOT_FORMAL_WEAR:
+                return PAPERDOLL_CHEST;
+            case L2Item.SLOT_LEGS:
+                return PAPERDOLL_LEGS;
+            case L2Item.SLOT_FEET:
+                return PAPERDOLL_FEET;
+            case L2Item.SLOT_BACK:
+                return PAPERDOLL_BACK;
+            case L2Item.SLOT_HAIR:
+            //case L2Item.SLOT_HAIRALL:
+                return PAPERDOLL_HAIR;
+            case L2Item.SLOT_DHAIR:
+                return PAPERDOLL_DHAIR;
+        }
+        return -1;
+    }
 }

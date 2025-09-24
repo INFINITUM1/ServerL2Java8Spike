@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
@@ -27,6 +28,7 @@ import net.sf.l2j.gameserver.GeoData;
 import net.sf.l2j.gameserver.ItemsAutoDestroy;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
+import net.sf.l2j.gameserver.model.Inventory;
 import net.sf.l2j.gameserver.model.L2Attackable;
 import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
@@ -41,6 +43,7 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.serverpackets.CreatureSay;
 import net.sf.l2j.gameserver.network.serverpackets.PledgeSkillList;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
+import net.sf.l2j.gameserver.templates.L2Item;
 import net.sf.l2j.gameserver.templates.L2NpcTemplate;
 import net.sf.l2j.gameserver.util.Util;
 import net.sf.l2j.mysql.Close;
@@ -102,6 +105,10 @@ public class CustomServerData {
 
         if (Config.CASTLE_BONUS_SKILLS) {
             cacheCastleSkills();
+        }
+
+        if (Config.ENABLE_FAKE_ITEMS_MOD) {
+            fakeItems();
         }
 
         cacheSoldSkills();
@@ -1983,5 +1990,54 @@ public class CustomServerData {
                 player.removeSkill(skill);
             }
         }
+    }
+
+    private static Map<Integer, Map<Integer, Integer>> _fakeItems = new HashMap<Integer, Map<Integer, Integer>>();
+
+    private void fakeItems() {
+        try {
+            File file = new File(Config.DATAPACK_ROOT, "data/item_fake_appearance.xml");
+            if (!file.exists()) {
+                _log.config("CustomServerData [ERROR]: data/item_fake_appearance.xml doesn't exist");
+                return;
+            }
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setValidating(false);
+            factory.setIgnoringComments(true);
+            Document doc = factory.newDocumentBuilder().parse(file);
+            for (Node n = doc.getFirstChild(); n != null; n = n.getNextSibling()) {
+                if ("list".equalsIgnoreCase(n.getNodeName())) {
+                    for (Node d = n.getFirstChild(); d != null; d = d.getNextSibling()) {
+                        if ("item".equalsIgnoreCase(d.getNodeName()))
+                        {
+                            NamedNodeMap attrs = d.getAttributes();
+                            int itemId = Integer.parseInt(attrs.getNamedItem("itemId").getNodeValue());
+
+                            Map<Integer, Integer> slots = new HashMap<Integer, Integer>();
+                            for (Node cd = d.getFirstChild(); cd != null; cd = cd.getNextSibling()) {
+                                if ("display".equalsIgnoreCase(cd.getNodeName())) {
+                                    attrs = cd.getAttributes();
+
+                                    int displayId = Integer.parseInt(attrs.getNamedItem("itemId").getNodeValue());
+
+                                    L2Item item = ItemTable.getInstance().getTemplate(displayId);
+                                    int slot = Inventory.getPaperdollIndex(item.getBodyPart());
+                                    slots.put(slot, item.getItemId());
+                                }
+                            }
+                            _fakeItems.put(itemId, slots);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            _log.warning("CustomServerData [ERROR]: fakeItems() " + e.toString());
+        }
+        _log.config("CustomServerData: Custom Fake Items, loaded " + _fakeItems.size() + " items.");
+    }
+
+    public Map<Integer, Map<Integer, Integer>> getFakeItems()
+    {
+        return _fakeItems;
     }
 }

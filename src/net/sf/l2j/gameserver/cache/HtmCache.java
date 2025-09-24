@@ -186,37 +186,37 @@ public class HtmCache {
         return content;
     }
 
-    public String getHtm(L2PcInstance player, String path) {
-        String content = null;
-        String newPath = path;
+    // public String getHtm(L2PcInstance player, String path) {
+    //     String content = null;
+    //     String newPath = path;
 
-        if (player != null && Config.MULTILANG_ENABLE) {
-            String lang = player.getLang();
-            if (lang != null && !lang.isEmpty() && !lang.equals(Config.MULTILANG_DEFAULT)) {
-                // заменяем только "data/html/" в начале
-                if (path.startsWith("data/html/")) {
-                    newPath = path.replaceFirst("data/html", "data/html-" + lang);
-                }
+    //     if (player != null && Config.MULTILANG_ENABLE) {
+    //         String lang = player.getLang();
+    //         if (lang != null && !lang.isEmpty() && !lang.equals(Config.MULTILANG_DEFAULT)) {
+    //             // заменяем только "data/html/" в начале
+    //             if (path.startsWith("data/html/")) {
+    //                 newPath = path.replaceFirst("data/html", "data/html-" + lang);
+    //             }
 
-                content = _cache.get(newPath.hashCode());
+    //             content = _cache.get(newPath.hashCode());
 
-                if (Config.LAZY_CACHE && content == null) {
-                    content = loadFile(new File(Config.DATAPACK_ROOT, newPath));
-                }
-            }
-        }
+    //             if (Config.LAZY_CACHE && content == null) {
+    //                 content = loadFile(new File(Config.DATAPACK_ROOT, newPath));
+    //             }
+    //         }
+    //     }
 
-        // если для языка не нашли → пробуем дефолт
-        if (content == null) {
-            content = _cache.get(path.hashCode());
+    //     // если для языка не нашли → пробуем дефолт
+    //     if (content == null) {
+    //         content = _cache.get(path.hashCode());
 
-            if (Config.LAZY_CACHE && content == null) {
-                content = loadFile(new File(Config.DATAPACK_ROOT, path));
-            }
-        }
+    //         if (Config.LAZY_CACHE && content == null) {
+    //             content = loadFile(new File(Config.DATAPACK_ROOT, path));
+    //         }
+    //     }
 
-        return content;
-    }
+    //     return content;
+    // }
 
     public boolean contains(String path) {
         return _cache.containsKey(path.hashCode());

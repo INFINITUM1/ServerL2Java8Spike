@@ -112,25 +112,25 @@ public class NpcHtmlMessage extends L2GameServerPacket {
     // return true;
     // }
     // Новый метод — только для реального игрока
-    public boolean setFile(L2PcInstance player, String path) {
-        if (player == null)
-            return setFile(path); // fallback
+    // public boolean setFile(L2PcInstance player, String path) {
+    //     if (player == null)
+    //         return setFile(path); // fallback
 
-        String content = HtmCache.getInstance().getHtm(player, path);
+    //     String content = HtmCache.getInstance().getHtm(player, path);
 
-        if (content == null) {
-            setHtml("<html><body>My Text is missing:<br>" + path + "</body></html>");
-            _log.warning("missing html page " + path);
-            return false;
-        }
+    //     if (content == null) {
+    //         setHtml("<html><body>My Text is missing:<br>" + path + "</body></html>");
+    //         _log.warning("missing html page " + path);
+    //         return false;
+    //     }
 
-        setHtml(content);
+    //     setHtml(content);
 
-        if (_npcObjId >= 40080) {
-            replaceAllRaidBossStatuses();
-        }
-        return true;
-    }
+    //     if (_npcObjId >= 40080) {
+    //         replaceAllRaidBossStatuses();
+    //     }
+    //     return true;
+    // }
 
     public boolean setFile(String path) {
         String content = HtmCache.getInstance().getHtm(path);

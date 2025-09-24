@@ -65,7 +65,7 @@ public class VoicedCommandHandler {
 
         registerVoicedCommandHandler(new BlockBuff());
         registerVoicedCommandHandler(new Security());
-        registerVoicedCommandHandler(new Language());
+        // registerVoicedCommandHandler(new Language());
         //модераторы
         registerVoicedCommandHandler(new ModBanChat());
         registerVoicedCommandHandler(new ModKick());

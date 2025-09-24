@@ -30,9 +30,13 @@ l2spike.com - a site of the server
 9.RequestExEnchantSkill.java - adapted to stackable Life-Stones
 10.add NewTeleporter.java 
 11 NpcHtmlMessage.java  - add replacing raidboss status
-12. Multilang: 
-        +Language.java
-        +3 fields in Config.java    
-        +2 fields +methods in L2PCinstance
-        + gethtm(player,path) in HtmCache.java
-        + edit setfile() in NpcHtmlMessage.java
+12. (Canceleds)Multilang: 
+        +Language.java ~~ 
+        +3 fields in Config.java ~~
+        +2 fields +methods in L2PCinstance 
+        + gethtm(player,path) in HtmCache.java --
+        + edit setFile() in NpcHtmlMessage.java --
+13. Fake item appearance: 
+        Config.java
+        CustomServerData.java
+        Inventory.java

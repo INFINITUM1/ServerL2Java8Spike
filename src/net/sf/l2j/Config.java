@@ -3288,6 +3288,7 @@ public final class Config {
     //
     public static boolean CATS_GUARD;
     //
+    public static boolean ENABLE_FAKE_ITEMS_MOD;
     public static int CLANHALL_FEE_ID;
     public static boolean CH_AUCTION_TOWNS;
     public static boolean CH_FEE_CASTLE;
@@ -7237,6 +7238,7 @@ public final class Config {
             //
             CHAR_CREATE_ENCHANT = Integer.parseInt(customSettings.getProperty("CharCreateEnchant", "0"));
             TVT_CUSTOM_ENCHANT = Integer.parseInt(customSettings.getProperty("tvtenchant", "0"));
+            ENABLE_FAKE_ITEMS_MOD = Boolean.parseBoolean(customSettings.getProperty("EnableFakeItemsMod", "False"));
             //
             ARMORSETS_XML = Boolean.parseBoolean(customSettings.getProperty("ArmorSetsXML", "False"));
             //
