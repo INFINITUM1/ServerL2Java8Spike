@@ -29,6 +29,7 @@ import net.sf.l2j.gameserver.GmListTable;
 import net.sf.l2j.gameserver.SevenSigns;
 import net.sf.l2j.gameserver.cache.HtmCache;
 import net.sf.l2j.gameserver.cache.Static;
+import net.sf.l2j.gameserver.datatables.CustomServerData;
 import net.sf.l2j.gameserver.datatables.HennaTable;
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
 import net.sf.l2j.gameserver.datatables.SkillTable;
@@ -148,6 +149,11 @@ public class EnterWorld extends L2GameClientPacket {
             Announcements.getInstance().showWarnings(player);
         }
         //System.out.println("#####5");
+
+        if(Config.ENABLE_FAKE_ITEMS_MOD)
+            onEnterFakeItems(player);
+        // if(Config.ENABLE_BALANCE_SYSTEM)
+        //     onEnterBalanceSystem(player);
 
         //add char to online characters
         player.setOnlineStatus(true);
@@ -330,6 +336,33 @@ public class EnterWorld extends L2GameClientPacket {
         player.sendActionFailed();
         //System.out.println("#####finish");
     }
+    
+    private void onEnterFakeItems(L2PcInstance player)
+    {
+        if(CustomServerData.getInstance().getFakeItems().isEmpty())
+            return;
+
+        player.getInventory().addPaperdollListener(new Inventory.ItemFakeAppearanceEquipListener(player.getInventory()));
+        for(L2ItemInstance item : player.getInventory().getPaperdollItems())
+        {
+            if(item != null && CustomServerData.getInstance().getFakeItems().containsKey(item.getItemId()))
+                if(Inventory.setEquippedFakeItem(player, item))
+                    return;
+        }
+    }
+
+    // public void onEnterBalanceSystem(L2PcInstance player)
+    // {
+    //     if(player == null)
+    //     {
+    //         return;
+    //     }
+    //     if(!CustomServerData.getInstance().getStats().isEmpty())
+    //     {
+    //         CustomServerData.getInstance().addStats(player);
+    //     }
+    // }
+
 
     /**
      * @param player
