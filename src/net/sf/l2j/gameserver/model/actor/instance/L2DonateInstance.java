@@ -315,6 +315,25 @@ public class L2DonateInstance extends L2NpcInstance {
             }
 
             AugsItem(player, objectId);
+        }
+            else if (command.equalsIgnoreCase("AugsaleEn")) {
+            AugSaleWelcomeEn(player);
+        } else if (command.equalsIgnoreCase("augSaleItemsEn")) {
+            AugSaleItemsEn(player);
+        } else if (command.equalsIgnoreCase("AugsaleFinishEn")) {
+            AugsaleFinishEn(player);
+        } else if (command.startsWith("anglAug")) {
+            int augId = Integer.parseInt(command.substring(8).trim());
+
+            anglAug(player, augId);
+        } else if (command.startsWith("itemAugsEn")) {
+            int objectId = Integer.parseInt(command.substring(11).trim());
+            if (objectId == 0) {
+                showError(player, "Request Error.");
+                return;
+            }
+
+            AugsItemEn(player, objectId);
         } else if (command.equalsIgnoreCase("chinaItems")) {
             itemsChina(player);
         } else if (command.startsWith("chinaShow")) {
@@ -1841,9 +1860,9 @@ public class L2DonateInstance extends L2NpcInstance {
         NpcHtmlMessage reply = NpcHtmlMessage.id(getObjectId());
         TextBuilder replyMSG = new TextBuilder("<html><body>");
         replyMSG.append("<table width=280><tr><td><font color=336699>Клан:</font> <font color=33CCFF>" + clan.getName() + " (" + level + " ур.)</font></td><td align=right><font color=336699>Лидер:</font> <font color=33CCFF>" + player.getName() + "</font></td></tr></table><br><br>");
-        replyMSG.append("Повышение уровня клана:<br1>");
+        replyMSG.append("Повышение уровня клана:<br1>Raise a clanleve:<br1>");
         if (level < 8) {
-            replyMSG.append("<a action=\"bypass -h npc_" + getObjectId() + "_clanLevel_8\" msg=\"Покупка 8 уровень кланa. Уверены?\">8 уровень.</a> (" + CLAN_LVL8 + " " + CLAN_COIN_NAME + ")<br>");
+            replyMSG.append("<a action=\"bypass -h npc_" + getObjectId() + "_clanLevel_8\" msg=\"Покупка 8 уровень кланa. Уверены? Sure?\">8 уровень (8 lvl)</a> (" + CLAN_LVL8 + " " + CLAN_COIN_NAME + ")<br>");
             /*switch (level)
              {
              case 5:
@@ -1860,13 +1879,13 @@ public class L2DonateInstance extends L2NpcInstance {
              break;
              }*/
         } else {
-            replyMSG.append("<font color=66CC00>Уже максимальный!</font><br>");
+            replyMSG.append("<font color=66CC00>Уже максимальный! Already MAX</font><br>");
         }
 
         replyMSG.append("Дополнительно:<br1>");
         if (level >= 5) {
-            replyMSG.append("<a action=\"bypass -h npc_" + getObjectId() + "_clanPoints\" msg=\"Покупка " + CLAN_POINTS + " клан очков. Уверены?\">" + CLAN_POINTS + " клан очков. </a> (" + CLAN_POINTS_PRICE + " " + CLAN_COIN_NAME + ")<br>");
-            replyMSG.append("<a action=\"bypass -h npc_" + getObjectId() + "_clanSkills\" msg=\"Покупка фулл клан скиллов. Уверены?\">Фулл клан скиллы. </a> (" + Config.CLAN_SKILLS_PRICE + " " + CLAN_COIN_NAME + ")<br>");
+            replyMSG.append("<a action=\"bypass -h npc_" + getObjectId() + "_clanPoints\" msg=\"Покупка " + CLAN_POINTS + " клан очков. Уверены?Sure?\">" + CLAN_POINTS + " клан очков (clan points) </a> (" + CLAN_POINTS_PRICE + " " + CLAN_COIN_NAME + ")<br>");
+            replyMSG.append("<a action=\"bypass -h npc_" + getObjectId() + "_clanSkills\" msg=\"Покупка фулл клан скиллов. Уверены? Sure?\">Фулл клан скиллы/Full Clan Skills </a> (" + Config.CLAN_SKILLS_PRICE + " " + CLAN_COIN_NAME + ")<br>");
         } else {
             replyMSG.append("<font color=999999>[" + CLAN_POINTS + " клан очков]</font> (" + CLAN_POINTS_PRICE + " " + CLAN_COIN_NAME + ") Для кланов выше 5 ур.<br>");
             replyMSG.append("<font color=999999>[Фулл клан скиллы]</font> (" + Config.CLAN_SKILLS_PRICE + " " + CLAN_COIN_NAME + ") Для кланов выше 5 ур.<br>");
@@ -2181,6 +2200,193 @@ public class L2DonateInstance extends L2NpcInstance {
             return;
         }
     }
+    private void AugSaleWelcomeEn(L2PcInstance player) {
+    if (AUGSALE_TABLE.isEmpty()) {
+        player.sendMessage("Service is currently unavailable.");
+        return;
+    }
+
+    NpcHtmlMessage reply = NpcHtmlMessage.id(getObjectId());
+    TextBuilder replyMSG = new TextBuilder("<html><body>");
+    replyMSG.append(player.getName() + ", choose an augmentation:<br>");
+    replyMSG.append("<table width=280><tr><td>Augmentation<br></td></tr>");
+
+    for (FastMap.Entry<Integer, Integer> e = AUGSALE_TABLE.head(), end = AUGSALE_TABLE.tail(); (e = e.getNext()) != end;) {
+        Integer id = e.getKey();
+        Integer lvl = e.getValue();
+        if (id == null || lvl == null) {
+            continue;
+        }
+
+        L2Skill augment = SkillTable.getInstance().getInfo(id, 1);
+        if (augment == null) {
+            continue;
+        }
+
+        String augName = augment.getName();
+        String type = "";
+        if (augment.isActive()) {
+            type = "Active";
+        } else if (augment.isPassive()) {
+            type = "Passive";
+        } else {
+            type = "Chance";
+        }
+        augName = augName.replace("Item Skill: ", "");
+
+        replyMSG.append("<tr><td><a action=\"bypass -h npc_" + getObjectId() + "_anglAug " + id + "\"><font color=bef574>" + augName + " (" + type + ":" + lvl + "lvl)</font></a><br></td></tr>");
+    }
+
+    replyMSG.append("</table><br>* Price for any augmentation:<br1>" + AUGSALE_PRICE + " " + AUGSALE_COIN_NAME + "</body></html>");
+
+    player.setAugSale(0, 0);
+    player.setAugSaleItem(0);
+
+    reply.setHtml(replyMSG.toString());
+    player.sendPacket(reply);
+}
+
+// Augmentation Preview
+private void anglAug(L2PcInstance player, int augId) {
+    NpcHtmlMessage reply = NpcHtmlMessage.id(getObjectId());
+    TextBuilder replyMSG = new TextBuilder("<html><body>");
+    replyMSG.append(player.getName() + ", confirm your selection:<br>");
+
+    int lvl = AUGSALE_TABLE.get(augId);
+    replyMSG.append("<table width=280><tr><td><img src=\"Icon.skill0375\" width=32 height=32></td><td>" + getAugmentSkill(augId, lvl) + "</td></tr></table><br>");
+
+    L2ItemInstance coin = player.getInventory().getItemByItemId(AUGSALE_COIN);
+    if (coin != null && coin.getCount() >= AUGSALE_PRICE) {
+        player.setAugSale(augId, lvl);
+        replyMSG.append("<font color=33CC00>Price: " + AUGSALE_PRICE + " " + AUGSALE_COIN_NAME + "</font><br>");
+        replyMSG.append("<button value=\"Proceed\" action=\"bypass -h npc_" + getObjectId() + "_augSaleItemsEn\" width=60 height=15 back=\"sek.cbui94\" fore=\"sek.cbui92\">");
+    } else {
+        replyMSG.append("<font color=FF6666>Price: " + AUGSALE_PRICE + " " + AUGSALE_COIN_NAME + "</font><br>");
+        replyMSG.append("<font color=999999>[Proceed]</font>");
+    }
+    replyMSG.append("<br><br><a action=\"bypass -h npc_" + getObjectId() + "_AugsaleEn\">Back</a><br></body></html>");
+
+    reply.setHtml(replyMSG.toString());
+    player.sendPacket(reply);
+}
+
+// Inventory Item Selection
+private void AugSaleItemsEn(L2PcInstance player) {
+    NpcHtmlMessage reply = NpcHtmlMessage.id(getObjectId());
+    TextBuilder replyMSG = new TextBuilder("<html><body>" + getAugmentSkill(player.getAugSaleId(), player.getAugSaleLvl()) + "<br>");
+    replyMSG.append("Select an item to augment:<br><br><table width=300>");
+
+    for (L2ItemInstance item : player.getInventory().getItems()) {
+        if (item == null || !item.canBeEnchanted()) {
+            continue;
+        }
+
+        if (item.canBeAugmented() && !item.isAugmented() && !item.isWear()) {
+            String itemName = item.getItem().getName();
+            int enchantLevel = item.getEnchantLevel();
+            String itemIcon = item.getItem().getIcon();
+            replyMSG.append("<tr><td><img src=\"" + itemIcon + "\" width=32 height=32></td><td><a action=\"bypass -h npc_" + getObjectId() + "_itemAugsEn " + item.getObjectId() + "\">" + itemName + " (+" + enchantLevel + ")</a></td></tr>");
+        }
+    }
+
+    replyMSG.append("</table>");
+    replyMSG.append("<br><br><a action=\"bypass -h npc_" + getObjectId() + "_AugsaleEn\">Back</a><br></body></html>");
+    reply.setHtml(replyMSG.toString());
+    player.sendPacket(reply);
+}
+
+// Confirm Selected Item
+private void AugsItemEn(L2PcInstance player, int objectId) {
+    L2ItemInstance item = player.getInventory().getItemByObjectId(objectId);
+    if (item != null) {
+        if (!item.canBeEnchanted()) {
+            showError(player, "Invalid request.");
+            return;
+        }
+
+        NpcHtmlMessage reply = NpcHtmlMessage.id(getObjectId());
+        TextBuilder replyMSG = new TextBuilder("<html><body>" + getAugmentSkill(player.getAugSaleId(), player.getAugSaleLvl()) + "<br>");
+
+        String itemName = item.getItem().getName();
+        int enchantLevel = item.getEnchantLevel();
+        String itemIcon = item.getItem().getIcon();
+
+        replyMSG.append("Purchase augmentation:<br>Confirm this item?<br>");
+
+        replyMSG.append("<table width=300><tr><td><img src=\"" + itemIcon + "\" width=32 height=32></td><td><font color=LEVEL>" + itemName + " (+" + enchantLevel + ")</font><br></td></tr></table><br>");
+        replyMSG.append("Enchant: <font color=bef574>+" + enchantLevel + "</font><br>");
+
+        replyMSG.append("<button value=\"Confirm\" action=\"bypass -h npc_" + getObjectId() + "_AugsaleFinishEn\" width=60 height=15 back=\"sek.cbui94\" fore=\"sek.cbui92\"><br>");
+        player.setAugSaleItem(objectId);
+
+        replyMSG.append("<br><br><a action=\"bypass -h npc_" + getObjectId() + "_AugsaleEn\">Back</a><br></body></html>");
+        reply.setHtml(replyMSG.toString());
+        player.sendPacket(reply);
+    } else {
+        showError(player, "Invalid request.");
+    }
+}
+
+// Finalize: Deduct currency and apply LS
+private void AugsaleFinishEn(L2PcInstance player) {
+    L2ItemInstance targetItem = player.getInventory().getItemByObjectId(player.getAugSaleItem());
+    if (targetItem != null) {
+        if (targetItem.isAugmented()) {
+            showVoteErr0r(player, 1, 1);
+            return;
+        }
+
+        NpcHtmlMessage reply = NpcHtmlMessage.id(getObjectId());
+        TextBuilder replyMSG = new TextBuilder("<html><body>");
+
+        L2ItemInstance coin = player.getInventory().getItemByItemId(AUGSALE_COIN);
+        if (coin == null || coin.getCount() < AUGSALE_PRICE) {
+            showVoteErr0r(player, 1, 3);
+            return;
+        }
+
+        if (!player.destroyItemByItemId("LS purchase", AUGSALE_COIN, AUGSALE_PRICE, player, true)) {
+            showVoteErr0r(player, 1, 3);
+            return;
+        }
+
+        int augId = player.getAugSaleId();
+        int augLevel = player.getAugSaleLvl();
+        L2Skill augment = SkillTable.getInstance().getInfo(augId, 1);
+        if (augment == null) {
+            showVoteErr0r(player, 1, 0);
+            return;
+        }
+
+        int type = 0;
+        if (augment.isActive()) {
+            type = 2;
+        } else if (augment.isPassive()) {
+            type = 3;
+        } else {
+            type = 1;
+        }
+
+        targetItem.setAugmentation(AugmentationData.getInstance().generateAugmentation(targetItem, augId, augLevel, type));
+
+        replyMSG.append("" + getAugmentSkill(augId, augLevel) + "<br>");
+        replyMSG.append("<font color=33CC00>...successfully applied!</font><br>");
+
+        player.sendItems(false);
+        player.broadcastUserInfo();
+
+        player.setAugSale(0, 0);
+        player.setAugSaleItem(0);
+
+        replyMSG.append("</body></html>");
+        reply.setHtml(replyMSG.toString());
+        player.sendPacket(reply);
+
+        Log.addDonate(player, "LS " + augId + ":" + augLevel, AUGSALE_PRICE);
+    } else {
+        showVoteErr0r(player, 1, 0);
+    }
+}
 
     /**
      * Шадоу шмотки

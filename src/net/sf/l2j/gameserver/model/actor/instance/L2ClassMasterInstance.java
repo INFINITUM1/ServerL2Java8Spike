@@ -217,7 +217,7 @@ public final class L2ClassMasterInstance extends L2FolkInstance {
                         break;
                 }
             } else {
-                replyMSG.append("<font color=66CC00>Уже максимальный!</font><br>");
+                replyMSG.append("<font color=66CC00>Уже максимальный! Already MAX</font><br>");
             }
             replyMSG.append("</body></html>");
             reply.setHtml(replyMSG.toString());
@@ -396,7 +396,7 @@ public final class L2ClassMasterInstance extends L2FolkInstance {
         }
 
         player.getClan().changeLevel(level);
-        player.sendMessage("Уровень клана увеличен до " + level);
+        player.sendMessage("Уровень клана увеличен до " + level + "\nClan level raised up to " + level);
     }
 
     @Override

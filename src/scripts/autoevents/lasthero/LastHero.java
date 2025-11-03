@@ -464,7 +464,7 @@ public class LastHero {
                 _ips.remove(player.getIP());
             }
 
-            player.sendCritMessage("Вы проиграли...");
+            player.sendCritMessage("Вы проиграли... (You lost)");
             try {
                 player.teleToLocationEvent(82737, 148571, -3470);
             } catch (Exception e) {

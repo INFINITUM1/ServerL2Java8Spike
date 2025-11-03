@@ -50,7 +50,7 @@ public class Online
 				if (Config.SONLINE_SHOW_OFFLINE)
 					an.announceToAll("Игроков онлайн: " + currentOnline + "; Оффлайн торговцев: " + offTraders);
 				else
-					an.announceToAll("Игроков онлайн: " + currentOnline);
+					an.announceToAll("Игроков онлайн: " + currentOnline + "\nOnline: " + currentOnline + " players");
 					
 				if (Config.SONLINE_SHOW_MAXONLINE)
 				{

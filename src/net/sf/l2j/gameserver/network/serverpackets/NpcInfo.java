@@ -55,10 +55,10 @@ public final class NpcInfo extends L2GameServerPacket {
 
         // Установка титула чемпиона
         if (Config.L2JMOD_CHAMPION_ENABLE && _isChampion) {
-            _title = "Заточки";
+            _title = "Заточки SCROLLS";
             championTitleSet = true;
         } else if (Config.L2JMOD_CHAMPION_ENABLE_BLUE && _isChampion1) {
-            _title = "Руна + Книга";
+            _title = "BONUS";
             championTitleSet = true;
         }
 
