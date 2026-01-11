@@ -70,9 +70,12 @@ public final class NpcInfo extends L2GameServerPacket {
                 _title = cha.getTitle();
             }
 
-            if (!Config.SHOW_NPC_LVL && _activeChar.isL2Monster()) {
-                _title = " ";
-            }
+// if (!Config.SHOW_NPC_LVL && _activeChar.isL2Monster()) {
+//         if (_title == null || _title.isEmpty()) {
+//             _title = " "; // оставляем пробел, если титул пуст
+//         }
+//         // иначе титул остаётся из шаблона
+//     }
 
             _team = cha.getTeamAura();
             if (_team > 0) {

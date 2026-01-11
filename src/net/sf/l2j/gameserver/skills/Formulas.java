@@ -192,8 +192,8 @@ public final class Formulas {
             double intb = INTbonus[env.cha.getINT()];
             double lvlb = env.cha.getLevelMod();
             env.value *= (lvlb * lvlb) * (intb * intb);
-            if (env.value > 36000) {
-                env.value = 36000;
+            if (env.value > 36000000) {
+                env.value = 36000000;
             }
         }
     }
@@ -1275,7 +1275,7 @@ public final class Formulas {
             mAtk *= 2;
         }
 
-        double damage = 91 * Math.sqrt(mAtk) / mDef * skill.getPower(attacker) * calcSkillVulnerability(target, skill);
+        double damage = 91 * (Math.sqrt(mAtk) * 15 / mDef) * skill.getPower(attacker) * calcSkillVulnerability(target, skill);
 
         // In C5 summons make 10 % less dmg in PvP.
         if (attacker.isL2Summon() && target.isPlayer()) {

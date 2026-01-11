@@ -6703,6 +6703,35 @@ public final class Config {
             customSettings.load(is);
             is.close();
 
+
+			// ENABLE_AUTO_PLAY = autoPlayConfig.getBoolean("EnableAutoPlay", false);
+			// ENABLE_AUTO_POTION = autoPlayConfig.getBoolean("EnableAutoPotion", true);
+			// ENABLE_AUTO_SKILL = autoPlayConfig.getBoolean("EnableAutoSkill", true);
+			// ENABLE_AUTO_ITEM = autoPlayConfig.getBoolean("EnableAutoItem", true);
+			// RESUME_AUTO_PLAY = autoPlayConfig.getBoolean("ResumeAutoPlay", false);
+			// ENABLE_AUTO_ASSIST = autoPlayConfig.getBoolean("AssistLeader", false);
+			// AUTO_PLAY_SHORT_RANGE = autoPlayConfig.getInt("ShortRange", 600);
+			// AUTO_PLAY_LONG_RANGE = autoPlayConfig.getInt("LongRange", 1400);
+			// AUTO_PLAY_PREMIUM = autoPlayConfig.getBoolean("AutoPlayPremium", false);
+			// DISABLED_AUTO_SKILLS.clear();
+			// final String disabledSkills = autoPlayConfig.getString("DisabledSkillIds", "");
+			// if (!disabledSkills.isEmpty())
+			// {
+			// 	for (String s : disabledSkills.split(","))
+			// 	{
+			// 		DISABLED_AUTO_SKILLS.add(Integer.parseInt(s.trim()));
+			// 	}
+			// }
+			// DISABLED_AUTO_ITEMS.clear();
+			// final String disabledItems = autoPlayConfig.getString("DisabledItemIds", "");
+			// if (!disabledItems.isEmpty())
+			// {
+			// 	for (String s : disabledItems.split(","))
+			// 	{
+			// 		DISABLED_AUTO_ITEMS.add(Integer.parseInt(s.trim()));
+			// 	}
+			// }
+			// AUTO_PLAY_LOGIN_MESSAGE = autoPlayConfig.getString("AutoPlayLoginMessage", "");
             ALLOW_HERO_SUBSKILL = Boolean.parseBoolean(customSettings.getProperty("CustomHeroSubSkill", "False"));
             SUB_START_LVL = Byte.parseByte(customSettings.getProperty("SubStartLvl", "40"));
             MULTILANG_ENABLE = Boolean.parseBoolean(customSettings.getProperty("MultilangEnable", "False"));

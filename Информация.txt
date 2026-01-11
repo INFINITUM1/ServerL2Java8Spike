@@ -14,6 +14,10 @@ https://drive.google.com/file/d/1sfQmX0F33y4BaK4KXNXlKf98gvBLnELD/view?usp=shari
 https://drive.google.com/file/d/1DixlyELVnjHIcCo5_M6OW6TsWtv0xpDX/view?usp=sharing
 4) L2 Spike Patch + DB + Build 07 september 2025 -  First Grand Open
 https://drive.google.com/file/d/1l1NnDz_z8mPj921tKZJ4U0xpc7jloLwN/view?usp=sharing
+5) L2 Spike Patch 31 december 2025 - Third Grand Open
+https://github.com/InsPekToP/L2spike/releases/download/L2Spike_Patch_30.12/L2.Spike.Patch_30.12.zip
+DB + build:
+https://drive.google.com/file/d/19cfXuNbA5t8dmebTImHpR8F_VSAJoJxS/view?usp=sharing
 
 l2spike.com - a site of the server 
 

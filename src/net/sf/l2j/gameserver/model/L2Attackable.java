@@ -1525,9 +1525,9 @@ public class L2Attackable extends L2NpcInstance {
             case 8609:
             case 8610:
             case 8611:
-            case 6622:
+            // case 6622:
             case 6577:
-            case 6578:
+            // case 6578:
             case 8762:
                 return true;
             default:

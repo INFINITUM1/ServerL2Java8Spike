@@ -275,8 +275,8 @@ public class LastHero {
                 }
 
                 player.teleToLocationEvent(_tpLoc.x + Rnd.get(300), _tpLoc.y + Rnd.get(300), _tpLoc.z);
-                player.stopAllEffects();
-                player.doEventBuff();
+                // player.stopAllEffects();
+                // player.doEventBuff();
                 player.setCurrentCp(player.getMaxCp());
                 player.setCurrentHp(player.getMaxHp());
                 player.setCurrentMp(player.getMaxMp());
