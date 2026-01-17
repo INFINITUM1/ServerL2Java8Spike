@@ -45,4 +45,6 @@ l2spike.com - a site of the server
         CustomServerData.java
         Inventory.java
         Enterworld.java
-14. 
+14. Command .box for Extractable item BOX: 
+        ExtractableItems.java: add extractMultiple();
+        + BoxCommand.java 
