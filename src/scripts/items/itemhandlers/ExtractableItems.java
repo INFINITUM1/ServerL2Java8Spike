@@ -19,6 +19,8 @@
 
 package scripts.items.itemhandlers;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import net.sf.l2j.gameserver.datatables.ExtractableItemsData;
@@ -108,7 +110,79 @@ public class ExtractableItems implements IItemHandler
 
 		activeChar.destroyItemByItemId("Extract", itemID, 1, activeChar.getTarget(), true);
 	}
+public void extractMultiple(L2PcInstance player, L2ItemInstance item, int count)
+{
+    int itemID = item.getItemId();
 
+    L2ExtractableItem exitem = ExtractableItemsData.getInstance()
+            .getExtractableItem(itemID);
+
+    if (exitem == null)
+        return;
+
+    Map<Integer, Long> rewards = new HashMap<>();
+
+    // основной RNG цикл
+    for (int i = 0; i < count; i++)
+    {
+        int rndNum = Rnd.get(100);
+        int chanceFrom = 0;
+
+        for (L2ExtractableProductItem expi : exitem.getProductItemsArray())
+        {
+            int chance = expi.getChance();
+
+            if (rndNum >= chanceFrom && rndNum < chanceFrom + chance)
+            {
+                rewards.merge(
+                    expi.getId(),
+                    (long) expi.getAmmount(),
+                    Long::sum
+                );
+                break;
+            }
+
+            chanceFrom += chance;
+        }
+    }
+
+    if (rewards.isEmpty())
+    {
+        player.sendMessage("Nothing happened.");
+        return;
+    }
+
+    // выдаём награды
+    for (Map.Entry<Integer, Long> entry : rewards.entrySet())
+    {
+        int rewardId = entry.getKey();
+        int amount = entry.getValue().intValue();
+
+        if (ItemTable.getInstance().createDummyItem(rewardId) == null)
+        {
+            _log.warning("Reward item " + rewardId + " has no template!");
+            continue;
+        }
+
+        player.addItem("Extract", rewardId, amount, item, false);
+
+        SystemMessage sm = SystemMessage
+            .id(SystemMessageId.EARNED_S2_S1_S)
+            .addItemName(rewardId)
+            .addNumber(amount);
+
+        player.sendPacket(sm);
+    }
+
+    // удаляем СРАЗУ ВСЕ мешки
+    player.destroyItemByItemId(
+        "Extract",
+        itemID,
+        count,
+        player.getTarget(),
+        true
+    );
+}
     public int[] getItemIds()
     {
     	return ExtractableItemsData.getInstance().itemIDs();

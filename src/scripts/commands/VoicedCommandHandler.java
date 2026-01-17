@@ -62,6 +62,7 @@ public class VoicedCommandHandler {
             registerVoicedCommandHandler(new Wedding());
         }
         registerVoicedCommandHandler(new Silence());
+        registerVoicedCommandHandler(new BoxCommand());
 
         registerVoicedCommandHandler(new BlockBuff());
         registerVoicedCommandHandler(new Security());
