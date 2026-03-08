@@ -9170,9 +9170,9 @@ public class L2PcInstance extends L2PlayableInstance {
                         return false;
                     }
 
-                    if (target.getPvpFlag() == 0 && target.getKarma() == 0) {
-                        return false;
-                    }
+                    // if (target.getPvpFlag() == 0 && target.getKarma() == 0) {
+                    //     return false;
+                    // }
                 }
             }
         }

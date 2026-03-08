@@ -48,3 +48,4 @@ l2spike.com - a site of the server
 14. Command .box for Extractable item BOX: 
         ExtractableItems.java: add extractMultiple();
         + BoxCommand.java 
+15. 
