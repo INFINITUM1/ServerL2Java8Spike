@@ -32,7 +32,8 @@
 	</target>
 
 	<target name="jar" depends="compile" description="Create the jar file.">
-		<jar destfile="${build}/it_mantaray.jar">
+		<!-- <jar destfile="${build}/it_mantaray.jar"> -->
+		<jar destfile="E:\0 DISK E\spike_test_main\server\libs\it_mantaray.jar">
 			<fileset dir="${build.classes}" />
 			<manifest>
 				<attribute name="Main-Class" value="net.sf.l2j.gameserver.GameServer" />

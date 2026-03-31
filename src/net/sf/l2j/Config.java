@@ -1620,6 +1620,7 @@ public final class Config {
     public static double BLOW_DAMAGE_HEAVY;
     public static double BLOW_DAMAGE_LIGHT;
     public static double BLOW_DAMAGE_ROBE;
+    public static boolean CUSTOM_SHORTCUTS;
     public static boolean ALLOW_HERO_SUBSKILL;
     public static byte SUB_START_LVL;
     public static int RUN_SPD_BOOST;
@@ -6736,6 +6737,7 @@ public final class Config {
             SUB_START_LVL = Byte.parseByte(customSettings.getProperty("SubStartLvl", "40"));
             MULTILANG_ENABLE = Boolean.parseBoolean(customSettings.getProperty("MultilangEnable", "False"));
             MULTILANG_DEFAULT = customSettings.getProperty("MultilangDefault", "ru");
+            CUSTOM_SHORTCUTS = Boolean.parseBoolean(customSettings.getProperty("CustomShortcuts", "False"));
             MULTILANG_ALLOWED = Arrays.asList(customSettings.getProperty("MultilangAllowed", "ru").split(","));
             RUN_SPD_BOOST = Integer.parseInt(customSettings.getProperty("RunSpeedBoost", "0"));
             MAX_RUN_SPEED = Integer.parseInt(customSettings.getProperty("MaxRunSpeed", "250"));

@@ -153,13 +153,13 @@ public class L2MerchantInstance extends L2FolkInstance {
             int val = Integer.parseInt(st.nextToken());
             L2Multisell.getInstance().SeparateAndSend(val, player, true, getCastle().getTaxRate());
         } else if (command.startsWith("WithdrawWH")) {
-            if (getTemplate().npcId != 50000) {
+            if (getTemplate().npcId != 50000&& getTemplate().npcId != 50100) {
                 return;
             }
 
             showRetrieveWindow(player);
         } else if (command.equals("DepositWH")) {
-            if (getTemplate().npcId != 50000) {
+            if (getTemplate().npcId != 50000&& getTemplate().npcId != 50100 ) {
                 return;
             }
 

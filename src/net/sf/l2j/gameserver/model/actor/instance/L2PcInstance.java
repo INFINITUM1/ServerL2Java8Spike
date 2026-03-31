@@ -1574,6 +1574,17 @@ public class L2PcInstance extends L2PlayableInstance {
         _shortCuts.registerShortCut(shortcut);
     }
 
+    public int findItemObjectId(int itemId) {
+        return checkItemObjectId(getInventory().getItemByItemId(itemId));
+    }
+
+    private int checkItemObjectId(L2ItemInstance coins) {
+        if (coins == null) {
+            return 0;
+        }
+        return coins.getObjectId();
+    }
+
     /**
      * Delete the L2ShortCut corresponding to the position (page-slot) from the
      * L2PcInstance _shortCuts.<BR>
@@ -8850,6 +8861,22 @@ public class L2PcInstance extends L2PlayableInstance {
             sendActionFailed();
             return;
         }
+        // Ultra Dash skill
+        if (skill.getId() == 3668 && target instanceof L2Character) {
+            L2Character t = (L2Character) target;
+
+            double dx = t.getX() - getX();
+            double dy = t.getY() - getY();
+            double dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist > 60) {
+                int newX = (int) (t.getX() - (dx / dist) * 60);
+                int newY = (int) (t.getY() - (dy / dist) * 60);
+                int newZ = t.getZ();
+
+                teleToLocation(newX, newY, newZ);
+            }
+        }
 
         updateLastTeleport(false);
 
@@ -9171,7 +9198,7 @@ public class L2PcInstance extends L2PlayableInstance {
                     }
 
                     // if (target.getPvpFlag() == 0 && target.getKarma() == 0) {
-                    //     return false;
+                    // return false;
                     // }
                 }
             }
@@ -10300,8 +10327,9 @@ public class L2PcInstance extends L2PlayableInstance {
          * 'classIndex'.
          */
         store();
-        clearDisabledSkills();
-
+        if (Config.RELOAD_SUB_SKILL) {
+            clearDisabledSkills();
+        }
         if (classIndex == 0) {
             setClassTemplate(getBaseClass());
         } else {
@@ -15580,6 +15608,7 @@ public class L2PcInstance extends L2PlayableInstance {
                 if (Rnd.get(100) < reward.chance) {
                     killer.addItem("pvp_bonus", reward.id, reward.count, killer, true);
                 }
+
             }
             reward = null;
 

@@ -32,6 +32,9 @@ import net.sf.l2j.gameserver.model.Inventory;
 import net.sf.l2j.gameserver.model.L2Attackable;
 import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.L2ItemInstance;
+import net.sf.l2j.gameserver.model.L2Macro;
+import net.sf.l2j.gameserver.model.L2Macro.L2MacroCmd;
+import net.sf.l2j.gameserver.model.L2ShortCut;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.actor.instance.L2NpcInstance;
 import net.sf.l2j.gameserver.model.actor.instance.L2PcInstance;
@@ -110,6 +113,9 @@ public class CustomServerData {
         if (Config.ENABLE_FAKE_ITEMS_MOD) {
             fakeItems();
         }
+        if (Config.CUSTOM_SHORTCUTS){
+            cacheStartShortcuts();
+        }
 
         cacheSoldSkills();
         cacheZakenPoints();
@@ -122,6 +128,7 @@ public class CustomServerData {
         cacheChestsDrop();
         cacheSpecialDrop();
         loadPcNpcs();
+        
     }
     //кеш донат шопа
     public static FastTable<DonateItem> _donateItems = new FastTable<DonateItem>();
@@ -154,6 +161,147 @@ public class CustomServerData {
     public static FastTable<StatPlayer> _statPk = new FastTable<StatPlayer>();
     public static FastTable<StatClan> _statClans = new FastTable<StatClan>();
     public static FastTable<StatCastle> _statCastles = new FastTable<StatCastle>();
+
+  private static FastMap<Integer, FastList<L2ShortCut>> _startShortcuts = new FastMap<Integer, FastList<L2ShortCut>>().shared("CustomServerData._startShortcuts");
+
+    private void cacheStartShortcuts()
+    {
+        try
+        {
+            File file = new File(Config.DATAPACK_ROOT, "data/pc_shortcuts.xml");
+            if (!file.exists())
+            {
+                _log.config("CustomServerData [ERROR]: data/pc_shortcuts.xml doesn't exist");
+                return;
+            }
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setValidating(false);
+            factory.setIgnoringComments(true);
+            Document doc = factory.newDocumentBuilder().parse(file);
+            for (Node n = doc.getFirstChild(); n != null; n = n.getNextSibling()) {
+                if ("list".equalsIgnoreCase(n.getNodeName())) {
+                    for (Node d = n.getFirstChild(); d != null; d = d.getNextSibling())
+                    {
+                        if ("magic".equalsIgnoreCase(d.getNodeName()))
+                        {
+                            NamedNodeMap attrs = d.getAttributes();
+
+                            FastList<L2ShortCut> shorts = new FastList<L2ShortCut>();
+                            for (Node cd = d.getFirstChild(); cd != null; cd = cd.getNextSibling()) {
+                                if ("shortcut".equalsIgnoreCase(cd.getNodeName()))
+                                {
+                                    attrs = cd.getAttributes();
+
+                                    String data = attrs.getNamedItem("data").getNodeValue();
+                                    data = data.replaceAll(" ", "");
+
+                                    String[] shotcut = data.split(",");
+
+                                    shorts.add(new L2ShortCut(Integer.parseInt(shotcut[0]), Integer.parseInt(shotcut[1]), Integer.parseInt(shotcut[2]), Integer.parseInt(shotcut[3]), Integer.parseInt(shotcut[4]), Integer.parseInt(shotcut[5])));
+                                }
+                            }
+                            _startShortcuts.put(0, shorts);
+                        }
+                        if ("fighter".equalsIgnoreCase(d.getNodeName()))
+                        {
+                            NamedNodeMap attrs = d.getAttributes();
+
+                            FastList<L2ShortCut> shorts = new FastList<L2ShortCut>();
+                            for (Node cd = d.getFirstChild(); cd != null; cd = cd.getNextSibling()) {
+                                if ("shortcut".equalsIgnoreCase(cd.getNodeName()))
+                                {
+                                    attrs = cd.getAttributes();
+
+                                    String data = attrs.getNamedItem("data").getNodeValue();
+                                    data = data.replaceAll(" ", "");
+
+                                    String[] shotcut = data.split(",");
+
+                                    shorts.add(new L2ShortCut(Integer.parseInt(shotcut[0]), Integer.parseInt(shotcut[1]), Integer.parseInt(shotcut[2]), Integer.parseInt(shotcut[3]), Integer.parseInt(shotcut[4]), Integer.parseInt(shotcut[5])));
+                                }
+                            }
+                            _startShortcuts.put(1, shorts);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            _log.warning("CustomServerData [ERROR]: cacheStartShortcuts() " + e.toString());
+        }
+        _log.config("CustomServerData: Custom Shortcuts, loaded " + (_startShortcuts.get(0) .size() + _startShortcuts.get(1).size()) + " shortcuts.");
+    }
+
+    public FastList<L2ShortCut> getShortCuts(int type)
+    {
+        return _startShortcuts.get(type);
+    }
+
+    public void registerShortCuts(L2PcInstance player)
+    {
+        if (player == null) {
+            return;
+        }
+        processShortCuts(player, _startShortcuts.get(player.isMageClass() ? 0 : 1), null);
+    }
+
+    private void processShortCuts(L2PcInstance player, FastList<L2ShortCut> shorts, L2ShortCut sc)
+    {
+        if (player == null) {
+            return;
+        }
+        if (shorts == null || shorts.isEmpty()) {
+            return;
+        }
+        FastList.Node<L2ShortCut> k = shorts.head();
+        for (FastList.Node<L2ShortCut> endk = shorts.tail(); (k = k.getNext()) != endk;)
+        {
+            sc = k.getValue();
+            if (sc == null) {
+                continue;
+            }
+            switch (sc.getType())
+            {
+                case 1:
+                    int itemId = sc.getId();
+                    int itemObjectId = player.findItemObjectId(itemId);
+                    if (itemObjectId == 0) {
+                        continue;
+                    }
+                    player.registerShortCut(sc.updateID(itemObjectId));
+                    break;
+                case 2:
+                    if (player.getKnownSkill(sc.getId()) == null) {
+                        continue;
+                    }
+                    player.registerShortCut(sc);
+                    break;
+                case 3:
+                    player.registerShortCut(sc);
+                    break;
+                case 4:
+                    L2MacroCmd[] commands = new L2MacroCmd[1];
+                    switch (sc.getId())
+                    {
+                        case 33333:
+                            commands[0] = new L2MacroCmd(1, 3, 0, 0, ".menu");
+                            player.registerMacro(new L2Macro(0, 0, ".menu", "", "menu", commands));
+                            player.registerShortCut(sc.updateID(1000));
+                            break;
+                        case 44444:
+                            commands[0] = new L2MacroCmd(1, 3, 0, 0, ".security");
+                            player.registerMacro(new L2Macro(0, 0, ".security", "", "security", commands));
+                            player.registerShortCut(sc.updateID(1001));
+                            break;
+                        default:
+                            player.registerShortCut(sc);
+                            break;
+                    }
+                    break;
+            }
+        }
+        sc = null;
+    }
 
     public static class Riddle {
 

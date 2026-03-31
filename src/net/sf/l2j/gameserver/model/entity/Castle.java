@@ -95,7 +95,7 @@ public class Castle {
     private int _ownerIdLast = 0;
     private Siege _siege = null;
     private Calendar _siegeDate;
-    private int _siegeDayOfWeek = 7; // Default to saturday
+    private int _siegeDayOfWeek = 1; // Default to saturday
     private int _siegeHourOfDay = 20; // Default to 8 pm server time
     private int _taxPercent = 0;
     private double _taxRate = 0;

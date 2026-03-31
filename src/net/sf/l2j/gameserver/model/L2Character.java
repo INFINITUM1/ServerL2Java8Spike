@@ -3039,7 +3039,10 @@ public abstract class L2Character extends L2Object {
             if (e == null) {
                 continue;
             }
-
+            // Пропускаем кастомный скилл 3665
+    if (e.getSkill().getId() == 3665) {
+        continue;
+    }
             e.exit(true);
         }
         updateAndBroadcastStatus(2);
@@ -5539,6 +5542,8 @@ public abstract class L2Character extends L2Object {
                     }
                     // Reduce HP of the target and calculate reflection damage to reduce HP of attacker if necessary
                     double reflectPercent = target.getStat().calcStat(Stats.REFLECT_DAMAGE_PERCENT, 0, null, null);
+                    reflectPercent = Math.min(reflectPercent, 10);
+
                     if (reflectPercent > 0) {
                         reflectedDamage = (int) (reflectPercent / 100. * damage);
                         damage -= reflectedDamage;

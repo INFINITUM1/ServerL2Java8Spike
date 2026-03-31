@@ -72,4 +72,7 @@ public class L2ShortCut
     {
         return _type;
     }
+    public L2ShortCut updateID(int id) {
+		return new L2ShortCut(_slot, _page, _type, id, _level, 1);
+	}
 }

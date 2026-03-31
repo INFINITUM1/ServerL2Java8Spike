@@ -20,6 +20,7 @@ package net.sf.l2j.gameserver.model;
 
 import java.util.concurrent.ScheduledFuture;
 
+import javolution.util.FastList;
 import javolution.util.FastMap;
 import javolution.util.FastTable;
 import net.sf.l2j.Config;
@@ -35,13 +36,17 @@ import net.sf.l2j.gameserver.model.actor.instance.L2SummonInstance;
 import net.sf.l2j.gameserver.model.entity.DimensionalRift;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
+import net.sf.l2j.gameserver.network.serverpackets.ExShowScreenMessage;
 import net.sf.l2j.gameserver.network.serverpackets.L2GameServerPacket;
+import net.sf.l2j.gameserver.network.serverpackets.MagicSkillLaunched;
+import net.sf.l2j.gameserver.network.serverpackets.MagicSkillUser;
 import net.sf.l2j.gameserver.network.serverpackets.PartyMemberPosition;
 import net.sf.l2j.gameserver.network.serverpackets.PartySmallWindowAdd;
 import net.sf.l2j.gameserver.network.serverpackets.PartySmallWindowAll;
 import net.sf.l2j.gameserver.network.serverpackets.PartySmallWindowDelete;
 import net.sf.l2j.gameserver.network.serverpackets.PartySmallWindowDeleteAll;
 import net.sf.l2j.gameserver.network.serverpackets.PartySmallWindowUpdate;
+import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.skills.Stats;
@@ -313,28 +318,126 @@ public class L2Party {
 
     public void updatePartyBuff() {
         int partySize = getMemberCount();
+        
+        if (partySize < 2)
+            return;
+
+        L2Skill skill = SkillTable.getInstance().getInfo(PARTY_SKILL_ID, partySize);
+        if (skill == null)
+            return;
+        int dropBonus = getDropBonus(partySize);
+        String message = "Party LVL = " + partySize + ". Drop: +" + dropBonus + "%";
 
         for (L2PcInstance member : getPartyMembers()) {
-            if (member == null) {
+            if (member == null)
                 continue;
-            }
 
-            // всегда сначала снимаем
             member.stopSkillEffects(PARTY_SKILL_ID);
-
-            // если пати меньше 2 — дальше ничего не даём
-            if (partySize < 2) {
-                continue;
-            }
-
-            L2Skill skill = SkillTable.getInstance()
-                    .getInfo(PARTY_SKILL_ID, partySize);
-
-            if (skill != null) {
-                skill.getEffects(member, member);
-            }
+            skill.getEffects(member, member);
+            member.broadcastPacket(new SocialAction(member.getObjectId(), 15));
+            // Отправка сообщения на экран
+            member.sendPacket(new ExShowScreenMessage(
+                    message,
+                    3000, // время в миллисекундах (5 секунд)
+                    ExShowScreenMessage.ScreenMessageAlign.TOP_CENTER,
+                    true, // большой шрифт
+                    1, // type = 1 (пользовательский текст)
+                    0, // sysMessageId
+                    true // эффект (вспышка)
+            ));
         }
     }
+
+    private int getDropBonus(int partySize) {
+        // partySize от 2 до 9
+        switch (partySize) {
+            case 2:
+                return 15;
+            case 3:
+                return 30;
+            case 4:
+                return 45;
+            case 5:
+                return 60;
+            case 6:
+                return 75;
+            case 7:
+                return 90;
+            case 8:
+                return 105;
+            case 9:
+                return 120;
+            default:
+                return 0;
+        }
+    }
+
+    // каст
+
+    // public void updatePartyBuff() {
+    // int partySize = getMemberCount();
+
+    // for (L2PcInstance member : getPartyMembers()) {
+    // if (member == null) {
+    // continue;
+    // }
+
+    // // всегда сначала снимаем
+    // member.stopSkillEffects(PARTY_SKILL_ID);
+
+    // // если пати меньше 2 — дальше ничего не даём
+    // if (partySize < 2) {
+    // continue;
+    // }
+
+    // L2Skill skill = SkillTable.getInstance()
+    // .getInfo(PARTY_SKILL_ID, partySize);
+
+    // if (skill != null) {
+
+    // skill.getEffects(member, member);
+
+    // }
+
+    // }
+    // }
+    // public void updatePartyBuff() {
+    // int partySize = getMemberCount();
+    // if (partySize < 2) return; // не даём баф малой пати
+
+    // L2Skill skill = SkillTable.getInstance().getInfo(PARTY_SKILL_ID, partySize);
+    // if (skill == null) return;
+
+    // FastTable<L2PcInstance> members = getPartyMembers();
+
+    // // Снимаем старый баф
+    // for (L2PcInstance member : members) {
+    // if (member != null)
+    // member.stopSkillEffects(PARTY_SKILL_ID);
+    // }
+
+    // // Накладываем эффекты на всех
+    // for (L2PcInstance member : members) {
+    // if (member != null)
+    // skill.getEffects(member, member);
+    // }
+
+    // // Берём лидера пати как кастера пакета
+    // L2PcInstance leader = members.get(0);
+
+    // if (leader != null) {
+    // FastList<L2Object> targets = new FastList<>();
+    // targets.addAll(members); // все члены пати
+
+    // // Отправляем один пакет, клиент сам покажет анимацию на всех
+    // leader.broadcastPacket(new MagicSkillLaunched(
+    // leader,
+    // skill.getId(),
+    // skill.getLevel(),
+    // targets
+    // ));
+    // }
+    // }
 
     /**
      * adds new member to party
