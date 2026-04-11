@@ -7650,6 +7650,9 @@ public class L2PcInstance extends L2PlayableInstance {
                 }
 
                 int skillId = effect.getSkill().getId();
+                if (skillId == 3665) {
+                    continue;
+                }
                 if (storedSkills.contains(skillId)) {
                     continue;
                 }

@@ -685,6 +685,7 @@ public class Castle {
     public final int getSiegeHourOfDay() {
         return _siegeHourOfDay;
     }
+ 
 
     public final int getTaxPercent() {
         return _taxPercent;

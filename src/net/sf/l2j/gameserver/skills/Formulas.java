@@ -1187,7 +1187,7 @@ public final class Formulas {
             double critBonus = attacker.getCriticalDmg(target, damage);
 
             // КАП (например максимум +200% от базы)
-            critBonus = Math.min(critBonus, damage * 2);
+            critBonus = Math.min(critBonus, damage * 1.6);
 
             damage += critBonus;
             if (attacker.getFirstEffect(357) != null) {

@@ -131,13 +131,13 @@ public class Siege {
                 if (timeRemaining > 3600000) {
                     ThreadPoolManager.getInstance().scheduleGeneral(new ScheduleEndSiegeTask(_castleInst), timeRemaining - 3600000); // Prepare task for 1 hr left.
                 } else if ((timeRemaining <= 3600000) && (timeRemaining > 600000)) {
-                    announceToPlayer(Math.round(timeRemaining / 60000) + " минут до окончани€ осады " + CastleName, true);
+                    announceToPlayer(Math.round(timeRemaining / 60000) + " минут до окончания осады " + CastleName, true);
                     ThreadPoolManager.getInstance().scheduleGeneral(new ScheduleEndSiegeTask(_castleInst), timeRemaining - 600000); // Prepare task for 10 minute left.
                 } else if ((timeRemaining <= 600000) && (timeRemaining > 300000)) {
-                    announceToPlayer(Math.round(timeRemaining / 60000) + " минут до окончани€ осады " + CastleName, true);
+                    announceToPlayer(Math.round(timeRemaining / 60000) + " минут до окончания осады " + CastleName, true);
                     ThreadPoolManager.getInstance().scheduleGeneral(new ScheduleEndSiegeTask(_castleInst), timeRemaining - 300000); // Prepare task for 5 minute left.
                 } else if ((timeRemaining <= 300000) && (timeRemaining > 10000)) {
-                    announceToPlayer(Math.round(timeRemaining / 60000) + " минут до окончани€ осады " + CastleName, true);
+                    announceToPlayer(Math.round(timeRemaining / 60000) + " минут до окончания осады " + CastleName, true);
                     ThreadPoolManager.getInstance().scheduleGeneral(new ScheduleEndSiegeTask(_castleInst), timeRemaining - 10000); // Prepare task for 10 seconds count down
                 } else if ((timeRemaining <= 10000) && (timeRemaining > 0)) {
                     for (int i = 10; i > 0; i--) {
@@ -174,7 +174,7 @@ public class Siege {
                 if (timeRemaining > 86400000) {
                     ThreadPoolManager.getInstance().scheduleGeneral(new ScheduleStartSiegeTask(_castleInst), timeRemaining - 86400000); // Prepare task for 24 before siege start to end registration
                 } else if ((timeRemaining <= 86400000) && (timeRemaining > 13600000)) {
-                    announceToPlayer("«акончена регистраци€ на осаду " + CastleName, false);
+                    announceToPlayer("Закончена регистрация на осаду " + CastleName, false);
                     _isRegistrationOver = true;
                     clearSiegeWaitingClan();
                     ThreadPoolManager.getInstance().scheduleGeneral(new ScheduleStartSiegeTask(_castleInst), timeRemaining - 13600000); // Prepare task for 1 hr left before siege start.
@@ -974,18 +974,18 @@ public class Siege {
      */
     private boolean checkIfCanRegister(L2PcInstance player) {
         if (getIsRegistrationOver()) {
-            player.sendMessage("¬рем€ регистрации на битву за " + getCastle().getName() + " истекло");
+            player.sendMessage("Время регистрации на битву за " + getCastle().getName() + " истекло");
         } else if (getIsInProgress()) {
             player.sendPacket(Static.SIEGE_NO_REG);
         } else if (player.getClan() == null
                 || player.getClan().getLevel() < SiegeManager.getInstance().getSiegeClanMinLevel()) {
-            player.sendMessage("“олько кланы выше " + SiegeManager.getInstance().getSiegeClanMinLevel() + " уровн€ могут регистрироватьс€");
+            player.sendMessage("Только кланы выше " + SiegeManager.getInstance().getSiegeClanMinLevel() + " уровн€ могут регистрироватьс€");
         } else if (player.getClan().getHasCastle() > 0) {
             player.sendPacket(Static.SIEGE_HAVE_CASTLE);
         } else if (player.getClan().getClanId() == getCastle().getOwnerId()) {
             player.sendPacket(Static.CLAN_THAT_OWNS_CASTLE_IS_AUTOMATICALLY_REGISTERED_DEFENDING);
         } else if (SiegeManager.getInstance().checkIsRegistered(player.getClan(), getCastle().getCastleId())) {
-            player.sendMessage("¬ы уже зарегистрированы");
+            player.sendMessage("Вы уже зарегистрированы");
         } //else if (player.getClanId() == ClanHallManager.getInstance().getClanHallById(34).getOwnerId() 
         //	|| player.getClanId() == ClanHallManager.getInstance().getClanHallById(64).getOwnerId())
         //		 player.sendMessage("¬ладельцам элитных кланхоллов нельз€ регистрироватьс€ на другие осады");

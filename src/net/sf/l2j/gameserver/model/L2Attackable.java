@@ -1097,9 +1097,10 @@ public class L2Attackable extends L2NpcInstance {
             default:
                 if (isGrandRaid()) {
                     return (itemCount * (int) Config.RATE_DROP_ITEMSGRANDMUL);
-                } else if (isRaid()) {
-                    return (itemCount * (int) Config.RATE_DROP_ITEMSRAIDMUL);
                 }
+                // } else if (isRaid()) {
+                //     return (itemCount * (int) Config.RATE_DROP_ITEMSRAIDMUL);
+                // }
 
                 if (Config.L2JMOD_CHAMPION_ENABLE && isChampion()) {
                     itemCount *= Config.L2JMOD_CHAMPION_REWARDS_COUNT;

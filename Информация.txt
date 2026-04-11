@@ -18,6 +18,8 @@ https://drive.google.com/file/d/1l1NnDz_z8mPj921tKZJ4U0xpc7jloLwN/view?usp=shari
 https://github.com/InsPekToP/L2spike/releases/download/L2Spike_Patch_30.12/L2.Spike.Patch_30.12.zip
 DB + build:
 https://drive.google.com/file/d/19cfXuNbA5t8dmebTImHpR8F_VSAJoJxS/view?usp=sharing
+6) L2 Spike Full Backup 11.04 - Four Grand Open
+https://drive.google.com/file/d/1Un3UaBS5zop1DfSlF2P3Oidgz9t9U3J-/view?usp=sharing
 
 l2spike.com - a site of the server 
 
@@ -48,4 +50,6 @@ l2spike.com - a site of the server
 14. Command .box for Extractable item BOX: 
         ExtractableItems.java: add extractMultiple();
         + BoxCommand.java 
-15. 
+15. updatePartyBuff() for party multiply drop
+16. Party accept bug fix
+17. some else
